@@ -99,8 +99,6 @@
 </template>
 
 <style scoped>
-
-  
   /** Main container*/
   .container{
     /*margin-top: 250px;*/
@@ -241,10 +239,8 @@ export default {
         return;
       }
       else{
-        this.userRegistration();
-        this.$router.push('/main_page');
+        this.userSignUp();
       }
-      
     },
     goBack(){
       this.$router.push('/');
@@ -322,14 +318,18 @@ export default {
     },
 
     // User registration method with Firebase
-    userRegistration(){
-      if (createUserWithEmailAndPassword(getAuth(), this.email, this.password)){
-        console.log("Successfully registered");
-        alert("Successfully registered");
-      }
-      else{
-        alert("An error has ocurred!");
-      }
+    userSignUp(){
+      const auth = getAuth();
+      createUserWithEmailAndPassword(auth, this.email, this.password)
+      .then(() => {
+        console.log("User registered");
+        console.log(auth.currentUser);
+        alert("Successfully registered!");
+        this.$router.push('/main_page');
+      })
+      .catch((error) => {
+        alert(error.message);
+      });
       
     }
 }

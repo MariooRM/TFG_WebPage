@@ -13,15 +13,15 @@
       <div class="login-form">
         <form @submit.prevent="login()">
         <div class="input-group">
-          <label class="input-label" for="username">Username</label>
+          <label class="input-label" for="email">Email</label>
           <br>
           <input class="custom-input"
-            id="username"
+            id="email"
             type="text"
-            v-model="username"
+            v-model="email"
             @keydown.enter="login()"
           >
-          <p v-if="usernameError" class="error-message">{{ usernameError }}</p>
+          <p v-if="emailError" class="error-message">{{ emailError }}</p>
         </div>
         <br>
         <div class="input-group">
@@ -164,14 +164,16 @@
 </style>
 
 <script>
+import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+
 
 export default {
   
   data() {
     return {
-      username: "",
+      email: "",
       password: "",
-      usernameError: "",
+      emailError: "",
       passError: "",
       validForm: false,
     };
@@ -182,7 +184,10 @@ export default {
       if (!this.makeComprobations()){
         return;
       }
-      this.$router.push('/main_page');
+      else{
+        this.userSignIn();
+      }
+      
       
     },
     goBack(){
@@ -190,13 +195,13 @@ export default {
     },
     
     // Username comprobations
-    checkUsername() {
-      if (!this.username){
-        this.usernameError = "You must provide a username";
+    checkEmail() {
+      if (!this.email || !this.isValidEmail(this.email)){
+        this.emailError = "You must provide a valid email";
         return false;
       }
       else {
-        this.usernameError = "";
+        this.emailError = "";
         return true;
       }
     },
@@ -212,8 +217,12 @@ export default {
         return true;
       }
     },
+    isValidEmail(email){
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    },
     makeComprobations(){
-      if (!this.checkUsername() || !this.checkPassword()){
+      if (!this.checkEmail() || !this.checkPassword()){
         return false;
       }
       return true;
@@ -221,9 +230,25 @@ export default {
     },
 
     // User auth
-    userAuth(){
-
-    }
+    userSignIn(){
+      const auth = getAuth();
+      signInWithEmailAndPassword(auth, this.email, this.password)
+      .then(() => {
+        console.log("user logged in");
+        console.log(auth.currentUser);
+        alert("Logged in!");
+        this.$router.push('/main_page');
+      })
+      .catch(() => {
+        alert("Wrong email or password");
+      });
+      
+    },
+    /*showErrorMessage(error){
+      switch(error) {
+        case "auth/invalid"
+      }
+    }*/
 }
 }
 </script>
