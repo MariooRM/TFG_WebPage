@@ -215,6 +215,8 @@
 <script>
 
 import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+import { getFirestore, doc, setDoc } from "firebase/firestore";
+import { Timestamp } from 'firebase/firestore';
 
 export default {
   
@@ -239,7 +241,18 @@ export default {
         return;
       }
       else{
-        this.userSignUp();
+        try 
+        {
+          const {userCredential, userData} = await this.userSignUp();
+          await this.createUserDocument(userCredential.user.uid, userData);
+          alert("Successfully registered!");
+          this.$router.push('/main_page');
+        } 
+        catch (error) 
+        {
+          alert("Error:" + error.message);
+        }
+        
       }
     },
     goBack(){
@@ -317,20 +330,36 @@ export default {
       return emailRegex.test(email);
     },
 
-    // User registration method with Firebase
-    userSignUp(){
-      const auth = getAuth();
-      createUserWithEmailAndPassword(auth, this.email, this.password)
-      .then(() => {
-        console.log("User registered");
-        console.log(auth.currentUser);
-        alert("Successfully registered!");
-        this.$router.push('/main_page');
-      })
-      .catch((error) => {
+    // User registration method with Firebase Auth
+    async userSignUp() {
+      try {
+        const auth = getAuth();
+        const userCredential = await createUserWithEmailAndPassword(auth, this.email, this.password);
+        const user = userCredential.user;
+
+        console.log("User authenticated");
+
+        const userData = {
+          uid: user.uid, 
+          name: this.name,
+          surname: this.surname,
+          email: this.email,
+          username: this.username,
+          createdAt: Timestamp.now()
+        };
+
+        return { userCredential, userData };
+      } catch (error) {
         alert(error.message);
-      });
-      
+        throw error; 
+      }
+    },
+
+    // User's document on users firestore table
+    async createUserDocument (uid, userData){
+      const db = getFirestore();
+      const userRef = doc(db, "users", uid);
+      await setDoc(userRef, userData);
     }
 }
 }
