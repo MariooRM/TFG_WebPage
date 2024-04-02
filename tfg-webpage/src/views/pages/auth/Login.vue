@@ -2,34 +2,37 @@
 <template>
     <div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
         <div class="flex flex-column align-items-center justify-content-center">
-            <img :src="logoUrl" alt="Sakai logo" class="mb-5 w-6rem flex-shrink-0" />
             <div style="border-radius: 53px; padding: 0.3rem; background: linear-gradient(180deg, black 10%, rgba(33, 150, 243, 0) 30%)">
-                <div class="w-full surface-card py-8 px-5 sm:px-8" style="border-radius: 53px;">
+                <div class="w-full surface-card pb-8 pt-4 px-5 sm:px-8" style="border-radius: 53px;">
                     <div class="text-center mb-5">
-                        <img src="/demo/images/login/avatar.png" alt="Image" height="50" class="mb-3" />
-                        <div class="text-900 text-3xl font-medium mb-3">Welcome, Isabel!</div>
+                        <img src="../../../assets/images/title-logo-removebg-preview.png" alt="EM logo" class="mb-2 w-20rem flex-shrink-0"/>
+
+                        <!-- <Avatar icon="pi pi-user" size="large" shape="circle" class="mb-3" /> -->
+                        <div class="text-900 text-3xl font-medium mb-3">Welcome!</div>
                         <span class="text-600 font-medium">Sign in to continue</span>
                     </div>
 
-                    <div>
-                        <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-                        <InputText id="email1" type="text" placeholder="Email address" class="w-full md:w-30rem mb-5" style="padding: 1rem" v-model="email" />
+                    <div class="login-form">
+                        <div class="input-fields">
+                            <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
+                            <InputText id="email1"  v-model="email" type="text" placeholder="Email address" class="w-full md:w-30rem mb-5" style="padding: 1rem"/>
 
-                        <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
-                        <Password id="password1" v-model="password" placeholder="Password" :toggleMask="true" class="w-full mb-3" inputClass="w-full" :inputStyle="{ padding: '1rem' }"></Password>
-
+                            <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
+                            <Password id="password1" v-model="password" :feedback="false" placeholder="Password" :toggleMask="true" class="w-full mb-3" inputClass="w-full" :inputStyle="{ padding: '1rem' }"></Password>
+                         </div>
+                        
                         <div class="flex align-items-center justify-content-between mb-5 gap-5">
                             <div class="flex align-items-center">
                                 <Checkbox v-model="checked" id="rememberme1" binary class="mr-2"></Checkbox>
                                 <label for="rememberme1">Remember me</label>
                             </div>
-                            <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>
+                            <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>    
                         </div>
-                        <Button label="Sign In" class="w-full p-3 text-xl" style="background-color: black; margin-bottom: 5px;" @click="goBack"></Button>
-                        <transition-group name="p-message" tag="div">
-                            <Message v-for="msg of message" :severity="msg.severity" :key="msg.content">{{ msg.content }}</Message>
-                        </transition-group>
-                        <!-- <Button label="Back" class="w-full p-3 text-xl" style="background-color: black;" @click="goBack()"></Button> -->
+                        <div class="flex align-items-center justify-content-center">
+                            <a class="font-medium no-underline ml-2 text-center cursor-pointer" style="color: var(--primary-color)" onclick="window.location.href='/auth/register'">Don't have an account? Register now</a>
+                        </div>
+                        <Button label="Sign In" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor, marginBottom: '5px', marginTop: '10px' }" @click="login"></Button>
+                        <Button label="Back" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor }" @click="goBack"></Button> 
                     </div>
                 </div>
             </div>
@@ -43,8 +46,8 @@
     import { ref, computed } from 'vue';
     import AppConfig from '@/layout/AppConfig.vue';
     import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-    import { useRouter } from 'vue-router';
     import { toast } from 'vue3-toastify';
+    import { useRouter } from 'vue-router';
     import 'vue3-toastify/dist/index.css';
 
 
@@ -53,62 +56,82 @@
     const password = ref('');
     const checked = ref(false);
     const router = useRouter();
-    const message = ref([]);
-    const count = ref(0);
 
     const logoUrl = computed(() => {
         return `/layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
     });
 
+    const bgColor = computed(() => {
+        return layoutConfig.darkTheme.value ? 'white' : 'black';
+    });
+
     function login()
     {
-
+        if (!makeComprobations())
+        {
+            return;
+        }
+        else
+        {
+            firebaseSignIn();
+        }
     }
 
     function goBack()
     {
-        toast("Hello! Wow so easy!", {
+        router.push("/landing");
+    }
+
+    function showToast (type, message)
+    {
+        toast(message, {
             "theme": "colored",
-            "type": "error",
+            "type": type,
             "autoClose": 1500,
             "dangerouslyHTMLString": true
             })
-        //message.value = [{ severity: 'error', detail: 'Success Message', content: 'Message sent', id: `msg_${count.value++}` }];
-        //router.push('/landing');
     }
 
     function checkEmail()
     {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.value || !emailRegex.test(email.value))
+        {
+            showToast('error', 'You must provide a valid email!');
+            return false;
+        }
 
+        return true;
     }
 
     function checkPassword()
     {
-
-    }
-
-    function isValidEmail()
-    {
-
+        if (!password.value){
+        showToast('error', 'You must provide a password');
+        return false;
+      }
+        return true;
     }
 
     function makeComprobations()
     {
-
+        if (!checkEmail() || !checkPassword()) return false;
+        return true;
     }
 
     function firebaseSignIn() 
     {
         const auth = getAuth();
-        signInWithEmailAndPassword(auth, email, password)
+        signInWithEmailAndPassword(auth, email.value, password.value)
             .then(() => {
-                console.log("user logged in");
-                console.log(auth.currentUser);
-                alert("Logged in!");
-                router.push('/main_page');
+                showToast('info', 'Successfully logged in!');
+                setTimeout(() => {
+                    router.push('/landing');
+                }, 2000);
+                
             })
             .catch(() => {
-                alert("Wrong email or password");
+                showToast('error', 'Wrong email or password, please try again');
             });
     }
 
