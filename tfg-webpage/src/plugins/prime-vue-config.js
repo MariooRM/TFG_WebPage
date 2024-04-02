@@ -1,15 +1,5 @@
 import { createApp } from 'vue';
-import PrimeVue from 'primevue/config';
-import { ToastService, DialogService, ConfirmationService } from 'primevue/api';
-
-import Tooltip from 'primevue/tooltip';
-import BadgeDirective from 'primevue/badgedirective';
-import Ripple from 'primevue/ripple';
-import StyleClass from 'primevue/styleclass';
-
-import 'primevue/resources/themes/saga-blue/theme.css'; // Theme
-import 'primevue/resources/primevue.min.css'; // Core CSS
-import 'primeicons/primeicons.css'; // Icons
+import App from '../App.vue';
 
 import PrimeVue from 'primevue/config';
 import AutoComplete from 'primevue/autocomplete';
@@ -117,7 +107,7 @@ import VirtualScroller from 'primevue/virtualscroller';
 
 import BlockViewer from '@/components/BlockViewer.vue';
 
-const app = createApp();
+const app = createApp(App);
 
 app.use(PrimeVue, { ripple: true });
 app.use(ToastService);
@@ -227,4 +217,4 @@ app.component('TreeTable', TreeTable);
 app.component('TriStateCheckbox', TriStateCheckbox);
 app.component('VirtualScroller', VirtualScroller);
 
-export default app;
+export default app
