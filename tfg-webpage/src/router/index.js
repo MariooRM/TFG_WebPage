@@ -163,7 +163,7 @@ const router = createRouter({
         {
             path: '/auth/register',
             name: 'register',
-            component: () => import('@/views/pages/auth/Register.vue')
+            component: () => import('../views/pages/auth/Register.vue')
         },
 
         {

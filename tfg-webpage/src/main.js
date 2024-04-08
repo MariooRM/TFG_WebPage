@@ -1,6 +1,7 @@
 import app from './plugins/prime-vue-config'
 import firebaseConfig from './plugins/firebase-config';
 import router from './router';
+import vuelidate from 'vuelidate'
 import { initializeApp } from "firebase/app";
 //import { getAnalytics } from "firebase/analytics";
 
@@ -10,8 +11,9 @@ import '@/assets/styles.scss';
 initializeApp(firebaseConfig);
 
 // Global properties
-app.config.globalProperties.$router = router;
+
 app.use(router);
+app.use(vuelidate);
 
 
 app.mount('#app');

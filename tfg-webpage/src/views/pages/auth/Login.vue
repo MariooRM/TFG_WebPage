@@ -14,14 +14,21 @@
 
                     <div class="login-form">
                         <div class="input-fields">
-                            <label for="email1" class="block text-900 text-xl font-medium mb-2">Email</label>
-                            <InputText id="email1"  v-model="email" type="text" placeholder="Email address" class="w-full md:w-30rem mb-5" style="padding: 1rem"/>
+                            <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
+                            <div>
+                                <InputText id="email" v-model="email" type="text" placeholder="Email address" class="w-full md:w-30rem" style="padding: 1rem" />
+                                <span v-if="errorMessages.email" class="text-red-500 block mt-2">{{ errorMessages.email }}</span>
+                            </div>
 
-                            <label for="password1" class="block text-900 font-medium text-xl mb-2">Password</label>
-                            <Password id="password1" v-model="password" :feedback="false" placeholder="Password" :toggleMask="true" class="w-full mb-3" inputClass="w-full" :inputStyle="{ padding: '1rem' }"></Password>
+                            <label for="password" class="block text-900 font-medium text-xl mb-2 mt-5">Password</label>
+                            <div>
+                                <Password id="password" v-model="password" :feedback="false" placeholder="Password" :toggleMask="true" class="w-full" inputClass="w-full" :inputStyle="{ padding: '1rem' }"></Password>
+                                <span v-if="errorMessages.password" class="text-red-500 block mb-5 mt-2">{{ errorMessages.password }}</span>
+                            </div>
+                            
                          </div>
                         
-                        <div class="flex align-items-center justify-content-between mb-5 gap-5">
+                        <div class="flex align-items-center justify-content-between mb-5 gap-5 mt-5">
                             <div class="flex align-items-center">
                                 <Checkbox v-model="checked" id="rememberme1" binary class="mr-2"></Checkbox>
                                 <label for="rememberme1">Remember me</label>
@@ -54,8 +61,13 @@
     const { layoutConfig } = useLayout();
     const email = ref('');
     const password = ref('');
-    const checked = ref(false);
     const router = useRouter();
+
+    const errorMessages = ref({
+        email: '',
+        password: ''
+    })
+
 
     const logoUrl = computed(() => {
         return `/layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
@@ -97,8 +109,12 @@
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email.value || !emailRegex.test(email.value))
         {
-            showToast('error', 'You must provide a valid email!');
+            errorMessages.value.email = 'You must provide a valid email!';
             return false;
+        }
+        else
+        {
+            errorMessages.value.email = '';
         }
 
         return true;
@@ -106,16 +122,22 @@
 
     function checkPassword()
     {
-        if (!password.value){
-        showToast('error', 'You must provide a password');
-        return false;
-      }
+        if (!password.value)
+        {
+            errorMessages.value.password = 'You must provide a password!';
+            //showToast('error', 'You must provide a password');
+            return false;
+        }
+        else errorMessages.value.password = '';
         return true;
     }
 
     function makeComprobations()
     {
-        if (!checkEmail() || !checkPassword()) return false;
+        if (!checkEmail() || !checkPassword())
+        {
+            return false;
+        } 
         return true;
     }
 

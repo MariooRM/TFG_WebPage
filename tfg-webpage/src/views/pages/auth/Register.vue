@@ -54,7 +54,7 @@
                             <a class="font-medium no-underline ml-2 text-center cursor-pointer" style="color: var(--primary-color)" onclick="window.location.href='/auth/login'">Already have an account? Sign in</a>
                         </div>
                         <Button :label="firstButton" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor, marginBottom: '5px', marginTop: '10px' }" @click="goNext"></Button>
-                        <Button label="Back" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor }" @click="goBack"></Button> 
+                        <Button v-if="showButton" label="Back" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor }" @click="goBack"></Button> 
                     </div>
                 </div>
             </div>
@@ -78,6 +78,7 @@
     const { layoutConfig } = useLayout();
 
     const firstButton = ref('Next');
+    const showButton = ref(false);
     const showFields1 = ref(true);
     const showFields2 = ref(false);
     const showFields3 = ref(false);
@@ -104,10 +105,12 @@
     {
         if (phase.value == 1)
         {
+            showButton.value = false;
             router.push('/auth/login');
         }
         else if (phase.value == 2)
         {
+            showButton.value = false;
             showFields1.value = true;
             showFields2.value = false;
             phase.value = 1;
@@ -131,6 +134,7 @@
             }
             else
             {
+                showButton.value = true;
                 phase.value = 2;
                 showFields1.value = false;
                 showFields2.value = true;
@@ -148,7 +152,7 @@
                 phase.value = 3;
                 showFields2.value = false;
                 showFields3.value = true;
-                firstButton.value = 'Sign in';
+                firstButton.value = 'Register';
             }
         }
         else if (phase.value == 3)
