@@ -17,23 +17,19 @@
                             <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
                             <div>
                                 <InputText id="email" v-model="email" type="text" placeholder="Email address" class="w-full md:w-30rem" style="padding: 1rem" />
-                                <span v-if="errorMessages.email" class="text-red-500 block mt-2">{{ errorMessages.email }}</span>
+                                <span v-if="errorMessages.email" class="error-message text-red-500 block mt-2">{{ errorMessages.email }}</span>
                             </div>
 
                             <label for="password" class="block text-900 font-medium text-xl mb-2 mt-5">Password</label>
                             <div>
                                 <Password id="password" v-model="password" :feedback="false" placeholder="Password" :toggleMask="true" class="w-full" inputClass="w-full" :inputStyle="{ padding: '1rem' }"></Password>
-                                <span v-if="errorMessages.password" class="text-red-500 block mb-5 mt-2">{{ errorMessages.password }}</span>
+                                <span v-if="errorMessages.password" class="error-message text-red-500 block mb-5 mt-2">{{ errorMessages.password }}</span>
                             </div>
                             
                          </div>
                         
-                        <div class="flex align-items-center justify-content-between mb-5 gap-5 mt-5">
-                            <div class="flex align-items-center">
-                                <Checkbox v-model="checked" id="rememberme1" binary class="mr-2"></Checkbox>
-                                <label for="rememberme1">Remember me</label>
-                            </div>
-                            <a class="font-medium no-underline ml-2 text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>    
+                        <div class="flex align-items-center justify-content-left mb-5 gap-5 mt-5">
+                            <a class="font-medium no-underline ml-auto text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>    
                         </div>
                         <div class="flex align-items-center justify-content-center">
                             <a class="font-medium no-underline ml-2 text-center cursor-pointer" style="color: var(--primary-color)" onclick="window.location.href='/auth/register'">Don't have an account? Register now</a>
@@ -168,5 +164,9 @@
 .pi-eye-slash {
     transform: scale(1.6);
     margin-right: 1rem;
+}
+
+.error-message {
+    font-size: .9em;
 }
 </style>

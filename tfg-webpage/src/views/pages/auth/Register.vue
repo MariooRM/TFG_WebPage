@@ -15,35 +15,55 @@
                     <div class="login-form">
                         <div class="input-fields-1" v-if="showFields1">
                             <label for="name" class="block text-900 text-xl font-medium mb-2">Name</label>
-                            <InputText id="name" v-model="name" type="text" placeholder="Name" class="w-full md:w-30rem mb-5" style="padding: 1rem"/>
+                            <div>
+                                <InputText id="name" v-model="name" type="text" placeholder="Name" class="w-full md:w-30rem" style="padding: 1rem"/>
+                                <span v-if="errorMessages.name" class="error-message text-red-500 block mt-2">{{ errorMessages.name }}</span>
+                            </div>
                             
-                            <label for="surname" class="block text-900 text-xl font-medium mb-2">Surname</label>
-                            <InputText id="surname" v-model="surname" type="text" placeholder="Surname" class="w-full md:w-30rem mb-5" style="padding: 1rem"/>
+                            <label for="surname" class="block text-900 text-xl font-medium mb-2 mt-5">Surname</label>
+                            <div>
+                                <InputText id="surname" v-model="surname" type="text" placeholder="Surname" class="w-full md:w-30rem" style="padding: 1rem"/>
+                            </div>
+                            
                         </div>
                         <div class="input-fields-2" v-if="showFields2">
                             <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
-                            <InputText id="email" v-model="email" type="text" placeholder="Email" class="w-full md:w-30rem mb-5" style="padding: 1rem"/>
+                            <div>
+                                <InputText id="email" v-model="email" type="text" placeholder="Email" class="w-full md:w-30rem" style="padding: 1rem"/>
+                                <span v-if="errorMessages.email" class="error-message text-red-500 block mt-2">{{ errorMessages.email }}</span>
+                            </div>
                             
-                            <label for="username" class="block text-900 text-xl font-medium mb-2">Username</label>
-                            <InputText id="usuername" v-model="username" type="text" placeholder="Username" class="w-full md:w-30rem mb-5" style="padding: 1rem"/>
+                            <label for="username" class="block text-900 text-xl font-medium mb-2 mt-5">Username</label>
+                            <div>
+                                <InputText id="username" v-model="username" type="text" placeholder="Username" class="w-full md:w-30rem" style="padding: 1rem"/>
+                                <span v-if="errorMessages.username" class="error-message text-red-500 block mt-2">{{ errorMessages.username }}</span>
+                            </div>
+                            
                         </div>
                         <div class="input-fields-3" v-if="showFields3">
                             <label for="password" class="block text-900 font-medium text-xl mb-2">Password</label>
-                            <Password id="password" v-model="password" :feedback="true" placeholder="Password" :toggleMask="true" class="w-full md:w-30rem mb-3" inputClass="w-full" :inputStyle="{ padding: '1rem' }">
-                            <template #footer>
-                                <Divider />
-                                    <p class="mt-2">Password must contain</p>
-                                    <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
-                                        <li>At least one lowercase</li>
-                                        <li>At least one uppercase</li>
-                                        <li>At least one numeric</li>
-                                        <li>Minimum 8 characters</li>
-                                    </ul>
-                            </template>
-                        </Password>
+                            <div>
+                                <Password id="password" v-model="password" :feedback="true" placeholder="Password" :toggleMask="true" class="w-full md:w-30rem" inputClass="w-full" :inputStyle="{ padding: '1rem' }">
+                                    <template #footer>
+                                        <Divider />
+                                            <p class="mt-2">Password must contain</p>
+                                            <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                                                <li>At least one lowercase</li>
+                                                <li>At least one uppercase</li>
+                                                <li>At least one numeric</li>
+                                                <li>Minimum 8 characters</li>
+                                            </ul>
+                                    </template>
+                                </Password>
+                                <span v-if="errorMessages.password" class="error-message text-red-500 block mt-2">{{ errorMessages.password }}</span>
+                            </div>
                             
-                            <label for="repeatPassword" class="block text-900 font-medium text-xl mb-2">Confirm password</label>
-                            <Password id="repeatPassword" v-model="repeatPassword" :feedback="false" placeholder="Confirm password" :toggleMask="true" class="w-full mb-3" inputClass="w-full" :inputStyle="{ padding: '1rem' }"></Password>
+                            <label for="confirmPassword" class="block text-900 font-medium text-xl mb-2 mt-5">Confirm password</label>
+                            <div>
+                                <Password id="confirmPassword" v-model="confirmPassword" :feedback="false" placeholder="Confirm password" :toggleMask="true" class="w-full" inputClass="w-full" :inputStyle="{ padding: '1rem' }"></Password>
+                                <span v-if="errorMessages.confirmPassword" class="error-message text-red-500 block mt-2">{{ errorMessages.confirmPassword }}</span>
+                            </div>
+                            
                         </div>
                         
                         
@@ -51,7 +71,7 @@
                             
                         </div>
                         <div class="flex align-items-center justify-content-center">
-                            <a class="font-medium no-underline ml-2 text-center cursor-pointer" style="color: var(--primary-color)" onclick="window.location.href='/auth/login'">Already have an account? Sign in</a>
+                            <a class="font-medium no-underline ml-2 text-center cursor-pointer mt-3" style="color: var(--primary-color)" onclick="window.location.href='/auth/login'">Already have an account? Sign in</a>
                         </div>
                         <Button :label="firstButton" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor, marginBottom: '5px', marginTop: '10px' }" @click="goNext"></Button>
                         <Button v-if="showButton" label="Back" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor }" @click="goBack"></Button> 
@@ -68,7 +88,7 @@
     import { ref, computed } from 'vue';
     import AppConfig from '@/layout/AppConfig.vue';
     import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
-    import { getFirestore, doc, setDoc } from "firebase/firestore";
+    import { getFirestore, doc, setDoc, collection, where, getDocs, query } from "firebase/firestore";
     import { Timestamp } from 'firebase/firestore';
     import { toast } from 'vue3-toastify';
     import { useRouter } from 'vue-router';
@@ -89,8 +109,18 @@
     const email = ref('');
     const username = ref('');
     const password = ref('');
-    const repeatPassword = ref('');
+    const confirmPassword = ref('');
 
+    const errorMessages = ref({
+        name: '',
+        email: '',
+        username: '',
+        password: '',
+        confirmPassword: ''
+    });
+
+    const db = getFirestore();
+    const userCollection = collection(db, 'users');
     const router = useRouter();
 
     const logoUrl = computed(() => {
@@ -129,11 +159,12 @@
         if (phase.value == 1) // Name comprobation
         {
             if (!name.value){
-                showToast('error', 'You must provide your name');
+                errorMessages.value.name = 'You must provide your name';
                 return;
             }
             else
             {
+                errorMessages.value.name = '';
                 showButton.value = true;
                 phase.value = 2;
                 showFields1.value = false;
@@ -141,9 +172,16 @@
             }
             
         }
-        else if (phase.value == 2) // Username and email
+        else if (phase.value == 2) // Username and email comprobation
         {
-            if (!checkEmailAndUsername())
+            const emailValid = await checkEmail();
+            if (!emailValid)
+            {
+                return;
+            }
+            
+            const usernameValid = await checkUsername();
+            if (!usernameValid)
             {
                 return;
             }
@@ -157,7 +195,7 @@
         }
         else if (phase.value == 3)
         {
-            if (!checkPasswordAndRepeatPassword())
+            if (!checkPasswordAndConfirmPassword())
             {
                 return;
             }
@@ -166,7 +204,7 @@
                 try
                 {
                     const {userCredential, userData} = await firebaseSignUp();
-                    await createUserDocument(userCredential.user.uid, userData);
+                    createUserDocument(userCredential.user.uid, userData);
                     showToast('info', 'Congratulations! Your account has been created');
                     setTimeout(() => {
                         router.push('/landing');
@@ -176,8 +214,6 @@
                 {
                     showToast('error', error.message);
                 }
-                
-                
             }
         }
     }
@@ -187,48 +223,79 @@
         toast(message, {
             "theme": "colored",
             "type": type,
-            "autoClose": 1500,
+            "autoClose": 2000,
             "dangerouslyHTMLString": true
             })
     }
 
-    function checkEmailAndUsername()
+    async function checkUsername()
     {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!email.value || !emailRegex.test(email.value))
+        if (!username.value)
         {
-            showToast('error', 'You must provide a valid email!');
+            errorMessages.value.username = 'You must provide an username';
             return false;
         }
-        else if (!username.value)
-        {
-            showToast('error', 'You must provide a valid username!');
-            return false;
-        }
+        else  errorMessages.value.username = '';
 
+        const usernameExistsBool = await usernameExists();
+
+        if (usernameExistsBool)
+        {
+            errorMessages.value.username = 'Username already in use';
+            return false;
+        } 
+        else errorMessages.value.username = '';
+        
         return true;
     }
 
-    function checkPasswordAndRepeatPassword()
+    async function checkEmail()
+    {
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        
+        if (!email.value || !emailRegex.test(email.value))
+        {
+            errorMessages.value.email = 'You must provide a valid email';
+            return false;
+        }
+        else errorMessages.value.email = '';
+        
+        const emailExistsBool = await emailExists();
+            
+        if (emailExistsBool)
+        {
+            errorMessages.value.email = 'Email already in use';
+            return false;
+        } 
+        else errorMessages.value.email = '';
+
+        return true;
+    
+    }
+
+    function checkPasswordAndConfirmPassword()
     {
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
 
         if (!password.value || !passwordRegex.test(password.value))
         {
-            showToast('error', 'You must provide a valid password!');
+            errorMessages.value.password = 'You must provide a valid password';
             return false;
         }
-        else if (!repeatPassword.value)
+        else errorMessages.value.password = '';
+
+        if (!confirmPassword.value)
         {
-            showToast('error', 'Password confirmation is needed');
+            errorMessages.value.confirmPassword = 'Password confirmation is needed';
             return false; 
         }
-        else if (password.value != repeatPassword.value)
+        else if (password.value != confirmPassword.value)
         {
-            showToast('error', 'Passwords do not match');
+            errorMessages.value.confirmPassword = 'Passwords do not match';
             return false;
         }
-
+        else errorMessages.value.confirmPassword = '';
+        
         return true;
     }
 
@@ -260,6 +327,52 @@
         setDoc(userRef, userData);
     }
 
+    async function emailExists()
+    {
+        try
+        {
+            const emailQuery = query(userCollection, where('email', '==', email.value));
+            const querySnapshot = await getDocs(emailQuery);
+
+            if (!querySnapshot.empty) {
+                errorMessages.value.email = 'Email already in use';
+                return true;
+            }
+            else
+            {
+                errorMessages.value.email = '';
+                return false;
+            } 
+        }
+        catch(error)
+        {
+            console.log(error.message);
+        }
+    }
+
+    async function usernameExists()
+    {
+        try
+        {
+            const usernameQuery = query(userCollection, where('username', '==', username.value));
+            const usernameQuerySnapshot = await getDocs(usernameQuery);
+
+            if (!usernameQuerySnapshot.empty) {
+                errorMessages.value.username = 'Username already in use';
+                return true;
+            }
+            else
+            {
+                errorMessages.value.username = '';
+                return false;
+            } 
+        }
+        catch(error)
+        {
+            console.log(error.message);
+        }
+    }
+
 </script>
 <style scoped>
 
@@ -273,7 +386,7 @@
     margin-right: 1rem;
 }
 
-.input-group{
+.input-group {
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -282,7 +395,7 @@
     margin-right: 10px;
   }
 
-  .column{
-    flex: 1
-  }
+.error-message {
+    font-size: .9em;
+}
 </style>
