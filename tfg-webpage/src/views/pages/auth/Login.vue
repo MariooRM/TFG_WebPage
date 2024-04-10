@@ -46,7 +46,7 @@
 
 <script setup>
     import { useLayout } from '@/layout/composables/layout';
-    import { ref, computed } from 'vue';
+    import { ref, computed, onMounted } from 'vue';
     import AppConfig from '@/layout/AppConfig.vue';
     import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
     import { toast } from 'vue3-toastify';
@@ -64,6 +64,12 @@
         password: ''
     })
 
+    onMounted(() => {
+        const route = router.currentRoute.value;
+        if (route.query.email) {
+            email.value = decodeURIComponent(route.query.email.toString());
+        }
+    })
 
     const logoUrl = computed(() => {
         return `/layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;

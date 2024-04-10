@@ -13,7 +13,8 @@
                     </div>
 
                     <div class="login-form">
-                        <div class="input-fields-1" v-if="showFields1">
+                        <form autocomplete="new-password">
+                            <div class="input-fields-1" v-if="showFields1">
                             <label for="name" class="block text-900 text-xl font-medium mb-2">Name</label>
                             <div>
                                 <InputText id="name" v-model="name" type="text" placeholder="Name" class="w-full md:w-30rem" style="padding: 1rem"/>
@@ -25,38 +26,38 @@
                                 <InputText id="surname" v-model="surname" type="text" placeholder="Surname" class="w-full md:w-30rem" style="padding: 1rem"/>
                             </div>
                             
-                        </div>
-                        <div class="input-fields-2" v-if="showFields2">
-                            <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
-                            <div>
-                                <InputText id="email" v-model="email" type="text" placeholder="Email" class="w-full md:w-30rem" style="padding: 1rem"/>
-                                <span v-if="errorMessages.email" class="error-message text-red-500 block mt-2">{{ errorMessages.email }}</span>
                             </div>
-                            
-                            <label for="username" class="block text-900 text-xl font-medium mb-2 mt-5">Username</label>
-                            <div>
-                                <InputText id="username" v-model="username" type="text" placeholder="Username" class="w-full md:w-30rem" style="padding: 1rem"/>
-                                <span v-if="errorMessages.username" class="error-message text-red-500 block mt-2">{{ errorMessages.username }}</span>
+                            <div class="input-fields-2" v-if="showFields2">
+                                <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
+                                <div>
+                                    <InputText id="email" v-model="email" type="text" placeholder="Email" class="w-full md:w-30rem" style="padding: 1rem"/>
+                                    <span v-if="errorMessages.email" class="error-message text-red-500 block mt-2">{{ errorMessages.email }}</span>
+                                </div>
+                                
+                                <label for="username" class="block text-900 text-xl font-medium mb-2 mt-5">Username</label>
+                                <div>
+                                    <InputText id="username" v-model="username" type="text" placeholder="Username" class="w-full md:w-30rem" style="padding: 1rem"/>
+                                    <span v-if="errorMessages.username" class="error-message text-red-500 block mt-2">{{ errorMessages.username }}</span>
+                                </div>
+                                
                             </div>
-                            
-                        </div>
-                        <div class="input-fields-3" v-if="showFields3">
-                            <label for="password" class="block text-900 font-medium text-xl mb-2">Password</label>
-                            <div>
-                                <Password id="password" v-model="password" :feedback="true" placeholder="Password" :toggleMask="true" class="w-full md:w-30rem" inputClass="w-full" :inputStyle="{ padding: '1rem' }">
-                                    <template #footer>
-                                        <Divider />
-                                            <p class="mt-2">Password must contain</p>
-                                            <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
-                                                <li>At least one lowercase</li>
-                                                <li>At least one uppercase</li>
-                                                <li>At least one numeric</li>
-                                                <li>Minimum 8 characters</li>
-                                            </ul>
-                                    </template>
-                                </Password>
-                                <span v-if="errorMessages.password" class="error-message text-red-500 block mt-2">{{ errorMessages.password }}</span>
-                            </div>
+                            <div class="input-fields-3" v-if="showFields3">
+                                <label for="password" class="block text-900 font-medium text-xl mb-2">Password</label>
+                                <div>
+                                    <Password id="password" v-model="password" :feedback="true" placeholder="Password" :toggleMask="true" class="w-full md:w-30rem" inputClass="w-full" :inputStyle="{ padding: '1rem' }">
+                                        <template #footer>
+                                            <Divider />
+                                                <p class="mt-2">Password must contain</p>
+                                                <ul class="pl-2 ml-2 mt-0" style="line-height: 1.5">
+                                                    <li>At least one lowercase</li>
+                                                    <li>At least one uppercase</li>
+                                                    <li>At least one numeric</li>
+                                                    <li>Minimum 8 characters</li>
+                                                </ul>
+                                        </template>
+                                    </Password>
+                                    <span v-if="errorMessages.password" class="error-message text-red-500 block mt-2">{{ errorMessages.password }}</span>
+                                </div>
                             
                             <label for="confirmPassword" class="block text-900 font-medium text-xl mb-2 mt-5">Confirm password</label>
                             <div>
@@ -64,7 +65,9 @@
                                 <span v-if="errorMessages.confirmPassword" class="error-message text-red-500 block mt-2">{{ errorMessages.confirmPassword }}</span>
                             </div>
                             
-                        </div>
+                            </div>
+                        </form>
+                        
                         
                         
                         <div class="flex align-items-center justify-content-between mb-3 gap-5">
@@ -87,7 +90,7 @@
     import { useLayout } from '@/layout/composables/layout';
     import { ref, computed } from 'vue';
     import AppConfig from '@/layout/AppConfig.vue';
-    import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+    import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from "firebase/auth";
     import { getFirestore, doc, setDoc, collection, where, getDocs, query } from "firebase/firestore";
     import { Timestamp } from 'firebase/firestore';
     import { toast } from 'vue3-toastify';
@@ -121,6 +124,7 @@
 
     const db = getFirestore();
     const userCollection = collection(db, 'users');
+    const auth = getAuth();
     const router = useRouter();
 
     const logoUrl = computed(() => {
@@ -204,11 +208,7 @@
                 try
                 {
                     const {userCredential, userData} = await firebaseSignUp();
-                    createUserDocument(userCredential.user.uid, userData);
-                    showToast('info', 'Congratulations! Your account has been created');
-                    setTimeout(() => {
-                        router.push('/landing');
-                    }, 2000);
+                    await sendEmail(userCredential, userData);
                 }
                 catch(error)
                 {
@@ -301,7 +301,7 @@
 
     async function firebaseSignUp() {
         try {
-            const auth = getAuth();
+            
             const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
             const user = userCredential.user;
             
@@ -321,6 +321,41 @@
         }
     }
 
+    async function sendEmail(userCredential, userData) {
+        console.log("Enviando email");
+        const user = userCredential.user;
+
+        try {
+            // Email verification
+            await sendEmailVerification(user);
+
+            showToast('info', 'A verification email has been sent! Please, check your inbox');
+
+            // Polling to check user verification status
+            const intervalId = setInterval(async () => {
+                await user.reload();
+                if (user.emailVerified) {
+                    clearInterval(intervalId); // Stop polling when user is verified
+                    console.log("Verified");
+
+                    // Create user document
+                    createUserDocument(user.uid, userData);
+                    showToast('info', 'Congratulations! Your account has been created');
+                    setTimeout(() => {
+                        router.push(`/auth/login?email=${encodeURIComponent(email)}`);
+                    }, 2000);
+                }
+            }, 5000); // Check every 5 secs
+
+        } catch (error) {
+            console.log(error.message);
+            showToast('error', error.message);
+        }
+    }
+
+
+
+    
     function createUserDocument (uid, userData){
         const db = getFirestore();
         const userRef = doc(db, "users", uid);
