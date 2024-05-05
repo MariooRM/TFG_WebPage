@@ -5,7 +5,7 @@
             <div style="border-radius: 53px; padding: 0.3rem; background: linear-gradient(180deg, black 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card pb-8 pt-4 px-5 sm:px-8" style="border-radius: 53px;">
                     <div class="text-center mb-5">
-                        <img src="../../../assets/images/title-logo-removebg-preview.png" alt="EM logo" class="mb-2 w-20rem flex-shrink-0"/>
+                        <img src="../../../assets/images/title-logo-nobg.png" alt="EM logo" class="mb-2 w-20rem flex-shrink-0"/>
 
                         <!-- <Avatar icon="pi pi-user" size="large" shape="circle" class="mb-3" /> -->
                         <div class="text-900 text-3xl font-medium mb-3">Welcome!</div>

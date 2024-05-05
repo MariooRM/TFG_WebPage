@@ -1,26 +1,9 @@
-<script setup>
-import { useLayout } from '@/layout/composables/layout';
-import { computed } from 'vue';
-import AppConfig from '@/layout/AppConfig.vue';
-
-const { layoutConfig } = useLayout();
-
-const smoothScroll = (id) => {
-    document.querySelector(id).scrollIntoView({
-        behavior: 'smooth'
-    });
-};
-
-const logoUrl = computed(() => {
-    return `layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
-});
-</script>
-
 <template>
     <div class="surface-0 flex justify-content-center">
         <div id="home" class="landing-wrapper overflow-hidden">
             <div class="py-4 px-4 mx-0 md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static mb-3">
-                <a class="flex align-items-center" href="#"> <img :src="logoUrl" alt="Sakai Logo" height="50" class="mr-0 lg:mr-2" /><span class="text-900 font-medium text-2xl line-height-3 mr-8">SAKAI</span> </a>
+                <a class="flex align-items-center" href="#">  </a>
+
                 <a class="cursor-pointer block lg:hidden text-700 p-ripple" v-ripple v-styleclass="{ selector: '@next', enterClass: 'hidden', leaveToClass: 'hidden', hideOnOutsideClick: true }">
                     <i class="pi pi-bars text-4xl"></i>
                 </a>
@@ -32,8 +15,8 @@ const logoUrl = computed(() => {
                             </a>
                         </li>
                         <li>
-                            <a @click="smoothScroll('#features')" class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple" v-ripple>
-                                <span>Features</span>
+                            <a @click="smoothScroll('#news')" class="flex m-0 md:ml-5 px-0 py-3 text-900 font-medium line-height-3 p-ripple" v-ripple>
+                                <span>News</span>
                             </a>
                         </li>
                         <li>
@@ -48,8 +31,12 @@ const logoUrl = computed(() => {
                         </li>
                     </ul>
                     <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
-                        <Button label="Login" class="p-button-text p-button-rounded border-none font-light line-height-2 text-blue-500"></Button>
-                        <Button label="Register" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 bg-blue-500"></Button>
+                        <router-link to="/auth/login">
+                            <Button label="Login" class="p-button-text p-button-rounded border-none font-light line-height-2 text-blue-500"></Button>
+                        </router-link>
+                        <router-link to="/auth/register">
+                            <Button label="Register" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 bg-blue-500"></Button>
+                        </router-link>
                     </div>
                 </div>
             </div>
@@ -57,19 +44,29 @@ const logoUrl = computed(() => {
             <div
                 id="hero"
                 class="flex flex-column pt-4 px-4 lg:px-8 overflow-hidden"
-                style="background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(238, 239, 175) 0%, rgb(195, 227, 250) 100%); clip-path: ellipse(150% 87% at 93% 13%)"
+                style="background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)),radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(196, 196, 196) 0%, rgb(85, 85, 85) 100%);"
+            
             >
-                <div class="mx-4 md:mx-8 mt-0 md:mt-4">
-                    <h1 class="text-6xl font-bold text-gray-900 line-height-2"><span class="font-light block">Eu sem integer</span>eget magna fermentum</h1>
-                    <p class="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">Sed blandit libero volutpat sed cras. Fames ac turpis egestas integer. Placerat in egestas erat...</p>
-                    <Button label="Get Started" class="p-button-rounded text-xl border-none mt-5 bg-blue-500 font-normal text-white line-height-3 px-3"></Button>
+            <div class="mx-4 md:mx-8 mt-0 md:mt-4 flex">
+                <div>
+                    <div class="flex justify-content-center md:justify-content-start">
+                        <img src="../../assets/images/title-logo-nobg.png" alt="EM logo" class="mb-2 w-30rem flex-shrink-0" style="border: 1px solid black;" />
+                    </div>
+                    <h1 class="text-6xl font-bold text-gray-900 line-height-2">Recover from the shadows of your mind...</h1>
+                    <p class="font-normal text-2xl line-height-3 md:mt-3 text-gray-700">You have woken up but your mind is... different. <br> It feels like your thoughts and memories have been stolen or even <strong>erased</strong></p>
+                    <br>
+                    <Button label="PLAY NOW FOR FREE!" :style="{ 'background-color': 'black', 'margin-left': 'irem' }" class="p-button-rounded text-xl border-none mt-5 bg-black font-normal text-white line-height-3 px-3 md:ml-0"></Button>
+                    </div>
                 </div>
-                <div class="flex justify-content-center md:justify-content-end">
-                    <img src="/demo/images/landing/screen-1.png" alt="Hero Image" class="w-9 md:w-auto" />
+                    <div class="flex justify-content-center md:justify-content-end" style="border: 1px solid black">
+                        <div class ="hidden md:flex md:w-5 md:h-7" style="width: 700px; height: 400px; border: 5px solid black; margin-top: 100px">
+                            <iframe style="width: 100%; height: 100%;" src="https://www.youtube.com/embed/_zDZYrIUgKE?si=FftuGB7GEEjFGVeh" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <img src="/src/assets/images/ninja.png" alt="Hero Image" class="w-10 md:w-auto" />
+                    </div>
                 </div>
-            </div>
 
-            <div id="features" class="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
+            <div id="news" class="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
                 <div class="grid justify-content-center">
                     <div class="col-12 text-center mt-8 mb-4">
                         <h2 class="text-900 font-normal mb-2">Marvelous Features</h2>
@@ -408,6 +405,34 @@ const logoUrl = computed(() => {
     </div>
     <AppConfig simple />
 </template>
+
+<script setup>
+import { computed, onMounted } from 'vue';
+
+import { useLayout } from '@/layout/composables/layout';
+import AppConfig from '@/layout/AppConfig.vue';
+
+import { useAuthStore } from '@/stores';
+
+const { layoutConfig } = useLayout();
+const authStore = useAuthStore();
+
+
+const smoothScroll = (id) => {
+    document.querySelector(id).scrollIntoView({
+        behavior: 'smooth'
+    });
+};
+
+const bgColor = computed(() => {
+        return layoutConfig.darkTheme.value ? 'white' : 'black';
+})
+const logoUrl = computed(() => {
+    return `layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
+});
+
+
+</script>
 
 <!-- <style scoped>
 #hero {

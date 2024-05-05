@@ -5,7 +5,7 @@
             <div style="border-radius: 53px; padding: 0.3rem; background: linear-gradient(180deg, black 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card pb-8 pt-4 px-5 sm:px-8" style="border-radius: 53px;">
                     <div class="text-center mb-5">
-                        <img src="../../../assets/images/title-logo-removebg-preview.png" alt="EM logo" class="mb-2 w-20rem flex-shrink-0"/>
+                        <img src="../../../assets/images/title-logo-nobg.png" alt="EM logo" class="mb-2 w-20rem flex-shrink-0"/>
 
                         <!-- <Avatar icon="pi pi-user" size="large" shape="circle" class="mb-3" /> -->
                         <div class="text-900 text-3xl font-medium mb-3">Welcome!</div>
@@ -45,19 +45,24 @@
 </template>
 
 <script setup>
-    import { useLayout } from '@/layout/composables/layout';
-    import { ref, computed, onMounted } from 'vue';
     import AppConfig from '@/layout/AppConfig.vue';
-    import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
-    import { toast } from 'vue3-toastify';
+    import { useLayout } from '@/layout/composables/layout';
+
+    import { ref, computed, onMounted } from 'vue';
     import { useRouter } from 'vue-router';
+    //import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+    
+    import { toast } from 'vue3-toastify';
     import 'vue3-toastify/dist/index.css';
+
+    import { useAuthStore } from '@/stores';
 
 
     const { layoutConfig } = useLayout();
     const email = ref('');
     const password = ref('');
     const router = useRouter();
+    const authStore = useAuthStore();
 
     const errorMessages = ref({
         email: '',
@@ -69,6 +74,10 @@
         if (route.query.email) {
             email.value = decodeURIComponent(route.query.email.toString());
         }
+
+
+        // Comprobar si ya hay un usuario logeado
+        /**/ 
     })
 
     const logoUrl = computed(() => {
@@ -79,21 +88,33 @@
         return layoutConfig.darkTheme.value ? 'white' : 'black';
     });
 
-    function login()
-    {
-        if (!makeComprobations())
-        {
-            return;
-        }
-        else
-        {
-            firebaseSignIn();
-        }
+    async function login() {
+    if (!makeComprobations()) {
+        return;
+    } else {
+        authStore.login(email.value, password.value)
+            .then((logged) => { 
+                if (logged) {
+                    console.log("Logged in successfully");
+                    showToast('info', 'Successfully logged in!');
+                    setTimeout(() => {
+                        router.push('/');
+                    }, 2000);
+                } else {
+                    showToast('error', 'Wrong email or password, please try again');
+                }
+            })
+            .catch((error) => {
+                console.error("Error during login:", error);
+                showToast('error', 'An error occurred during login. Please try again later.');
+            });
     }
+}
+
 
     function goBack()
     {
-        router.push("/landing");
+        router.push("/");
     }
 
     function showToast (type, message)
