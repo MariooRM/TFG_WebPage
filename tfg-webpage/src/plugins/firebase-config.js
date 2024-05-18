@@ -1,5 +1,5 @@
 
-const firebaseConfig = {
+export const firebaseConfig = {
   apiKey: "AIzaSyCIVCKtuTfDwXs5UsDAET-MvhYvRqOqtAQ",
   authDomain: "tfg-mariorodrigomarcos.firebaseapp.com",
   projectId: "tfg-mariorodrigomarcos",
@@ -9,5 +9,3 @@ const firebaseConfig = {
   measurementId: "G-P7BEKHTTQ8"
 };
 
-
-export default firebaseConfig;

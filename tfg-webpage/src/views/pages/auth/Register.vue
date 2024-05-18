@@ -5,7 +5,7 @@
             <div style="border-radius: 53px; padding: 0.3rem; background: linear-gradient(180deg, black 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card pb-8 pt-4 px-5 sm:px-8" style="border-radius: 53px;">
                     <div class="text-center mb-5">
-                        <img src="../../../assets/images/title-logo-nobg.png" alt="EM logo" class="mb-2 w-20rem flex-shrink-0"/>
+                        <img src="../../../assets/images/Logo-nobg.png" alt="EM logo" class="mb-5 w-20rem flex-shrink-0"/>
 
                         <!-- <Avatar icon="pi pi-user" size="large" shape="circle" class="mb-3" /> -->
                         <div class="text-900 text-3xl font-medium mb-3">Welcome!</div>
@@ -74,7 +74,7 @@
                             
                         </div>
                         <div class="flex align-items-center justify-content-center">
-                            <a class="font-medium no-underline ml-2 text-center cursor-pointer mt-3" style="color: var(--primary-color)" onclick="window.location.href='/auth/login'">Already have an account? Sign in</a>
+                            <a class="font-medium no-underline ml-2 mb-2 text-center cursor-pointer mt-3 font-bold" style="color: lightslategray" onclick="window.location.href='/auth/login'">Already have an account? Sign in</a>
                         </div>
                         <Button :label="firstButton" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor, marginBottom: '5px', marginTop: '10px' }" @click="goNext"></Button>
                         <Button v-if="showButton" label="Back" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor }" @click="goBack"></Button> 
@@ -88,17 +88,21 @@
 
 <script setup>
     import { useLayout } from '@/layout/composables/layout';
-    import { ref, computed } from 'vue';
     import AppConfig from '@/layout/AppConfig.vue';
-    import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification } from "firebase/auth";
-    import { getFirestore, doc, setDoc, collection, where, getDocs, query } from "firebase/firestore";
-    import { Timestamp } from 'firebase/firestore';
-    import { toast } from 'vue3-toastify';
+    
+    import { ref, computed } from 'vue';
     import { useRouter } from 'vue-router';
+
+    import { toast } from 'vue3-toastify';
     import 'vue3-toastify/dist/index.css';
+
+    import { useAuthStore } from '@/stores';
+
+    import { getFirestore, collection, where, getDocs, query } from "firebase/firestore";
 
 
     const { layoutConfig } = useLayout();
+    const autStore = useAuthStore();
 
     const firstButton = ref('Next');
     const showButton = ref(false);
@@ -124,7 +128,7 @@
 
     const db = getFirestore();
     const userCollection = collection(db, 'users');
-    const auth = getAuth();
+ 
     const router = useRouter();
 
     const logoUrl = computed(() => {
@@ -207,8 +211,9 @@
             {
                 try
                 {
-                    const {userCredential, userData} = await firebaseSignUp();
-                    await sendEmail(userCredential, userData);
+                    const {userCredential, userData} = await autStore.register(name.value, surname.value, email.value, username.value, password.value);
+                    
+                    await autStore.sendEmail(userCredential, userData, email.value);
                 }
                 catch(error)
                 {
@@ -299,68 +304,6 @@
         return true;
     }
 
-    async function firebaseSignUp() {
-        try {
-            
-            const userCredential = await createUserWithEmailAndPassword(auth, email.value, password.value);
-            const user = userCredential.user;
-            
-            const userData = {
-            uid: user.uid, 
-            name: name.value,
-            surname: surname.value,
-            email: email.value,
-            username: username.value,
-            createdAt: Timestamp.now()
-            };
-
-            return { userCredential, userData };
-        } 
-        catch (error) {
-            showToast('error', error.message);
-        }
-    }
-
-    async function sendEmail(userCredential, userData) {
-        console.log("Enviando email");
-        const user = userCredential.user;
-
-        try {
-            // Email verification
-            await sendEmailVerification(user);
-
-            showToast('info', 'A verification email has been sent! Please, check your inbox');
-
-            // Polling to check user verification status
-            const intervalId = setInterval(async () => {
-                await user.reload();
-                if (user.emailVerified) {
-                    clearInterval(intervalId); // Stop polling when user is verified
-                    console.log("Verified");
-
-                    // Create user document
-                    createUserDocument(user.uid, userData);
-                    showToast('info', 'Congratulations! Your account has been created');
-                    setTimeout(() => {
-                        router.push(`/auth/login?email=${encodeURIComponent(email)}`);
-                    }, 2000);
-                }
-            }, 5000); // Check every 5 secs
-
-        } catch (error) {
-            console.log(error.message);
-            showToast('error', error.message);
-        }
-    }
-
-
-
-    
-    function createUserDocument (uid, userData){
-        const db = getFirestore();
-        const userRef = doc(db, "users", uid);
-        setDoc(userRef, userData);
-    }
 
     async function emailExists()
     {

@@ -1,6 +1,6 @@
 import app from './plugins/prime-vue-config'
-import firebaseConfig from './plugins/firebase-config';
-import router from './router';
+import { firebaseConfig } from './plugins/firebase-config';
+import { router } from './router';
 import { initializeApp } from "firebase/app";
 import { createPinia } from 'pinia';
 //import { getAnalytics } from "firebase/analytics";

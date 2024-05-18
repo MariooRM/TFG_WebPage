@@ -5,7 +5,7 @@
             <div style="border-radius: 53px; padding: 0.3rem; background: linear-gradient(180deg, black 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card pb-8 pt-4 px-5 sm:px-8" style="border-radius: 53px;">
                     <div class="text-center mb-5">
-                        <img src="../../../assets/images/title-logo-nobg.png" alt="EM logo" class="mb-2 w-20rem flex-shrink-0"/>
+                        <img src="../../../assets/images/Logo-nobg.png" alt="EM logo" class="mb-5 w-20rem flex-shrink-0"/>
 
                         <!-- <Avatar icon="pi pi-user" size="large" shape="circle" class="mb-3" /> -->
                         <div class="text-900 text-3xl font-medium mb-3">Welcome!</div>
@@ -29,10 +29,10 @@
                          </div>
                         
                         <div class="flex align-items-center justify-content-left mb-5 gap-5 mt-5">
-                            <a class="font-medium no-underline ml-auto text-right cursor-pointer" style="color: var(--primary-color)">Forgot password?</a>    
+                            <a class="font-medium no-underline ml-auto text-right cursor-pointer font-bold" style="color: lightslategray">Forgot password?</a>    
                         </div>
                         <div class="flex align-items-center justify-content-center">
-                            <a class="font-medium no-underline ml-2 text-center cursor-pointer" style="color: var(--primary-color)" onclick="window.location.href='/auth/register'">Don't have an account? Register now</a>
+                            <a class="font-medium no-underline ml-2 mb-2 text-center cursor-pointer font-bold" style="color: lightslategray" onclick="window.location.href='/auth/register'">Don't have an account? Register now</a>
                         </div>
                         <Button label="Sign In" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor, marginBottom: '5px', marginTop: '10px' }" @click="login"></Button>
                         <Button label="Back" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor }" @click="goBack"></Button> 
@@ -50,7 +50,6 @@
 
     import { ref, computed, onMounted } from 'vue';
     import { useRouter } from 'vue-router';
-    //import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
     
     import { toast } from 'vue3-toastify';
     import 'vue3-toastify/dist/index.css';
@@ -164,21 +163,6 @@
         return true;
     }
 
-    function firebaseSignIn() 
-    {
-        const auth = getAuth();
-        signInWithEmailAndPassword(auth, email.value, password.value)
-            .then(() => {
-                showToast('info', 'Successfully logged in!');
-                setTimeout(() => {
-                    router.push('/landing');
-                }, 2000);
-                
-            })
-            .catch(() => {
-                showToast('error', 'Wrong email or password, please try again');
-            });
-    }
 
 </script>
 <style scoped>
