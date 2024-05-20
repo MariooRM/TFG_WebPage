@@ -10,9 +10,24 @@ export const router = createRouter({
             component: AppLayout,
             children: [
                 {
-                    path: '/dashboard',
+                    path: '/home/dashboard',
                     name: 'dashboard',
-                    component: () => import('@/views/Dashboard.vue')
+                    component: () => import('@/views/pages/home/Dashboard.vue')
+                },
+                {
+                    path: '/home/profile',
+                    name: 'profile',
+                    component: () => import('@/views/pages/home/Profile.vue')
+                },
+                {
+                    path: '/home/stats',
+                    name: 'stats',
+                    component: () => import('@/views/pages/home/Stats.vue')
+                },
+                {
+                    path: '/home/leaderboard',
+                    name: 'leaderboard',
+                    component: () => import('@/views/pages/home/Leaderboard.vue')
                 },
                 {
                     path: '/uikit/formlayout',

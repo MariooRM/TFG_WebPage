@@ -1,3 +1,44 @@
+
+<script setup>
+import { computed, onMounted } from 'vue';
+
+import { useLayout } from '@/layout/composables/layout';
+import AppConfig from '@/layout/AppConfig.vue';
+
+import { useAuthStore } from '@/stores';
+import Sidebar from 'primevue/sidebar';
+import { ref } from 'vue';
+
+const { layoutConfig } = useLayout();
+const authStore = useAuthStore();
+
+
+const smoothScroll = (id) => {
+    document.querySelector(id).scrollIntoView({
+        behavior: 'smooth'
+    });
+};
+
+const bgColor = computed(() => {
+        return layoutConfig.darkTheme.value ? 'white' : 'black';
+})
+const logoUrl = computed(() => {
+    return `layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
+});
+
+const showTopBar = ref(false);
+
+function toggleTopBar() {
+    showTopBar.value = !showTopBar.value;
+}
+
+function logout() {
+    authStore.logout();
+    window.location.reload();
+}
+
+</script>
+
 <template>
     <div 
     class="surface-0 flex justify-content-center"
@@ -10,7 +51,7 @@
                     <i class="pi pi-bars text-4xl"></i>
                 </a>
                 <div class="align-items-center surface-0 flex-grow-1 justify-content-between hidden lg:flex absolute lg:static w-full left-0 px-6 lg:px-0 z-2" style="top: 120px">
-                    <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer text-black">
+                    <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer text-black" style="color: black;">
                         <li>
                             <a @click="smoothScroll('#hero')" class="flex m-0 md:ml-5 px-0 py-3 text-2xl font-medium line-height-3 p-ripple" v-ripple>
                                 <span>Home</span>
@@ -32,21 +73,54 @@
                             </a>
                         </li>
                     </ul>
-                    <div class="flex justify-content-between lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
-                        
-                        <!-- <router-link v-if="authStore.isAuthenticated" to="/">
-                            <Button label="PERSONAL PAGE" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 bg-blue-500"></Button>
-                        </router-link> -->
-                        <router-link to="/auth/login">
-                            <Button label="LOGIN" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 text-xl" :style="{ 'background-color': 'black'}"></Button>
-                        </router-link>
-
-                        <router-link  to="/auth/register">
-                            <Button label="REGISTER" class="p-button-rounded border-none ml-5 font-light text-white line-height-2 text-xl" :style="{ 'background-color': 'black'}"></Button>
-                        </router-link>
+                    <div class="layout-topbar-menu flex justify-content-center lg:block border-top-1 lg:border-top-none surface-border py-3 lg:py-0 mt-3 lg:mt-0">
+                        <button @click="toggleTopBar()" class="p-link layout-topbar-button flex align-items-center justify-content-center" style="flex-direction: column;">
+                            <i class="pi pi-user text-5xl mb-1"></i>
+                            <span class="text-2xl font-medium text-black">Account</span>
+                        </button>
                     </div>
                 </div>
             </div>
+
+            <Sidebar v-model:visible="showTopBar" position="top" style="height: auto;">
+                <div v-if="!authStore.isAuthenticated" class="button-container flex justify-content-center" style="gap: 6.5rem;">
+                    <router-link to="/auth/login">
+                        <div class="flex align-items-center justify-content-center" style="flex-direction: column;">
+                            <div class="flex align-items-center justify-content-center" style="width: 3.5rem; height: 3.5rem; border-radius: 10px; background-color: black;">
+                                <i class="pi pi-fw pi-sign-in text-5xl" style="color: white;"></i>
+                            </div>
+                            <h5 style="margin-top: 0.7rem; margin-bottom: 0;">Sign in</h5>
+                        </div>
+                    </router-link>
+                    <router-link to="/auth/register">
+                        <div class="flex align-items-center justify-content-center" style="flex-direction: column;">
+                            <div class="flex align-items-center justify-content-center" style="width: 3.5rem; height: 3.5rem; border-radius: 10px; background-color: black;">
+                                <i class="pi pi-fw pi-user-plus text-5xl" style="color: white;"></i>
+                            </div>
+                            <h5 style="margin-top: 0.7rem; margin-bottom: 0;">Register</h5>
+                        </div>
+                    </router-link>
+                </div>
+
+                <div v-if="authStore.isAuthenticated" class="button-container flex justify-content-center" style="gap: 6.5rem;">
+                    <router-link to="/home/dashboard">
+                        <div class="flex align-items-center justify-content-center" style="flex-direction: column;">
+                            <div class="flex align-items-center justify-content-center" style="width: 3.5rem; height: 3.5rem; border-radius: 10px; background-color: black;">
+                                <i class="pi pi-fw pi-home text-5xl" style="color: white;"></i>
+                            </div>
+                            <h5 style="margin-top: 0.7rem; margin-bottom: 0;">Home</h5>
+                        </div>
+                    </router-link>
+                    <a @click="logout()" style="cursor: pointer;">
+                        <div class="flex align-items-center justify-content-center" style="flex-direction: column;">
+                            <div class="flex align-items-center justify-content-center" style="width: 3.5rem; height: 3.5rem; border-radius: 10px; background-color: black;">
+                                <i class="pi pi-fw pi-sign-out text-5xl" style="color: white;"></i>
+                            </div>
+                            <h5 style="margin-top: 0.7rem; margin-bottom: 0;">Sign out</h5>
+                        </div>
+                    </a>
+                </div>
+            </Sidebar>
 
             <div
                 id="hero"
@@ -274,33 +348,6 @@
     <AppConfig simple />
 </template>
 
-<script setup>
-import { computed, onMounted } from 'vue';
-
-import { useLayout } from '@/layout/composables/layout';
-import AppConfig from '@/layout/AppConfig.vue';
-
-import { useAuthStore } from '@/stores';
-
-const { layoutConfig } = useLayout();
-const authStore = useAuthStore();
-
-
-const smoothScroll = (id) => {
-    document.querySelector(id).scrollIntoView({
-        behavior: 'smooth'
-    });
-};
-
-const bgColor = computed(() => {
-        return layoutConfig.darkTheme.value ? 'white' : 'black';
-})
-const logoUrl = computed(() => {
-    return `layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
-});
-
-
-</script>
 
 <style scoped>
 .armory-div {
@@ -315,3 +362,5 @@ const logoUrl = computed(() => {
     transform: scale(1.05); /* Define la transformación solo en :hover */
 }
 </style> 
+
+

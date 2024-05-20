@@ -115,7 +115,7 @@ const onFocusRingColorChange = (value) => {
 };
 </script>
 
-<template>
+<!-- <template>
     <button class="layout-config-button p-link" type="button" @click="onConfigButtonClick()">
         <i class="pi pi-cog"></i>
     </button>
@@ -399,9 +399,9 @@ const onFocusRingColorChange = (value) => {
                     <div class="w-3"></div>
                     <div class="w-3"></div>
                 </div>
-            </section>-->
+            </section>
         </div>
     </Sidebar>
-</template>
+</template> -->
 
 <style lang="scss" scoped></style>

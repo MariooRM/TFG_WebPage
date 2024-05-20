@@ -53,7 +53,7 @@ const isOutsideClicked = (event) => {
     const topbarEl = document.querySelector('.layout-menu-button');
 
     if (!sidebarEl || !topbarEl) {
-        return true; // Si los elementos son nulos, consideramos que el clic está afuera
+        return true; 
     }
     return !(sidebarEl.isSameNode(event.target) || sidebarEl.contains(event.target) || topbarEl.isSameNode(event.target) || topbarEl.contains(event.target));
 };
