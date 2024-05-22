@@ -115,7 +115,7 @@ const onFocusRingColorChange = (value) => {
 };
 </script>
 
-<!-- <template>
+ <template>
     <button class="layout-config-button p-link" type="button" @click="onConfigButtonClick()">
         <i class="pi pi-cog"></i>
     </button>
@@ -154,7 +154,7 @@ const onFocusRingColorChange = (value) => {
                 <InputSwitch :modelValue="layoutConfig.ripple.value" @update:modelValue="onRippleChange" />
             </section>
 
-            <!-- <section class="py-4 border-bottom-1 surface-border">
+            <section class="py-4 border-bottom-1 surface-border">
                 <div class="text-xl font-semibold mb-3">Themes</div>
                 <div class="flex align-items-center gap-2 mb-3">
                     <img src="https://primefaces.org/cdn/primevue/images/themes/aura.png" alt="Aura" style="width: 1.5rem" />
@@ -402,6 +402,6 @@ const onFocusRingColorChange = (value) => {
             </section>
         </div>
     </Sidebar>
-</template> -->
+</template> 
 
 <style lang="scss" scoped></style>

@@ -11,9 +11,9 @@ const logoUrl = computed(() => {
 
 <template>
     <div class="layout-footer">
-        <img :src="logoUrl" alt="Logo" height="20" class="mr-2" />
+        <img src="../assets/images/Logo-nobg.png" alt="Logo" height="80" class="mr-0 lg:mr-2" />
         by
-        <span class="font-medium ml-2">PrimeVue</span>
+        <span class="font-medium ml-2">Mario Rodrigo Marcos</span>
     </div>
 </template>
 <style lang="scss" scoped></style>
