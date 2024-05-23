@@ -1,58 +1,68 @@
 import { defineStore } from "pinia";
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signOut, signInWithEmailAndPassword } from "firebase/auth";
-import { getFirestore, doc, setDoc, collection, where, getDocs, query, Timestamp } from "firebase/firestore";
+
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signOut, signInWithEmailAndPassword,
+     setPersistence, browserLocalPersistence, updateEmail, updatePassword } from "firebase/auth";
+import { getFirestore, doc, setDoc, Timestamp } from "firebase/firestore";
+
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import { router } from '@/router';
+import { useUserInfoStore } from './userInfo.store';
 
 export const useAuthStore = defineStore({
     id: 'auth',
     state: () => ({
-        user: JSON.parse(localStorage.getItem('user')) || null,
-        isAuthenticated: JSON.parse(localStorage.getItem('isAuthenticated')) || false
+        userUID: localStorage.getItem('userUID') || null,
+        isAuthenticated: localStorage.getItem('isAuthenticated') || false
     }),
 
     actions: {
+        async initAuth() {
+            const auth = getAuth();
+            onAuthStateChanged(auth, user => {
+                if (user) {
+                    this.userUID = user.uid;
+                    this.isAuthenticated = true;
+                    localStorage.setItem('userUID', JSON.stringify(user.uid));
+                    localStorage.setItem('isAuthenticated', JSON.stringify(true));
+                } else {
+                    this.userUID = null;
+                    this.isAuthenticated = false;
+                    localStorage.removeItem('userUID');
+                    localStorage.removeItem('isAuthenticated');
+                }
+            });
+        },
+
         async login(email, password) {
             const auth = getAuth();
+            const userInfoStore = useUserInfoStore();
             try {
-                await signInWithEmailAndPassword(auth, email, password);
-                const username = await this.getUsername(email);
-                this.user = username;
+                // Configurar persistencia antes de iniciar sesión
+                await setPersistence(auth, browserLocalPersistence);
+
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                this.userUID = userCredential.user.uid;
                 this.isAuthenticated = true;
-                localStorage.setItem('user', JSON.stringify(username));
+                await userInfoStore.getUserInfo(email);
+                localStorage.setItem('userUID', JSON.stringify(userCredential.user.uid));
                 localStorage.setItem('isAuthenticated', JSON.stringify(true));
                 return true; 
             } catch (error) {
-                console.error("Error during login");
+                console.error("Error during login:", error);
                 return false; 
             }
         },
 
-        async getUsername(email) {
-            try {
-                const db = getFirestore();
-                const userCollection = collection(db, 'users');
-                const usernameQuery = query(userCollection, where('email', '==', email));
-                const usernameQuerySnapshot = await getDocs(usernameQuery);
-                if (!usernameQuerySnapshot.empty) {
-                    const userDoc = usernameQuerySnapshot.docs[0];
-                    const username = userDoc.data().username;
-                    return username;
-                } else {
-                    return null;
-                } 
-            } catch (error) {
-                console.error("Error getting username:", error);
-                throw error; 
-            }
-        },
-
         async logout() {
+            console.log("Logging out");
             const auth = getAuth();
+            const userInfoStore = useUserInfoStore();
             await signOut(auth); 
             this.user = null;
             this.isAuthenticated = false;
+            await userInfoStore.clearData();
+            console.log(this.isAuthenticated)
             localStorage.removeItem('user');
             localStorage.removeItem('isAuthenticated');
         },
@@ -61,15 +71,14 @@ export const useAuthStore = defineStore({
             const auth = getAuth();
             try {
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-                const user = userCredential.user;
-                
+        
                 const userData = {
-                uid: user.uid, 
                 name: name,
                 surname: surname,
                 email: email,
                 username: username,
-                createdAt: Timestamp.now()
+                createdAt: Timestamp.now(),
+                profileImg: ''
                 };
     
                 return { userCredential, userData };
@@ -87,7 +96,6 @@ export const useAuthStore = defineStore({
                 // Email verification
                 await sendEmailVerification(user);
                 this.showToast('info', 'A verification email has been sent! Please, check your inbox');
-                console.log("Email sent");
                 // Polling to check user verification status
                 const intervalId = setInterval(async () => {
                     await user.reload();

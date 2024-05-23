@@ -131,10 +131,6 @@
  
     const router = useRouter();
 
-    const logoUrl = computed(() => {
-        return `/layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
-    });
-
     const bgColor = computed(() => {
         return layoutConfig.darkTheme.value ? 'white' : 'black';
     });
@@ -212,7 +208,6 @@
                 try
                 {
                     const {userCredential, userData} = await autStore.register(name.value, surname.value, email.value, username.value, password.value);
-                    
                     await autStore.sendEmail(userCredential, userData, email.value);
                 }
                 catch(error)

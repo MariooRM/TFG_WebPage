@@ -56,7 +56,6 @@
 
     import { useAuthStore } from '@/stores';
 
-
     const { layoutConfig } = useLayout();
     const email = ref('');
     const password = ref('');
@@ -73,10 +72,6 @@
         if (route.query.email) {
             email.value = decodeURIComponent(route.query.email.toString());
         }
-
-
-        // Comprobar si ya hay un usuario logeado
-        /**/ 
     })
 
     const logoUrl = computed(() => {
@@ -97,7 +92,7 @@
                     console.log("Logged in successfully");
                     showToast('info', 'Successfully logged in!');
                     setTimeout(() => {
-                        router.push('/');
+                        router.push('/home/dashboard');
                     }, 2000);
                 } else {
                     showToast('error', 'Wrong email or password, please try again');

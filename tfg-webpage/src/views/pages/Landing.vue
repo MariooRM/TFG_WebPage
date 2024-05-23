@@ -9,6 +9,10 @@ import { useAuthStore } from '@/stores';
 import Sidebar from 'primevue/sidebar';
 import { ref } from 'vue';
 
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
+
 const { layoutConfig } = useLayout();
 const authStore = useAuthStore();
 
@@ -32,9 +36,23 @@ function toggleTopBar() {
     showTopBar.value = !showTopBar.value;
 }
 
-function logout() {
-    authStore.logout();
+function showToast (type, message)
+{
+    toast(message, {
+        "theme": "colored",
+        "type": type,
+        "autoClose": 1500,
+        "dangerouslyHTMLString": true
+        })
+}
+async function logout() {
+    await authStore.logout();
+    this.toggleTopBar();
+    //showToast('info', 'Goodbye!');
     window.location.reload();
+                    // setTimeout(() => {
+                        
+                    // }, 2000);
 }
 
 </script>
@@ -54,7 +72,7 @@ function logout() {
                     <ul class="list-none p-0 m-0 flex lg:align-items-center select-none flex-column lg:flex-row cursor-pointer text-black" style="color: black;">
                         <li>
                             <a @click="smoothScroll('#hero')" class="flex m-0 md:ml-5 px-0 py-3 text-2xl font-medium line-height-3 p-ripple" v-ripple>
-                                <span>Home</span>
+                                <span>Introduction</span>
                             </a>
                         </li>
                         <li>

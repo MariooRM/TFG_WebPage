@@ -21,7 +21,7 @@ const layoutState = reactive({
 
 export function useLayout() {
     const setScale = (scale) => {
-        layoutConfig.scale = scale;
+        layoutConfig.scale = 15;
     };
 
     const setActiveMenuItem = (item) => {

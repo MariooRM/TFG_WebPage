@@ -3,18 +3,19 @@ import { firebaseConfig } from './plugins/firebase-config';
 import { router } from './router';
 import { initializeApp } from "firebase/app";
 import { createPinia } from 'pinia';
-//import { getAnalytics } from "firebase/analytics";
+import { useAuthStore } from './stores/auth.store';
 
 import '@/assets/styles.scss';
 
 // Initialize Firebase
 initializeApp(firebaseConfig);
 const pinia = createPinia();
-
 // Global properties
 
 app.use(router);
 app.use(pinia);
 
+const authStore = useAuthStore();
+authStore.initAuth();
 
 app.mount('#app');
