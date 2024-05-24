@@ -4,10 +4,12 @@ import { useAuthStore } from "./auth.store";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getAuth } from "firebase/auth";
 
+const defaultProfileImgURL = 'https://firebasestorage.googleapis.com/v0/b/tfg-mariorodrigomarcos.appspot.com/o/profile_images%2FProfile-icon.jpg?alt=media&token=92a5ee1e-7cbe-44cc-8f9d-46610b213b4f';
+
 export const useUserInfoStore = defineStore({
     id: 'info',
     state: () => ({
-        profileImg: localStorage.getItem('profileImg') || "../src/assets/images/Profile-icon.jpg",
+        profileImg: localStorage.getItem('profileImg') || null,
         username: localStorage.getItem('username') || null,
         email: localStorage.getItem('email') || null,
         name: localStorage.getItem('name') || null,
@@ -28,12 +30,17 @@ export const useUserInfoStore = defineStore({
                     this.name = userDoc.data().name;
                     this.surname = userDoc.data().surname;
                     this.profileImg = userDoc.data().profileImg;
+
+                    if (!this.profileImg) {
+                        this.profileImg = defaultProfileImgURL;
+                        localStorage.setItem('profileImg', defaultProfileImgURL);
+                    }
                 } else {
                     this.username = null;
                     this.email = null;
                     this.name = null;
                     this.surname = null;
-                    this.profileImg = "../src/assets/images/Profile-icon.jpg";
+                    this.profileImg = defaultProfileImgURL;
                 }
         
                 // Save user information to local storage
@@ -41,7 +48,7 @@ export const useUserInfoStore = defineStore({
                 localStorage.setItem('email', this.email);
                 localStorage.setItem('name', this.name);
                 localStorage.setItem('surname', this.surname);
-                localStorage.setItem('profileImg', JSON.stringify(this.profileImg));
+                localStorage.setItem('profileImg', this.profileImg);
             } catch (error) {
                 console.error("Error getting user information:", error);
                 throw error;
@@ -49,8 +56,6 @@ export const useUserInfoStore = defineStore({
         },
 
         async updateProfileImg(file) {
-           
-
             const authStore = useAuthStore();
             const storage = getStorage();
             const userId = authStore.userUID;
@@ -58,7 +63,6 @@ export const useUserInfoStore = defineStore({
                 
                 const storageRef = ref(storage, `profile_images/${userId}/profile.jpg`);
                 await uploadBytes(storageRef, file);
-                 console.log(userId);
                 console.log("File uploaded successfully");
         
                 const imageUrl = await getDownloadURL(storageRef); 
@@ -81,6 +85,120 @@ export const useUserInfoStore = defineStore({
             localStorage.removeItem('name');
             localStorage.removeItem('surname');
             localStorage.removeItem('profileImg');
+        },
+
+        async updateUserInfo(username, email, name, surname) {
+            const authStore = useAuthStore();
+            const db = getFirestore();
+            const userRef = doc(db, "users", authStore.userUID);
+            try {
+                await updateDoc(userRef, { username, email, name, surname });
+                this.username = username;
+                this.email = email;
+                this.name = name;
+                this.surname = surname;
+        
+                // Update local storage
+                localStorage.setItem('username', username);
+                localStorage.setItem('email', email);
+                localStorage.setItem('name', name);
+                localStorage.setItem('surname', surname);
+            } catch (error) {
+                console.error("Error updating user information:", error);
+                throw error;
+            }
+        },
+
+        async checkUsername(userCollection, username) {
+    
+            if (!username)
+            {
+                return ['You must provide an username', false];
+            }
+        
+            const usernameExistsBool = await this.usernameExists(userCollection, username);
+
+            if (usernameExistsBool)
+            {
+                return ['Username already in use', false];
+            } 
+            else
+            {
+                return ['', true];
+            } 
+        },
+
+        async usernameExists(userCollection, username) {
+            try
+            {
+                const usernameQuery = query(userCollection, where('username', '==', username));
+                const usernameQuerySnapshot = await getDocs(usernameQuery);
+
+                if (!usernameQuerySnapshot.empty) {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                } 
+            }
+            catch(error)
+            {
+                console.log(error.message);
+            }
+        },
+
+        async checkEmail(userCollection, email) {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            console.log(email)
+            
+            if (!email || !emailRegex.test(email))
+            {
+                return ['You must provide a valid email', false];
+            }
+            
+            const emailExistsBool = await this.emailExists(userCollection, email);
+                
+            if (emailExistsBool)
+            {
+                return ['Email already in use', false];
+            } 
+            else 
+            {
+                return ['', true];
+            }
+        },
+
+        async emailExists(userCollection, email) {
+            try
+            {
+                const emailQuery = query(userCollection, where('email', '==', email));
+                const querySnapshot = await getDocs(emailQuery);
+
+                if (!querySnapshot.empty) {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                } 
+            }
+            catch(error)
+            {
+                console.log(error.message);
+            }
+        },
+
+        checkName (name) {
+            if (!name)
+            {
+                return ['You must provide a name', false];
+            }
+            else
+            {
+                return ['', true];
+            }
         }
-    }
+    }, 
+
 });

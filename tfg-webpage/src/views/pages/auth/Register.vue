@@ -97,12 +97,14 @@
     import 'vue3-toastify/dist/index.css';
 
     import { useAuthStore } from '@/stores';
+    import { useUserInfoStore } from '@/stores';
 
     import { getFirestore, collection, where, getDocs, query } from "firebase/firestore";
 
 
     const { layoutConfig } = useLayout();
     const autStore = useAuthStore();
+    const userInfoStore = useUserInfoStore();
 
     const firstButton = ref('Next');
     const showButton = ref(false);
@@ -117,6 +119,10 @@
     const username = ref('');
     const password = ref('');
     const confirmPassword = ref('');
+
+    const usernameValid = ref(false);
+    const emailValid = ref(false);
+    const nameValid = ref(false);
 
     const errorMessages = ref({
         name: '',
@@ -162,13 +168,13 @@
     {
         if (phase.value == 1) // Name comprobation
         {
-            if (!name.value){
-                errorMessages.value.name = 'You must provide your name';
+            [errorMessages.value.name, nameValid.value] = userInfoStore.checkName(name.value);
+
+            if (!nameValid.value){
                 return;
             }
             else
             {
-                errorMessages.value.name = '';
                 showButton.value = true;
                 phase.value = 2;
                 showFields1.value = false;
@@ -178,14 +184,16 @@
         }
         else if (phase.value == 2) // Username and email comprobation
         {
-            const emailValid = await checkEmail();
-            if (!emailValid)
+            [errorMessages.value.email, emailValid.value] = await userInfoStore.checkEmail(userCollection, email.value);
+            console.log(emailValid.value);
+            console.log(errorMessages.value.email);
+            if (!emailValid.value)
             {
                 return;
             }
             
-            const usernameValid = await checkUsername();
-            if (!usernameValid)
+            [errorMessages.value.username, usernameValid.value] = await userInfoStore.checkUsername(userCollection, username.value);
+            if (!usernameValid.value)
             {
                 return;
             }
@@ -228,51 +236,6 @@
             })
     }
 
-    async function checkUsername()
-    {
-        if (!username.value)
-        {
-            errorMessages.value.username = 'You must provide an username';
-            return false;
-        }
-        else  errorMessages.value.username = '';
-
-        const usernameExistsBool = await usernameExists();
-
-        if (usernameExistsBool)
-        {
-            errorMessages.value.username = 'Username already in use';
-            return false;
-        } 
-        else errorMessages.value.username = '';
-        
-        return true;
-    }
-
-    async function checkEmail()
-    {
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
-        if (!email.value || !emailRegex.test(email.value))
-        {
-            errorMessages.value.email = 'You must provide a valid email';
-            return false;
-        }
-        else errorMessages.value.email = '';
-        
-        const emailExistsBool = await emailExists();
-            
-        if (emailExistsBool)
-        {
-            errorMessages.value.email = 'Email already in use';
-            return false;
-        } 
-        else errorMessages.value.email = '';
-
-        return true;
-    
-    }
-
     function checkPasswordAndConfirmPassword()
     {
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
@@ -300,51 +263,9 @@
     }
 
 
-    async function emailExists()
-    {
-        try
-        {
-            const emailQuery = query(userCollection, where('email', '==', email.value));
-            const querySnapshot = await getDocs(emailQuery);
+    
 
-            if (!querySnapshot.empty) {
-                errorMessages.value.email = 'Email already in use';
-                return true;
-            }
-            else
-            {
-                errorMessages.value.email = '';
-                return false;
-            } 
-        }
-        catch(error)
-        {
-            console.log(error.message);
-        }
-    }
-
-    async function usernameExists()
-    {
-        try
-        {
-            const usernameQuery = query(userCollection, where('username', '==', username.value));
-            const usernameQuerySnapshot = await getDocs(usernameQuery);
-
-            if (!usernameQuerySnapshot.empty) {
-                errorMessages.value.username = 'Username already in use';
-                return true;
-            }
-            else
-            {
-                errorMessages.value.username = '';
-                return false;
-            } 
-        }
-        catch(error)
-        {
-            console.log(error.message);
-        }
-    }
+    
 
 </script>
 <style scoped>

@@ -17,32 +17,38 @@
           <div class="flex flex-column gap-2">
             <label for="username">Username</label>
             <div class="input-div flex justify-content-center align-items-center lg:mr-3 mb-3" >
-              <InputText id="username" v-model="username" type="text" :disabled="usernameFieldDisabled" class="w-full md:w-30rem mr-3" style="padding: 1rem; height: 4rem;" />
-              <Button icon="pi pi-pencil" @click="enableField('username')" class="p-button" style="background-color: black; height: 4rem; width: 4rem;"/>
+              <InputText id="username" v-model="username" type="text" :disabled="usernameFieldDisabled" class="w-full md:w-30rem mr-3" style="padding: 1rem; height: 3rem;" />
+              <Button icon="pi pi-pencil" @click="enableField('username')" class="p-button" style="background-color: black; height: 3rem; width: 3rem;"/>
             </div> 
           </div>
           <div class="flex flex-column gap-2">
             <label for="email">Email</label>
             <div class="input-div flex justify-content-center align-items-center lg:mr-3 mb-5" style="">
-              <InputText id="email" v-model="email" type="text" :disabled="emailFieldDisabled" class="w-full md:w-30rem mr-3" style="padding: 1rem; height: 4rem;" />
-              <Button icon="pi pi-pencil" @click="enableField('email')" class="p-button" style="background-color: black; height: 4rem; width: 4rem;"/>
+              <InputText id="email" v-model="email" type="text" :disabled="emailFieldDisabled" class="w-full md:w-30rem mr-3" style="padding: 1rem; height: 3rem;" />
+              <Button icon="pi pi-pencil" @click="enableField('email')" class="p-button" style="background-color: black; height: 3rem; width: 3rem;"/>
             </div> 
           </div>
           <h4 class="mb-1 w-full" style="text-align: center;">Personal info</h4>
           <div class="flex flex-column gap-2">
             <label for="name">Name</label>
             <div class="input-div flex justify-content-center align-items-center lg:mr-3 mb-3">
-              <InputText id="name" v-model="name" type="text" :disabled="nameFieldDisabled" class="w-full md:w-30rem mr-3" style="padding: 1rem; height: 4rem;" />
-              <Button icon="pi pi-pencil" @click="enableField('name')" class="p-button" style="background-color: black; height: 4rem; width: 4rem;"/>
+              <InputText id="name" v-model="name" type="text" :disabled="nameFieldDisabled" class="w-full md:w-30rem mr-3" style="padding: 1rem; height: 3rem;" />
+              <Button icon="pi pi-pencil" @click="enableField('name')" class="p-button" style="background-color: black; height: 3rem; width: 3rem;"/>
             </div> 
           </div>
           <div class="flex flex-column gap-2">
             <label for="surname">Surname</label>
             <div class="input-div flex justify-content-center align-items-center lg:mr-3 mb-3" style="">
-              <InputText id="email" v-model="surname" type="text" :disabled="surnameFieldDisabled" class="w-full md:w-30rem mr-3" style="padding: 1rem; height: 4rem;" />
-              <Button icon="pi pi-pencil" @click="enableField('surname')" class="p-button" style="background-color: black; height: 4rem; width: 4rem;"/>
+              <InputText id="email" v-model="surname" type="text" :disabled="surnameFieldDisabled" class="w-full md:w-30rem mr-3" style="padding: 1rem; height: 3rem;" />
+              <Button icon="pi pi-pencil" @click="enableField('surname')" class="p-button" style="background-color: black; height: 3rem; width: 3rem;"/>
             </div> 
-          </div>    
+          </div>  
+        </div>
+        
+      </template>
+      <template #footer>
+        <div class="flex justify-content-center align-items center">
+          <Button class="md:w-3 sm:w-3 p-3" style="height: 50px;" @click="saveChanges()" type="button" :disabled="!isSaveButtonEnabled" label="Save changes" icon="pi pi-save" :loading="loading"/>
         </div>
       </template>
     </Card>
@@ -50,8 +56,8 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import { useUserInfoStore } from '../../../stores/userInfo.store';
+import { ref, watch } from 'vue';
+import { useUserInfoStore } from '@/stores';
 
 const userInfoStore = useUserInfoStore();
 
@@ -65,10 +71,17 @@ const email = ref(userInfoStore.email);
 const name = ref(userInfoStore.name);
 const surname = ref(userInfoStore.surname);
 
+const isSaveButtonEnabled = ref(false);
+const loading = ref(false);
+
+watch([username, email, name, surname], () => {
+  isSaveButtonEnabled.value = true;
+});
+
 function onFileChange(event) {
   const file = event.target.files[0];
   if (file) {
-    userInfoStore.updateProfileImg(file); // Llamar al método para actualizar la imagen de perfil
+    userInfoStore.updateProfileImg(file); 
   }
 }
 
@@ -96,6 +109,15 @@ function enableField(field) {
     default:
       break;
   }
+}
+
+async function saveChanges() {
+  loading.value = true;
+  await userInfoStore.updateUserInfo(username.value, email.value, name.value, surname.value);
+  setTimeout(() => {
+    loading.value = false;
+    window.location.reload();
+  }, 2000);
 }
 </script>
 

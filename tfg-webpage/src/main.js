@@ -10,8 +10,9 @@ import '@/assets/styles.scss';
 // Initialize Firebase
 initializeApp(firebaseConfig);
 const pinia = createPinia();
-// Global properties
 
+// Global properties
+export const defaultProfileImgURL = 'https://firebasestorage.googleapis.com/v0/b/tfg-mariorodrigomarcos.appspot.com/o/profile_images%2FProfile-icon.jpg?alt=media&token=92a5ee1e-7cbe-44cc-8f9d-46610b213b4f'
 app.use(router);
 app.use(pinia);
 
