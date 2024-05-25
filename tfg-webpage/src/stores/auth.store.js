@@ -65,6 +65,7 @@ export const useAuthStore = defineStore({
             console.log(this.isAuthenticated)
             localStorage.removeItem('user');
             localStorage.removeItem('isAuthenticated');
+            router.push('/');
         },
 
         async register(name, surname, email, username, password) {

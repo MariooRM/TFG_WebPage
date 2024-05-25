@@ -99,9 +99,6 @@
     import { useAuthStore } from '@/stores';
     import { useUserInfoStore } from '@/stores';
 
-    import { getFirestore, collection, where, getDocs, query } from "firebase/firestore";
-
-
     const { layoutConfig } = useLayout();
     const autStore = useAuthStore();
     const userInfoStore = useUserInfoStore();
@@ -132,9 +129,7 @@
         confirmPassword: ''
     });
 
-    const db = getFirestore();
-    const userCollection = collection(db, 'users');
- 
+
     const router = useRouter();
 
     const bgColor = computed(() => {
@@ -184,15 +179,14 @@
         }
         else if (phase.value == 2) // Username and email comprobation
         {
-            [errorMessages.value.email, emailValid.value] = await userInfoStore.checkEmail(userCollection, email.value);
-            console.log(emailValid.value);
-            console.log(errorMessages.value.email);
+            [errorMessages.value.email, emailValid.value] = await userInfoStore.checkEmail(email.value);
+          
             if (!emailValid.value)
             {
                 return;
             }
             
-            [errorMessages.value.username, usernameValid.value] = await userInfoStore.checkUsername(userCollection, username.value);
+            [errorMessages.value.username, usernameValid.value] = await userInfoStore.checkUsername(username.value);
             if (!usernameValid.value)
             {
                 return;

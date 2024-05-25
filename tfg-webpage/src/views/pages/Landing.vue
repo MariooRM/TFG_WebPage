@@ -1,6 +1,6 @@
 
 <script setup>
-import { computed, onMounted } from 'vue';
+import { computed } from 'vue';
 
 import { useLayout } from '@/layout/composables/layout';
 import AppConfig from '@/layout/AppConfig.vue';
@@ -23,13 +23,6 @@ const smoothScroll = (id) => {
     });
 };
 
-const bgColor = computed(() => {
-        return layoutConfig.darkTheme.value ? 'white' : 'black';
-})
-const logoUrl = computed(() => {
-    return `layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
-});
-
 const showTopBar = ref(false);
 
 function toggleTopBar() {
@@ -46,13 +39,8 @@ function showToast (type, message)
         })
 }
 async function logout() {
-    await authStore.logout();
     this.toggleTopBar();
-    //showToast('info', 'Goodbye!');
-    window.location.reload();
-                    // setTimeout(() => {
-                        
-                    // }, 2000);
+    await authStore.logout();
 }
 
 </script>

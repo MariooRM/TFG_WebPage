@@ -109,11 +109,13 @@ export const useUserInfoStore = defineStore({
             }
         },
 
-        async checkUsername(userCollection, username) {
-    
+        async checkUsername(username) {
+            const db = getFirestore();
+            const userCollection = collection(db, 'users');
+
             if (!username)
             {
-                return ['You must provide an username', false];
+                return ['You must provide a username', false];
             }
         
             const usernameExistsBool = await this.usernameExists(userCollection, username);
@@ -148,9 +150,10 @@ export const useUserInfoStore = defineStore({
             }
         },
 
-        async checkEmail(userCollection, email) {
+        async checkEmail(email) {
+            const db = getFirestore();
+            const userCollection = collection(db, 'users');
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            console.log(email)
             
             if (!email || !emailRegex.test(email))
             {
