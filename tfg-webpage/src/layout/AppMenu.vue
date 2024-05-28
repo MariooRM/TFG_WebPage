@@ -26,7 +26,7 @@ function showConfirmDialog() {
     message: 'Are you sure you want to logout?',
     header: 'Confirmation',
     accept: authStore.logout,
-    reject: () => window.location.reload(),
+    reject: () => {},
   });
 }
 </script>

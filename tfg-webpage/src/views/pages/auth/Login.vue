@@ -74,10 +74,6 @@
         }
     })
 
-    const logoUrl = computed(() => {
-        return `/layout/images/${layoutConfig.darkTheme.value ? 'logo-white' : 'logo-dark'}.svg`;
-    });
-
     const bgColor = computed(() => {
         return layoutConfig.darkTheme.value ? 'white' : 'black';
     });

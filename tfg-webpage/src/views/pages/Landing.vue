@@ -64,8 +64,8 @@ async function logout() {
                             </a>
                         </li>
                         <li>
-                            <a @click="smoothScroll('#armory')" class="flex m-0 md:ml-5 px-0 py-3 text-2xl font-medium line-height-3 p-ripple" v-ripple>
-                                <span>Armory</span>
+                            <a @click="smoothScroll('#arsenal')" class="flex m-0 md:ml-5 px-0 py-3 text-2xl font-medium line-height-3 p-ripple" v-ripple>
+                                <span>Arsenal</span>
                             </a>
                         </li>
                         <li>
@@ -151,24 +151,24 @@ async function logout() {
                 </div>
 
             <div 
-                id="armory" 
+                id="arsenal" 
                 class="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8"
                 >
                 <div class="grid justify-content-center">
                     <div
                         class="col-12 mt-8 mb-8 p-2 md:p-5 justify-content-center align-items-center text-center"
                         style="border-radius: 20px; background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(211, 211, 211) 0%, rgb(128, 128, 128) 100%), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(221, 221, 153) 0%, rgb(192, 212, 230) 100%);">
-                        <h1 class="text-black font-bold"> Armory</h1>
+                        <h1 class="text-black font-bold"> Arsenal</h1>
                         <span class="text-600 text-2xl">Learn about weapons and skills!</span>
                     </div>
                         
                     
 
                     <div class="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
-                        <div class="armory-div">
+                        <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
-                                <div class="flex align-items-center justify-content-center bg-yellow-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-users text-2xl text-yellow-700"></i>
+                                <div class="flex align-items-center justify-content-center bg-blue-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <img alt="dropdown icon" src="/src/assets/images/skill-icon.png" style="width: 40px;">
                                 </div>
                                 <h5 class="mb-2 text-900">Teleport</h5>
                                 <span class="text-600">Cross the battlefield in the blink of an eye <br><br> Power cost: 35</span>
@@ -177,10 +177,10 @@ async function logout() {
                     </div>
 
                     <div class="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
-                        <div class="armory-div">
+                        <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
-                                <div class="flex align-items-center justify-content-center bg-cyan-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-palette text-2xl text-cyan-700"></i>
+                                <div class="flex align-items-center justify-content-center bg-blue-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <img alt="dropdown icon" src="/src/assets/images/skill-icon.png" style="width: 40px;">
                                 </div>
                                 <h5 class="mb-2 text-900">Invisibility</h5>
                                 <span class="text-600">Don't let your enemies see you<br><br> Power cost: 25</span>
@@ -189,10 +189,10 @@ async function logout() {
                     </div>
 
                     <div class="col-12 md:col-12 lg:col-4 p-0 lg:pb-5 mt-4 lg:mt-0">
-                        <div class="armory-div">
+                        <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
-                                <div class="flex align-items-center justify-content-center bg-indigo-200" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-map text-2xl text-indigo-700"></i>
+                                <div class="flex align-items-center justify-content-center bg-blue-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <img alt="dropdown icon" src="/src/assets/images/skill-icon.png" style="width: 40px;">
                                 </div>
                                 <h5 class="mb-2 text-900">Dash</h5>
                                 <span class="text-600">Avoid enemy attacks and reach new heights<br><br> Power cost: 25</span>
@@ -201,12 +201,12 @@ async function logout() {
                     </div>
 
                     <div class="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
-                        <div class="armory-div">
+                        <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-id-card text-2xl text-bluegray-700"></i>
+                                    <img alt="dropdown icon" src="/src/assets/images/weapon-icon.png" style="width: 40px;">
                                 </div>
-                                <h5 class="mb-2 text-900">Pistol</h5>
+                                <h5 class="mb-2 text-900">HK-45 Pistol</h5>
                                 <span class="text-600">A light and quick weapon<br><br> 
                                     Damage: 25<br>
                                     Mag size: 11<br>
@@ -217,30 +217,44 @@ async function logout() {
                     </div>
 
                     <div class="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
-                        <div class="armory-div">
+                        <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
-                                <div class="flex align-items-center justify-content-center bg-orange-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-star text-2xl text-orange-700"></i>
+                                <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <img alt="dropdown icon" src="/src/assets/images/weapon-icon.png" style="width: 40px;">
                                 </div>
-                                <h5 class="mb-2 text-900">SMG</h5>
-                                <span class="text-600">Medium firepower and great movement<br><br> 
-                                    Damage: 15<br>
-                                    Mag size: 27<br>
+                                <h5 class="mb-2 text-900">Svitka Shotgun</h5>
+                                <span class="text-600">Deathly at short range<br><br> 
+                                    Damage: 75<br>
+                                    Mag size: 5<br>
                                     Implemented: not yet<br></span>
                             </div>
                         </div>
                     </div>
 
                     <div class="col-12 md:col-12 lg:col-4 p-0 lg:pb-5 mt-4 lg:mt-0">
-                        <div class="armory-div">
+                        <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
-                                <div class="flex align-items-center justify-content-center bg-pink-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <i class="pi pi-fw pi-moon text-2xl text-pink-700"></i>
+                                <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <img alt="dropdown icon" src="/src/assets/images/weapon-icon.png" style="width: 40px;">
                                 </div>
-                                <h5 class="mb-2 text-900">Rifle</h5>
-                                <span class="text-600">Hight firepower but slower movement<br><br> 
+                                <h5 class="mb-2 text-900">Ark.53 AR</h5>
+                                <span class="text-600">Hight firepower but medium movement<br><br> 
                                     Damage: 40<br>
                                     Mag size: 30<br>
+                                    Implemented: not yet<br></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 md:col-12 lg:col-4 p-0 lg:pb-5 mt-4 lg:mt-0">
+                        <div class="arsenal-div">
+                            <div class="p-3 surface-card h-full" style="border-radius: 8px">
+                                <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <img alt="dropdown icon" src="/src/assets/images/weapon-icon.png" style="width: 40px;">
+                                </div>
+                                <h5 class="mb-2 text-900">Mark-6 Sniper Rifle</h5>
+                                <span class="text-600">The most powered gun in the game<br><br> 
+                                    Damage: 100<br>
+                                    Mag size: 5<br>
                                     Implemented: not yet<br></span>
                             </div>
                         </div>
@@ -257,34 +271,18 @@ async function logout() {
                 </div>
 
                 <div class="grid mt-8 pb-2 md:pb-8">
-                    <div class="flex justify-content-center col-12 lg:col-6 bg-purple-100 p-0 flex-order-1 lg:flex-order-0" style="border-radius: 8px">
-                        <img src="/demo/images/landing/mockup.svg" class="w-11" alt="mockup mobile" />
+                    <div class="flex justify-content-center col-12 lg:col-6 p-0 flex-order-1 lg:flex-order-0" style="border-radius: 8px">
+                        <img src="/src/assets/images/news-demo-01.png" class="w-11" alt="mockup mobile" style="border-radius: 5%;"/>
                     </div>
 
                     <div class="col-12 lg:col-6 my-auto flex flex-column lg:align-items-end text-center lg:text-right">
-                        <div class="flex align-items-center justify-content-center bg-purple-200 align-self-center lg:align-self-end" style="width: 4.2rem; height: 4.2rem; border-radius: 10px">
-                            <i class="pi pi-fw pi-mobile text-5xl text-purple-700"></i>
+                        <div class="flex align-items-center justify-content-center align-self-end lg:align-self-end" style="width: 4.2rem; height: 4.2rem; border-radius: 10px; background-color: black;">
+                            <i class="pi pi-fw pi-plus text-5xl text-white"></i>
                         </div>
                         <h2 class="line-height-1 text-900 text-4xl font-normal">New weapon added!</h2>
                         <span class="text-700 text-2xl line-height-3 ml-0 md:ml-2" style="max-width: 650px"
-                            >Lectus arcu bibendum at varius vel pharetra vel turpis nunc. Eget aliquet nibh praesent tristique magna sit amet purus gravida. Sit amet mattis vulputate enim nulla aliquet.</span
+                            >Ark.53 assault rifle lands to Erased Memories this May 25 in order to help complete your arsenal. You will find it in your safe house.</span
                         >
-                    </div>
-                </div>
-
-                <div class="grid my-8 pt-2 md:pt-8">
-                    <div class="col-12 lg:col-6 my-auto flex flex-column text-center lg:text-left lg:align-items-start">
-                        <div class="flex align-items-center justify-content-center bg-yellow-200 align-self-center lg:align-self-start" style="width: 4.2rem; height: 4.2rem; border-radius: 10px">
-                            <i class="pi pi-fw pi-desktop text-5xl text-yellow-700"></i>
-                        </div>
-                        <h2 class="line-height-1 text-900 text-4xl font-normal">New skill added!</h2>
-                        <span class="text-700 text-2xl line-height-3 mr-0 md:mr-2" style="max-width: 650px"
-                            >Adipiscing commodo elit at imperdiet dui. Viverra nibh cras pulvinar mattis nunc sed blandit libero. Suspendisse in est ante in. Mauris pharetra et ultrices neque ornare aenean euismod elementum nisi.</span
-                        >
-                    </div>
-
-                    <div class="flex justify-content-end flex-order-1 sm:flex-order-2 col-12 lg:col-6 bg-yellow-100 p-0" style="border-radius: 8px">
-                        <img src="/demo/images/landing/mockup-desktop.svg" class="w-11" alt="mockup" />
                     </div>
                 </div>
             </div>
@@ -356,7 +354,7 @@ async function logout() {
 
 
 <style scoped>
-.armory-div {
+.arsenal-div {
     height: 230px;
     padding: 2px;
     border-radius: 10px;
@@ -364,7 +362,7 @@ async function logout() {
     transition: transform 0.3s ease; /* Define la transición fuera de :hover */
 }
 
-.armory-div:hover {
+.arsenal-div:hover {
     transform: scale(1.05); /* Define la transformación solo en :hover */
 }
 </style> 
