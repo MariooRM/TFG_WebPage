@@ -1,7 +1,8 @@
 import { defineStore } from "pinia";
 
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signOut, signInWithEmailAndPassword,
-     setPersistence, browserLocalPersistence, updateEmail, updatePassword } from "firebase/auth";
+     setPersistence, browserLocalPersistence, updatePassword, EmailAuthProvider, 
+     reauthenticateWithCredential} from "firebase/auth";
 import { getFirestore, doc, setDoc, Timestamp } from "firebase/firestore";
 
 import { toast } from 'vue3-toastify';
@@ -23,8 +24,8 @@ export const useAuthStore = defineStore({
                 if (user) {
                     this.userUID = user.uid;
                     this.isAuthenticated = true;
-                    localStorage.setItem('userUID', JSON.stringify(user.uid));
-                    localStorage.setItem('isAuthenticated', JSON.stringify(true));
+                    localStorage.setItem('userUID', user.uid);
+                    localStorage.setItem('isAuthenticated', true);
                 } else {
                     this.userUID = null;
                     this.isAuthenticated = false;
@@ -119,6 +120,43 @@ export const useAuthStore = defineStore({
             }
         },
 
+        async checkCurrentPassword(password) {
+            const auth = getAuth();
+            const user = auth.currentUser;
+        
+            if (user) {
+                const credential = EmailAuthProvider.credential(user.email, password);
+                try {
+                    await reauthenticateWithCredential(user, credential);
+                    return ['', true];
+                } catch (error) {
+                    if (error.code === 'auth/invalid-credential') {
+                        return ['Incorrect password. You have 6 total attempts', false];
+                    } else if (error.code === 'auth/too-many-requests') {
+                        return ['Too many attempts, please try again later', false];
+                    }
+                }
+            } else {
+                return ['No user is currently signed in.', false];
+            }
+        },
+
+        async changePassword(newPassword) {
+            const auth = getAuth();
+            const user = auth.currentUser;
+        
+            if (user) {
+                try {
+                    await updatePassword(user, newPassword);
+                    return true;
+                } catch (error) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        },
+        
         showToast (type, message)
         {
             toast(message, {

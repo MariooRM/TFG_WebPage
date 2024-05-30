@@ -129,7 +129,6 @@
         confirmPassword: ''
     });
 
-
     const router = useRouter();
 
     const bgColor = computed(() => {
@@ -233,7 +232,6 @@
     function checkPasswordAndConfirmPassword()
     {
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-
         if (!password.value || !passwordRegex.test(password.value))
         {
             errorMessages.value.password = 'You must provide a valid password';
@@ -255,11 +253,6 @@
         
         return true;
     }
-
-
-    
-
-    
 
 </script>
 <style scoped>

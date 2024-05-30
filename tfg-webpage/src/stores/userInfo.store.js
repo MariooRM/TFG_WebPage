@@ -87,24 +87,48 @@ export const useUserInfoStore = defineStore({
             localStorage.removeItem('profileImg');
         },
 
-        async updateUserInfo(username, email, name, surname) {
+        async updatePersonalInfo(name, surname) {
             const authStore = useAuthStore();
             const db = getFirestore();
             const userRef = doc(db, "users", authStore.userUID);
             try {
-                await updateDoc(userRef, { username, email, name, surname });
-                this.username = username;
-                this.email = email;
+                await updateDoc(userRef, {name, surname });
                 this.name = name;
                 this.surname = surname;
         
                 // Update local storage
-                localStorage.setItem('username', username);
-                localStorage.setItem('email', email);
                 localStorage.setItem('name', name);
                 localStorage.setItem('surname', surname);
             } catch (error) {
                 console.error("Error updating user information:", error);
+                throw error;
+            }
+        },
+
+        async updateUsername(username) {
+            const authStore = useAuthStore();
+            const db = getFirestore();
+            const userRef = doc(db, "users", authStore.userUID);
+            try {
+                await updateDoc(userRef, { username });
+                this.username = username;
+                localStorage.setItem('username', username);
+            } catch (error) {
+                console.error("Error updating username:", error);
+                throw error;
+            }
+        },
+
+        async updateEmail(email) {
+            const authStore = useAuthStore();
+            const db = getFirestore();
+            const userRef = doc(db, "users", authStore.userUID);
+            try {
+                await updateDoc(userRef, { email });
+                this.email = email;
+                localStorage.setItem('email', email);
+            } catch (error) {
+                console.error("Error updating email:", error);
                 throw error;
             }
         },
@@ -201,6 +225,10 @@ export const useUserInfoStore = defineStore({
             {
                 return ['', true];
             }
+        },
+
+        checkPassword(password) {
+            const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
         }
     }, 
 

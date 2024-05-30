@@ -9,10 +9,6 @@ import { useAuthStore } from '@/stores';
 import Sidebar from 'primevue/sidebar';
 import { ref } from 'vue';
 
-import { toast } from 'vue3-toastify';
-import 'vue3-toastify/dist/index.css';
-
-
 const { layoutConfig } = useLayout();
 const authStore = useAuthStore();
 
@@ -29,15 +25,6 @@ function toggleTopBar() {
     showTopBar.value = !showTopBar.value;
 }
 
-function showToast (type, message)
-{
-    toast(message, {
-        "theme": "colored",
-        "type": type,
-        "autoClose": 1500,
-        "dangerouslyHTMLString": true
-        })
-}
 async function logout() {
     this.toggleTopBar();
     await authStore.logout();
@@ -122,7 +109,7 @@ async function logout() {
                             <div class="flex align-items-center justify-content-center" style="width: 3.5rem; height: 3.5rem; border-radius: 10px; background-color: black;">
                                 <i class="pi pi-fw pi-sign-out text-5xl" style="color: white;"></i>
                             </div>
-                            <h5 style="margin-top: 0.7rem; margin-bottom: 0;">Sign out</h5>
+                            <h5 style="margin-top: 0.7rem; margin-bottom: 0;">Logout</h5>
                         </div>
                     </a>
                 </div>
@@ -142,8 +129,11 @@ async function logout() {
                     <Button label="PLAY NOW FOR FREE!" :style="{ 'background-color': 'black', 'margin-left': 'irem' }" class="p-button-rounded text-xl border-none mt-5 bg-black font-normal text-white line-height-3 px-3 md:ml-0"></Button>
                     </div>
                 </div>
-                    <div class="flex justify-content-center md:justify-content-end">
-                        <div class ="hidden md:flex md:w-5 md:h-7" style="width: 700px; height: 400px; border: 5px solid black; margin-top: 100px">
+                    <div class="flex md:flex-row flex-column justify-content-center">
+                        <div class="hidden md:flex" style="width: 700px; height: 400px; border: 5px solid black; margin-top: 100px">
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/_zDZYrIUgKE?si=FftuGB7GEEjFGVeh" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                        <div class ="md:hidden w-20rem h-15rem" style="width: 700px; height: 400px; border: 5px solid black; margin-top: 100px; margin-left: 45px;">
                             <iframe style="width: 100%; height: 100%;" src="https://www.youtube.com/embed/_zDZYrIUgKE?si=FftuGB7GEEjFGVeh" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <img src="/src/assets/images/ninja.png" alt="Hero Image" class="w-10 md:w-auto" />

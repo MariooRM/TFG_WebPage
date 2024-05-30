@@ -12,42 +12,80 @@
       </template>
 
       <template #content>
-        <div class="profile-info-div flex flex-column justify-content-center align-items-center mb-3">
-          <h4 class="mb-1 w-full sm:mb-3" style="text-align: center;">Account info</h4>
-          <div class="flex flex-column gap-2">
-            <label for="username">Username</label>
-            <div class="input-div flex justify-content-center align-items-center lg:mr-3" >
-              <InputText id="username" v-model="username" type="text" :disabled="usernameFieldDisabled" class="w-full md:w-30rem mr-3" style="padding: 1rem; height: 3rem;" />
-              <Button icon="pi pi-pencil" @click="enableField('username')" class="p-button" style="background-color: black; height: 3rem; width: 3rem;"/>
-            </div> 
-            <span v-if="errorMessages.username" class="error-message text-red-500 block">{{ errorMessages.username }}</span>
+        <div class="profile-info-div flex flex-column justify-content-center align-items-center mb-3" style="">
+          <h4 class="mb-1 w-full sm:mb-2" style="text-align: center;">Account info</h4>
+          <div class="flex flex-column gap-2 w-full" style="max-width: 25rem;">
+            <label class="lg:ml-2 font-bold" for="email">Email</label>
+            <div class="input-div flex justify-content-center align-items-center w-full" style="">
+              <InputText id="email" v-model="email" type="text" disabled class="w-full" style="padding: 1rem; height: 3rem;" />
+              <i class="pi pi-verified ml-2" style="font-size: 2.5rem; color: gold"></i>
+            </div>
           </div>
-          <div class="flex flex-column gap-2 mt-3">
-            <label for="email">Email</label>
-            <div class="input-div flex justify-content-center align-items-center lg:mr-3" style="">
-              <InputText id="email" v-model="email" type="text" :disabled="emailFieldDisabled" class="w-full md:w-30rem mr-3" style="padding: 1rem; height: 3rem;" />
-              <Button icon="pi pi-pencil" @click="enableField('email')" class="p-button" style="background-color: black; height: 3rem; width: 3rem;"/>
-            </div> 
-            <span v-if="errorMessages.email" class="error-message text-red-500 block">{{ errorMessages.email }}</span>
+          <div class="flex flex-column gap-2 w-full mt-3" style="max-width: 25rem;">
+            <label class="font-bold" for="username">Username</label>
+            <div class="input-div flex justify-content-center align-items-center w-full">
+              <InputText id="username" v-model="username" type="text" class="w-full" disabled style="padding: 1rem; height: 3rem;" />
+              <Button icon="pi pi-pencil" @click="showModificationDialog('username')" class="p-button ml-2" style="background-color: black; height: 3rem; width: 3rem;"/>
+            </div>
           </div>
-          <h4 class="mb-1 w-full sm:mb-3 mt-5" style="text-align: center;">Personal info</h4>
-          <div class="flex flex-column gap-2">
-            <label for="name">Name</label>
-            <div class="input-div flex justify-content-center align-items-center lg:mr-3 mb-3">
-              <InputText id="name" v-model="name" type="text" :disabled="nameFieldDisabled" class="w-full md:w-30rem mr-3" style="padding: 1rem; height: 3rem;" />
-              <span v-if="errorMessages.name" class="error-message text-red-500 block mt-2">{{ errorMessages.name }}</span>
-              <Button icon="pi pi-pencil" @click="enableField('name')" class="p-button" style="background-color: black; height: 3rem; width: 3rem;"/>
-            </div> 
+          <div class="flex flex-column gap-2 w-full mt-3" style="max-width: 25rem;">
+            <label class="font-bold" for="username">Password</label>
+            <div class="input-div flex justify-content-center align-items-center w-full">
+              <InputText id="password" v-model="password" type="text" class="w-full" placeholder="********" disabled style="padding: 1rem; height: 3rem;" />
+              <Button icon="pi pi-pencil" @click="showModificationDialog('password')" class="p-button ml-2" style="background-color: black; height: 3rem; width: 3rem;"/>
+            </div>
           </div>
-          <div class="flex flex-column gap-2">
-            <label for="surname">Surname</label>
-            <div class="input-div flex justify-content-center align-items-center lg:mr-3 mb-3" style="">
-              <InputText id="email" v-model="surname" type="text" :disabled="surnameFieldDisabled" class="w-full md:w-30rem mr-3" style="padding: 1rem; height: 3rem;" />
-              <Button icon="pi pi-pencil" @click="enableField('surname')" class="p-button" style="background-color: black; height: 3rem; width: 3rem;"/>
-            </div> 
-          </div>  
+          <Dialog v-model:visible="usernameVisible" @hide="OnDialogHide()" modal header="Edit Profile" class="md:w-30rem sm:w-25rem">
+            <span class="p-text-secondary block mb-5">Update your username information.</span>
+            <div class="flex align-items-center gap-3 mb-3">
+              <span>Current username: <span style="font-weight: bold;">{{ originalUsername }}</span></span>
+            </div>
+            <div class="flex align-items-center gap-3">
+                <InputText id="usernameToModify" v-model="usernameToModify" class="flex-auto" style="height: 3rem;" autocomplete="off" placeholder="New username"/>
+            </div>
+            <span v-if="errorMessages.username" class="error-message text-red-500 block mt-1" style="font-size: 13px;">{{ errorMessages.username }}</span>
+            <div class="flex justify-content-center gap-5 mt-5">
+                <Button type="button" label="Cancel" severity="secondary" @click="OnDialogHide()"></Button>
+                <Button type="button" label="Save" @click="checkNewUsername()"></Button>
+            </div>
+          </Dialog>
+          <Dialog v-model:visible="passwordVisible" @hide="OnDialogHide()" modal header="Edit Profile" class="md:w-30rem sm:w-25rem">
+              <span class="p-text-secondary block mb-5">Update your profile information.</span>
+              
+              <div class="flex align-items-center gap-3">
+                  <Password id="currentPassword" v-model="currentPassword" inputClass="w-full" :feedback="false" :toggleMask="true" class="w-full" style="width: 100%; height: 3rem;" autocomplete="off" placeholder="Current password"/>
+              </div>
+              <span v-if="errorMessages.currentPassword" class="error-message text-red-500 block mt-1" style="font-size: 13px;">{{ errorMessages.currentPassword }}</span>
+              
+              <div class="flex align-items-center gap-3 mt-3">
+                <Password id="newPassword" v-model="newPassword" inputClass="w-full" :feedback="false" :toggleMask="true" class="w-full" style="width: 100%; height: 3rem;" autocomplete="off" placeholder="New password"/>
+              </div>
+              <span v-if="errorMessages.newPassword" class="error-message text-red-500 block mt-1" style="font-size: 13px;">{{ errorMessages.newPassword }}</span>
+              
+              <div class="flex align-items-center gap-3 mt-3">
+                <Password id="confirmNewPassword" v-model="confirmNewPassword" inputClass="w-full" :feedback="false" :toggleMask="true" class="w-full" style="width: 100%; height: 3rem;" autocomplete="off" placeholder="Confirm new password"/>
+              </div>
+              <span v-if="errorMessages.confirmNewPassword" class="error-message text-red-500 block mt-1" style="font-size: 13px;">{{ errorMessages.confirmNewPassword }}</span>
+              <div class="flex justify-content-center gap-5 mt-5">
+                  <Button type="button" label="Cancel" severity="secondary" @click="OnDialogHide()"></Button>
+                  <Button type="button" label="Save" @click="checkPasswordInputs()"></Button>
+              </div>
+          </Dialog>
+          <h4 class="mb-1 w-full sm:mb-2 mt-6" style="text-align: center;">Personal info</h4>
+          <div class="flex flex-column gap-2 w-full" style="max-width: 25rem;">
+            <label class="font-bold" for="name">Name</label>
+            <div class="input-div flex flex-column justify-content-center align-items-center w-full">
+              <InputText id="name" v-model="name" type="text" class="w-full" style="padding: 1rem; height: 3rem;" />
+            </div>
+            <span v-if="errorMessages.name" class="error-message text-red-500 block">{{ errorMessages.name }}</span>
+          </div>
+          <div class="flex flex-column gap-2 w-full mt-3" style="max-width: 25rem;">
+            <label class="font-bold" for="surname">Surname</label>
+            <div class="input-div flex justify-content-center align-items-center w-full" style="">
+              <InputText id="surname" v-model="surname" type="text" class="w-full" style="padding: 1rem; height: 3rem;" />
+            </div>
+          </div>
         </div>
-        
       </template>
       <template #footer>
         <ConfirmDialog group="headless">
@@ -74,38 +112,67 @@
 </template>
 
 <script setup>
-import { ref, watch } from 'vue';
-import { useUserInfoStore } from '@/stores';
+import { ref, watch, onMounted } from 'vue';
+import { useUserInfoStore, useAuthStore } from '@/stores';
 import { useConfirm } from 'primevue/useconfirm';
 
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
+
 const userInfoStore = useUserInfoStore();
+const authStore = useAuthStore();
 const confirm = useConfirm();
 
-const usernameFieldDisabled = ref(true);
-const emailFieldDisabled = ref(true);
-const nameFieldDisabled = ref(true);
-const surnameFieldDisabled = ref(true);
+const usernameVisible = ref(false);
+const passwordVisible = ref(false);
+
+const originalName = ref('')
+const originalSurname = ref('')
+const originalUsername = ref('')
+const originalEmail = ref('')
+
+const usernameToModify = ref('');
+const currentPassword = ref('');
+const newPassword = ref('');
+const confirmNewPassword = ref('');
 
 const username = ref(userInfoStore.username);
 const email = ref(userInfoStore.email);
 const name = ref(userInfoStore.name);
 const surname = ref(userInfoStore.surname);
+const password = ref('********');
 
 const isSaveButtonEnabled = ref(false);
 const loading = ref(false);
 
 const errorMessages = ref({
         name: '',
-        email: '',
         username: '',
+        currentPassword: '',
+        newPassword: '',
+        confirmNewPassword: '',
     });
 
-const emailIsValid = ref(false);
-const usernameIsValid = ref(false);
-const nameIsValid = ref(false);
+let usernameIsValid = ref(false);
+let nameIsValid = ref(false);
+let currentPasswordIsValid = ref(false);
+let newPasswordIsValid = ref(false);
+let confirmNewPasswordIsValid = ref(false);
 
-watch([username, email, name, surname], () => {
-  isSaveButtonEnabled.value = true;
+onMounted(() => {
+  originalUsername.value = username.value;
+  originalEmail.value = email.value;
+  originalName.value = name.value;
+  originalSurname.value = surname.value;
+});
+
+watch([username, name, surname], ([newUsername, newName, newSurname]) => {
+  isSaveButtonEnabled.value = (
+    newUsername !== originalUsername.value ||
+    newName !== originalName.value ||
+    newSurname !== originalSurname.value
+  );
 });
 
 function onFileChange(event) {
@@ -122,28 +189,9 @@ function openFileInput() {
   }
 }
 
-function enableField(field) {
-  switch (field) {
-    case 'username':
-      usernameFieldDisabled.value = false;
-      break;
-    case 'email':
-      emailFieldDisabled.value = false;
-      break;
-    case 'name':
-      nameFieldDisabled.value = false;
-      break;
-    case 'surname':
-      surnameFieldDisabled.value = false;
-      break;
-    default:
-      break;
-  }
-}
-
-async function saveChanges() {
+async function savePersonalInfo() {
   loading.value = true;
-  await userInfoStore.updateUserInfo(username.value, email.value, name.value, surname.value);
+  await userInfoStore.updatePersonalInfo(name.value, surname.value);
   setTimeout(() => {
     loading.value = false;
     window.location.reload();
@@ -155,33 +203,111 @@ function showConfirmDialog() {
     group: 'headless',
     message: 'Are you sure you want to save changes?',
     header: 'Confirmation',
-    accept: saveChanges,
+    accept: savePersonalInfo,
     reject: () => window.location.reload(),
   });
+}
+
+function showModificationDialog(field) {
+ 
+  if (field == 'username')
+  {
+     usernameVisible.value = true;
+  } 
+  else
+  {
+    passwordVisible.value = true;
+  } 
+}
+
+async function checkNewUsername()
+{
+  if (usernameToModify.value != originalUsername.value) {
+    const [usernameError, usernameValid] = await userInfoStore.checkUsername(usernameToModify.value);
+    errorMessages.value.username = usernameError;
+    usernameIsValid.value = usernameValid;
+    if (usernameIsValid.value) {
+      await userInfoStore.updateUsername(usernameToModify.value);
+      window.location.reload();
+    }
+  }
+  else
+  {
+    errorMessages.value.username = 'Your new username must be different from your current one';
+    return;
+  }
+  }
+
+async function checkPasswordInputs()
+{
+  // We first check if the current password is correct
+  if (!currentPassword.value)
+  {
+    errorMessages.value.currentPassword = 'You must provide your current password';
+    return;
+  }
+  
+  [errorMessages.value.currentPassword, currentPasswordIsValid] = await authStore.checkCurrentPassword(currentPassword.value);
+  if (!currentPasswordIsValid) 
+  {
+    return;
+  }
+  else
+  {
+    if (checkPasswordAndConfirmPassword())
+    {
+      await authStore.changePassword(newPassword.value);
+      showToast('info', 'Password successfully updated');
+      setTimeout(() => {
+                      window.location.reload();
+                    }, 2000);
+    }
+  }
+}
+
+function checkPasswordAndConfirmPassword()
+{
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  if (!newPassword.value || !passwordRegex.test(newPassword.value))
+  {
+      errorMessages.value.newPassword = 'Insecure password, please try again';
+      return false;
+  }
+  else errorMessages.value.newPassword = '';
+
+  if (!confirmNewPassword.value)
+  {
+      errorMessages.value.confirmNewPassword = 'Password confirmation is needed';
+      return false; 
+  }
+  else if (newPassword.value != confirmNewPassword.value)
+  {
+      errorMessages.value.confirmNewPassword = 'Passwords do not match';
+      return false;
+  }
+  else errorMessages.value.confirmNewPassword = '';
+  
+  return true;
+}
+
+function OnDialogHide()
+{
+  usernameVisible.value = false;
+  passwordVisible.value = false;
+  errorMessages.value.username = '';
+  errorMessages.value.currentPassword = '';
+  errorMessages.value.password = '';
+  errorMessages.value.confirmPassword = '';
+  usernameToModify.value = '';
+  currentPassword.value = '';
+  newPassword.value = '';
+  confirmNewPassword.value = '';
 }
 
 async function makeComprobations() {
   let allValid = true;
 
-  if (!usernameFieldDisabled.value) {
-    const [usernameError, usernameValid] = await userInfoStore.checkUsername(username.value);
-    errorMessages.value.username = usernameError;
-    usernameIsValid.value = usernameValid;
-    if (!usernameIsValid.value) {
-      allValid = false;
-    } 
-  }
-
-  if (!emailFieldDisabled.value) {
-    const [emailError, emailValid] = await userInfoStore.checkEmail(email.value);
-    errorMessages.value.email = emailError;
-    emailIsValid.value = emailValid;
-    if (!emailIsValid.value) {
-      allValid = false;
-    }
-  }
-
-  if (!nameFieldDisabled.value) {
+  if (name.value !== originalName.value) {
     const [nameError, nameValid] = userInfoStore.checkName(name.value);
     errorMessages.value.name = nameError;
     nameIsValid.value = nameValid;
@@ -193,6 +319,16 @@ async function makeComprobations() {
   if (allValid) {
     showConfirmDialog();
   }
+}
+
+function showToast (type, message)
+{
+    toast(message, {
+        "theme": "colored",
+        "type": type,
+        "autoClose": 1500,
+        "dangerouslyHTMLString": true
+        })
 }
 </script>
 
