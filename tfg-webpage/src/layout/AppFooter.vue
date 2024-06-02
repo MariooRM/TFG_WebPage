@@ -16,4 +16,10 @@ const logoUrl = computed(() => {
         <span class="font-medium ml-2">Mario Rodrigo Marcos</span>
     </div>
 </template>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.layout-footer {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+</style>

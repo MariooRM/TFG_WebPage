@@ -1,10 +1,10 @@
 <template>
   <div class="profile-container flex justify-content-center mb-5">
-    <Card style="width: 50rem; overflow: hidden">
+    <Card style="width: 50rem; overflow: hidden; ">
       <template #header>
         <div class="profile-div flex justify-content-center align-items-center w-full mt-3 mb-3" style=" flex-direction: column;">
-          <div class="profile-img-div mb-3" style=" border-radius: 50%; width: 200px; height: 200px;">
-            <img :src="userInfoStore.profileImg" alt="ProfileImg" class="profile-img" style="object-fit: cover; border-radius: 50%; width: 100%; height: 100%;" />
+          <div class="profile-img-div mb-3" style=" border-radius: 50%; width: 200px; height: 200px; ">
+            <img :src="userInfoStore.profileImg" alt="ProfileImg" class="profile-img" style="object-fit: cover; border-radius: 50%; width: 100%; height: 100%; " />
           </div>
           <button class="p-button" @click="openFileInput" style="background-color: black; color: white; padding: 10px 20px; border: none; cursor: pointer;">Choose Image</button>
           <input type="file" style="display: none;" ref="fileInput" @change="onFileChange" accept="image/*">
@@ -331,4 +331,8 @@ function showToast (type, message)
         })
 }
 </script>
+
+<style scoped>
+
+</style>
 

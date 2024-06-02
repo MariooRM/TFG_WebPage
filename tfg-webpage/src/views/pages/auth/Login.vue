@@ -2,7 +2,7 @@
 <template>
     <div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
         <div class="flex flex-column align-items-center justify-content-center">
-            <div style="border-radius: 53px; padding: 0.3rem; background: linear-gradient(180deg, black 10%, rgba(33, 150, 243, 0) 30%)">
+            <div style="border-radius: 53px; padding: .3rem; background: linear-gradient(180deg, black 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card pb-8 pt-4 px-5 sm:px-8" style="border-radius: 53px;">
                     <div class="text-center mb-5">
                         <img src="../../../assets/images/Logo-nobg.png" alt="EM logo" class="mb-5 w-20rem flex-shrink-0"/>
@@ -12,7 +12,7 @@
                         <span class="text-600 font-medium">Sign in to continue</span>
                     </div>
 
-                    <div class="login-form">
+                    <div @keydown.enter="handleEventKey" class="login-form">
                         <div class="input-fields">
                             <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
                             <div>
@@ -34,7 +34,7 @@
                         <div class="flex align-items-center justify-content-center">
                             <a class="font-medium no-underline ml-2 mb-2 text-center cursor-pointer font-bold" style="color: lightslategray" onclick="window.location.href='/auth/register'">Don't have an account? Register now</a>
                         </div>
-                        <Button label="Sign In" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor, marginBottom: '5px', marginTop: '10px' }" @click="login"></Button>
+                        <Button id="signInButton" label="Sign In" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor, marginBottom: '5px', marginTop: '10px' }" @click="login"></Button>
                         <Button label="Back" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor }" @click="goBack"></Button> 
                     </div>
                 </div>
@@ -77,6 +77,15 @@
     const bgColor = computed(() => {
         return layoutConfig.darkTheme.value ? 'white' : 'black';
     });
+
+    function handleEventKey(event) {
+        if (event.key === 'Enter') {
+            const signInButton = document.getElementById('signInButton');
+            if (signInButton) {
+                signInButton.click();
+            }
+        }
+    }
 
     async function login() {
     if (!makeComprobations()) {
@@ -122,7 +131,7 @@
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         if (!email.value || !emailRegex.test(email.value))
         {
-            errorMessages.value.email = 'You must provide a valid email!';
+            errorMessages.value.email = 'You must provide a valid email';
             return false;
         }
         else
@@ -137,8 +146,7 @@
     {
         if (!password.value)
         {
-            errorMessages.value.password = 'You must provide a password!';
-            //showToast('error', 'You must provide a password');
+            errorMessages.value.password = 'You must provide a password';
             return false;
         }
         else errorMessages.value.password = '';
@@ -171,4 +179,7 @@
 .error-message {
     font-size: .9em;
 }
+
+.surface-ground {
+    background: linear-gradient(to bottom, #f0f0f0, #d9d9d9); }
 </style>

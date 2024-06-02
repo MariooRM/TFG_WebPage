@@ -12,7 +12,7 @@
                         <span class="text-600 font-medium">Sign up to continue</span>
                     </div>
 
-                    <div class="login-form">
+                    <div class="register-form" @keydown.enter="handleEventKey">
                         <form autocomplete="new-password">
                             <div class="input-fields-1" v-if="showFields1">
                             <label for="name" class="block text-900 text-xl font-medium mb-2">Name</label>
@@ -76,7 +76,7 @@
                         <div class="flex align-items-center justify-content-center">
                             <a class="font-medium no-underline ml-2 mb-2 text-center cursor-pointer mt-3 font-bold" style="color: lightslategray" onclick="window.location.href='/auth/login'">Already have an account? Sign in</a>
                         </div>
-                        <Button :label="firstButton" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor, marginBottom: '5px', marginTop: '10px' }" @click="goNext"></Button>
+                        <Button id="nextButton" :label="firstButton" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor, marginBottom: '5px', marginTop: '10px' }" @click="goNext"></Button>
                         <Button v-if="showButton" label="Back" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor }" @click="goBack"></Button> 
                     </div>
                 </div>
@@ -134,6 +134,15 @@
     const bgColor = computed(() => {
         return layoutConfig.darkTheme.value ? 'white' : 'black';
     });
+
+    function handleEventKey(event) {
+        if (event.key === 'Enter') {
+            const nextButton = document.getElementById('nextButton');
+            if (nextButton) {
+                nextButton.click();
+            }
+        }
+    }
 
     function goBack()
     {
@@ -278,5 +287,9 @@
 
 .error-message {
     font-size: .9em;
+}
+
+.surface-ground {
+    background: linear-gradient(to bottom, #f0f0f0, #d9d9d9);
 }
 </style>
