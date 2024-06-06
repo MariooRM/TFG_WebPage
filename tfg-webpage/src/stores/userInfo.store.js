@@ -79,7 +79,7 @@ export const useUserInfoStore = defineStore({
             }
         },
 
-        async clearData() {
+        clearData() {
             localStorage.removeItem('username');
             localStorage.removeItem('email');
             localStorage.removeItem('name');

@@ -3,12 +3,13 @@ import { defineStore } from "pinia";
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signOut, signInWithEmailAndPassword,
      setPersistence, browserLocalPersistence, updatePassword, EmailAuthProvider, 
      reauthenticateWithCredential} from "firebase/auth";
-import { getFirestore, doc, setDoc, Timestamp } from "firebase/firestore";
+import { getFirestore, doc, setDoc, Timestamp} from "firebase/firestore";
 
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
 import { router } from '@/router';
 import { useUserInfoStore } from './userInfo.store';
+import { useStatsStore } from './stats.store';
 
 export const useAuthStore = defineStore({
     id: 'auth',
@@ -38,6 +39,7 @@ export const useAuthStore = defineStore({
         async login(email, password) {
             const auth = getAuth();
             const userInfoStore = useUserInfoStore();
+            const statsStore = useStatsStore();
             try {
                 // Configurar persistencia antes de iniciar sesión
                 await setPersistence(auth, browserLocalPersistence);
@@ -46,6 +48,7 @@ export const useAuthStore = defineStore({
                 this.userUID = userCredential.user.uid;
                 this.isAuthenticated = true;
                 await userInfoStore.getUserInfo(email);
+                await statsStore.fetchUserGamesDocs(userCredential.user.uid);
                 localStorage.setItem('userUID', JSON.stringify(userCredential.user.uid));
                 localStorage.setItem('isAuthenticated', JSON.stringify(true));
                 return true; 
@@ -59,11 +62,12 @@ export const useAuthStore = defineStore({
             console.log("Logging out");
             const auth = getAuth();
             const userInfoStore = useUserInfoStore();
+            const statsStore = useStatsStore();
             await signOut(auth); 
             this.user = null;
             this.isAuthenticated = false;
-            await userInfoStore.clearData();
-            console.log(this.isAuthenticated)
+            userInfoStore.clearData();
+            statsStore.clearData();
             localStorage.removeItem('user');
             localStorage.removeItem('isAuthenticated');
             router.push('/');

@@ -357,5 +357,7 @@ watch(
 </template>
 
 <style scoped>
-
+.grid {
+    background: linear-gradient(to bottom, #f0f0f0, #d9d9d9);
+}
 </style>
