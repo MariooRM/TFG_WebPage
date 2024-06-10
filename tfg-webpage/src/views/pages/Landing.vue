@@ -1,28 +1,32 @@
 
 <script setup>
-import { computed } from 'vue';
-
 import { useLayout } from '@/layout/composables/layout';
 import AppConfig from '@/layout/AppConfig.vue';
 
-import { useAuthStore } from '@/stores';
-import Sidebar from 'primevue/sidebar';
 import { ref } from 'vue';
 
-const { layoutConfig } = useLayout();
-const authStore = useAuthStore();
+import { useAuthStore } from '@/stores';
+import Sidebar from 'primevue/sidebar';
 
+const authStore = useAuthStore();
 
 const smoothScroll = (id) => {
     document.querySelector(id).scrollIntoView({
         behavior: 'smooth'
     });
+    showNavBar.value = false;
+    
 };
 
 const showTopBar = ref(false);
+const showNavBar = ref(false);
 
 function toggleTopBar() {
     showTopBar.value = !showTopBar.value;
+}
+
+function toggleNavBar() {
+    showNavBar.value = !showNavBar.value;
 }
 
 async function logout() {
@@ -142,14 +146,15 @@ async function logout() {
 
             <div 
                 id="arsenal" 
-                class="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8"
+                class="py-4 px-4 mt-5 mx-0 lg:mx-8 grid justify-content-center"
                 >
                 <div class="grid justify-content-center">
                     <div
-                        class="col-12 mt-8 mb-8 p-2 md:p-5 justify-content-center align-items-center text-center"
-                        style="border-radius: 20px; background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(211, 211, 211) 0%, rgb(128, 128, 128) 100%), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(221, 221, 153) 0%, rgb(192, 212, 230) 100%);">
-                        <h1 class="text-black font-bold"> Arsenal</h1>
-                        <span class="text-600 text-2xl">Learn about weapons and skills!</span>
+                        class="col-12 mt-8 mb-8 p-2 md:p-5 justify-content-center align-items-center text-center relative"
+                        style="background-image: url('src/assets/images/landing-header.png'); background-size: cover; background-position: center;"
+                    >
+                        <h1 class="text-white font-bold text-4xl mb-1 md:mb-3">Arsenal</h1>
+                        <span class="text-300 md:text-2xl text-xl">Learn about weapons and skills!</span>
                     </div>
                         
                     
@@ -178,7 +183,7 @@ async function logout() {
                         </div>
                     </div>
 
-                    <div class="col-12 md:col-12 lg:col-4 p-0 lg:pb-5 mt-4 lg:mt-0">
+                    <div class="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
                         <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-blue-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
@@ -235,29 +240,33 @@ async function logout() {
                             </div>
                         </div>
                     </div>
-                    <div class="col-12 md:col-12 lg:col-4 p-0 lg:pb-5 mt-4 lg:mt-0">
+                    
+                    <div class="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
                         <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
                                     <img alt="dropdown icon" src="/src/assets/images/weapon-icon.png" style="width: 40px;">
                                 </div>
-                                <h5 class="mb-2 text-900">Mark-6 Sniper Rifle</h5>
-                                <span class="text-600">The most powered gun in the game<br><br> 
-                                    Damage: 100<br>
+                                <h5 class="mb-2 text-900">Mark-6 Sniper rifle</h5>
+                                <span class="text-600">Deathly at short range<br><br> 
+                                    Damage: 75<br>
                                     Mag size: 5<br>
                                     Implemented: not yet<br></span>
                             </div>
                         </div>
                     </div>
+
+                    
                 </div>
             </div>
 
             <div id="news" class="py-4 px-4 lg:px-8 mx-0 my-6 lg:mx-8">
                 <div
-                    class="col-12 mt-8 mb-8 p-2 md:p-5 justify-content-center align-items-center text-center"
-                    style="border-radius: 20px; background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(211, 211, 211) 0%, rgb(128, 128, 128) 100%), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(221, 221, 153) 0%, rgb(192, 212, 230) 100%);">
-                    <h1 class="text-black font-bold"> News</h1>
-                    <span class="text-600 text-2xl">Stay up to the latest news</span>
+                    class="col-12 mt-8 mb-8 p-2 md:p-5 justify-content-center align-items-center text-center relative"
+                    style="background-image: url('src/assets/images/landing-header.png'); background-size: cover; background-position: center;"
+                >
+                    <h1 class="text-white font-bold text-4xl mb-1 md:mb-3">News</h1>
+                    <span class="text-300 md:text-2xl text-xl">Stay up to the latest news</span>
                 </div>
 
                 <div class="grid mt-8 pb-2 md:pb-8">
@@ -279,17 +288,18 @@ async function logout() {
 
             <div id="about-me" class="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
                 <div
-                    class="col-12 mt-8 mb-5 p-2 md:p-5 justify-content-center align-items-center text-center"
-                    style="border-radius: 20px; background: linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(211, 211, 211) 0%, rgb(128, 128, 128) 100%), radial-gradient(77.36% 256.97% at 77.36% 57.52%, rgb(221, 221, 153) 0%, rgb(192, 212, 230) 100%);">
-                    <h1 class="text-black font-bold"> About me</h1>
-                    <span class="text-600 text-2xl">Learn about me!</span>
+                    class="col-12 mt-8 mb-8 p-2 md:p-5 justify-content-center align-items-center text-center relative"
+                    style="background-image: url('src/assets/images/landing-header.png'); background-size: cover; background-position: center;"
+                >
+                    <h1 class="text-white font-bold text-4xl mb-1 md:mb-3">About me</h1>
+                    <span class="text-300 md:text-2xl text-xl">Learn about me</span>
                 </div>
                 <div class="flex flex-column lg:align-items-center text-center lg:text-center">
                     <h3 class="line-height-1 text-900 text-2xl font-normal">
                         Hi! I'm Mario, the main developer of Erased Memories. This is my final degree work.
-                        <br>
+                        <br><br>
                         I'm currently studying Computer Engineering at the University of Salamanca.
-                        <br>
+                        <br><br>
                         I love videogames and I've always wanted to create one. This is my first project and I hope you enjoy it!
                     </h3>
                     
@@ -353,7 +363,7 @@ async function logout() {
 }
 
 .arsenal-div:hover {
-    transform: scale(1.05); /* Define la transformación solo en :hover */
+    transform: scale(1.02); /* Define la transformación solo en :hover */
 }
 </style> 
 
