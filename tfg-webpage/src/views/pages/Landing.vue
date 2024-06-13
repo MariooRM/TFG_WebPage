@@ -1,8 +1,8 @@
 
 <script setup>
-import { useLayout } from '@/layout/composables/layout';
-import AppConfig from '@/layout/AppConfig.vue';
+import headerImage from '@/assets/images/landing-header.png';
 
+import AppConfig from '@/layout/AppConfig.vue';
 import { ref } from 'vue';
 
 import { useAuthStore } from '@/stores';
@@ -43,7 +43,7 @@ async function logout() {
         <div id="navBar" class="landing-wrapper overflow-hidden">
             <div class="py-4 px-4 mx-0 md:mx-6 lg:mx-8 lg:px-8 flex align-items-center justify-content-between relative lg:static mb-3">
                 <a class="flex align-items-center" href="#">  </a>
-                <a class="flex align-items-center" href="#"> <img src="../../assets/images/Logo-nobg.png" alt="Logo" height="100" class="mr-0 lg:mr-2" /> </a>
+                <a class="flex align-items-center" href="#"> <img src="../../assets/images/Logo02.png" alt="Logo" height="100" class="mr-0 lg:mr-2" /> </a>
                 <a class="cursor-pointer block lg:hidden text-700 p-ripple" v-ripple v-styleclass="{ selector: '@next', enterClass: 'hidden', leaveToClass: 'hidden', hideOnOutsideClick: true }">
                     <i class="pi pi-bars text-4xl"></i>
                 </a>
@@ -151,8 +151,7 @@ async function logout() {
                 <div class="grid justify-content-center">
                     <div
                         class="col-12 mt-8 mb-8 p-2 md:p-5 justify-content-center align-items-center text-center relative"
-                        style="background-image: url('src/assets/images/landing-header.png'); background-size: cover; background-position: center;"
-                    >
+                        :style="{ backgroundImage: `url(${headerImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }"                    >
                         <h1 class="text-white font-bold text-4xl mb-1 md:mb-3">Arsenal</h1>
                         <span class="text-300 md:text-2xl text-xl">Learn about weapons and skills!</span>
                     </div>
@@ -163,7 +162,7 @@ async function logout() {
                         <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-blue-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <img alt="dropdown icon" src="/src/assets/images/skill-icon.png" style="width: 40px;">
+                                    <img alt="dropdown icon" src="/src/assets/images/icons/skill-icon.png" style="width: 40px;">
                                 </div>
                                 <h5 class="mb-2 text-900">Teleport</h5>
                                 <span class="text-600">Cross the battlefield in the blink of an eye <br><br> Power cost: 35</span>
@@ -175,7 +174,7 @@ async function logout() {
                         <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-blue-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <img alt="dropdown icon" src="/src/assets/images/skill-icon.png" style="width: 40px;">
+                                    <img alt="dropdown icon" src="/src/assets/images/icons/skill-icon.png" style="width: 40px;">
                                 </div>
                                 <h5 class="mb-2 text-900">Invisibility</h5>
                                 <span class="text-600">Don't let your enemies see you<br><br> Power cost: 25</span>
@@ -187,7 +186,7 @@ async function logout() {
                         <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-blue-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <img alt="dropdown icon" src="/src/assets/images/skill-icon.png" style="width: 40px;">
+                                    <img alt="dropdown icon" src="/src/assets/images/icons/skill-icon.png" style="width: 40px;">
                                 </div>
                                 <h5 class="mb-2 text-900">Dash</h5>
                                 <span class="text-600">Avoid enemy attacks and reach new heights<br><br> Power cost: 25</span>
@@ -199,7 +198,7 @@ async function logout() {
                         <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <img alt="dropdown icon" src="/src/assets/images/weapon-icon.png" style="width: 40px;">
+                                    <img alt="dropdown icon" src="/src/assets/images/icons/weapon-icon.png" style="width: 40px;">
                                 </div>
                                 <h5 class="mb-2 text-900">HK-45 Pistol</h5>
                                 <span class="text-600">A light and quick weapon<br><br> 
@@ -215,7 +214,7 @@ async function logout() {
                         <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <img alt="dropdown icon" src="/src/assets/images/weapon-icon.png" style="width: 40px;">
+                                    <img alt="dropdown icon" src="/src/assets/images/icons/weapon-icon.png" style="width: 40px;">
                                 </div>
                                 <h5 class="mb-2 text-900">Svitka Shotgun</h5>
                                 <span class="text-600">Deathly at short range<br><br> 
@@ -230,7 +229,7 @@ async function logout() {
                         <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <img alt="dropdown icon" src="/src/assets/images/weapon-icon.png" style="width: 40px;">
+                                    <img alt="dropdown icon" src="/src/assets/images/icons/weapon-icon.png" style="width: 40px;">
                                 </div>
                                 <h5 class="mb-2 text-900">Ark.53 AR</h5>
                                 <span class="text-600">Hight firepower but medium movement<br><br> 
@@ -245,7 +244,7 @@ async function logout() {
                         <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
-                                    <img alt="dropdown icon" src="/src/assets/images/weapon-icon.png" style="width: 40px;">
+                                    <img alt="dropdown icon" src="/src/assets/images/icons/weapon-icon.png" style="width: 40px;">
                                 </div>
                                 <h5 class="mb-2 text-900">Mark-6 Sniper rifle</h5>
                                 <span class="text-600">Deathly at short range<br><br> 
@@ -263,8 +262,7 @@ async function logout() {
             <div id="news" class="py-4 px-4 lg:px-8 mx-0 my-6 lg:mx-8">
                 <div
                     class="col-12 mt-8 mb-8 p-2 md:p-5 justify-content-center align-items-center text-center relative"
-                    style="background-image: url('src/assets/images/landing-header.png'); background-size: cover; background-position: center;"
-                >
+                    :style="{ backgroundImage: `url(${headerImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }" >
                     <h1 class="text-white font-bold text-4xl mb-1 md:mb-3">News</h1>
                     <span class="text-300 md:text-2xl text-xl">Stay up to the latest news</span>
                 </div>
@@ -289,7 +287,7 @@ async function logout() {
             <div id="about-me" class="py-4 px-4 lg:px-8 mt-5 mx-0 lg:mx-8">
                 <div
                     class="col-12 mt-8 mb-8 p-2 md:p-5 justify-content-center align-items-center text-center relative"
-                    style="background-image: url('src/assets/images/landing-header.png'); background-size: cover; background-position: center;"
+                    :style="{ backgroundImage: `url(${headerImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }"
                 >
                     <h1 class="text-white font-bold text-4xl mb-1 md:mb-3">About me</h1>
                     <span class="text-300 md:text-2xl text-xl">Learn about me</span>
@@ -308,7 +306,7 @@ async function logout() {
 
             <div class="py-4 px-4 mx-0 mt-5 lg:mx-8">
                 <a @click="smoothScroll('#navBar')" class="flex flex-wrap align-items-center justify-content-center md:justify-content-center md:mb-5 mb-3 cursor-pointer">
-                        <img src="../../assets/images/Logo-nobg.png" alt="footer sections"height="120" class="mr-2" />
+                        <img src="../../assets/images/Logo02.png" alt="footer sections"height="120" class="mr-2" />
                 </a>
                 <div class="grid justify-content-center">
                     <div class="col-12 md:col-10 lg:col-7">

@@ -216,7 +216,7 @@ export const useUserInfoStore = defineStore({
             }
         },
 
-        checkName (name) {
+        checkName(name) {
             if (!name)
             {
                 return ['You must provide a name', false];
@@ -229,7 +229,30 @@ export const useUserInfoStore = defineStore({
 
         checkPassword(password) {
             const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
-        }
-    }, 
+            if (!password || !passwordRegex.test(password))
+            {
+                return ['You must provide a valid password', false];
+            }
+            else 
+            {
+                return ['', true];
+            }
+        }, 
+
+        checkConfirmPassword(password, confirmPassword) {
+            if (!confirmPassword)
+            {
+                return ['You must confirm your password', false];
+            }
+            else if (password !== confirmPassword)
+            {
+                return ['Passwords do not match', false];
+            }
+            else
+            {
+                return ['', true];
+            }
+        },
+    }
 
 });

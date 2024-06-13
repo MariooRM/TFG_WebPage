@@ -1,8 +1,8 @@
 import { defineStore } from "pinia";
 
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signOut, signInWithEmailAndPassword,
-     setPersistence, browserLocalPersistence, updatePassword, EmailAuthProvider, 
-     reauthenticateWithCredential} from "firebase/auth";
+     setPersistence, browserLocalPersistence, updatePassword, EmailAuthProvider, sendPasswordResetEmail, 
+     reauthenticateWithCredential, confirmPasswordReset} from "firebase/auth";
 import { getFirestore, doc, setDoc, Timestamp} from "firebase/firestore";
 
 import { toast } from 'vue3-toastify';
@@ -41,14 +41,18 @@ export const useAuthStore = defineStore({
             const userInfoStore = useUserInfoStore();
             const statsStore = useStatsStore();
             try {
-                // Configurar persistencia antes de iniciar sesión
-                await setPersistence(auth, browserLocalPersistence);
+                try {
+                    await setPersistence(auth, browserLocalPersistence);
+                    console.log("Persistencia local configurada correctamente.");
+                  } catch (error) {
+                    console.error("Error al configurar la persistencia local:", error);
+                  }
 
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 this.userUID = userCredential.user.uid;
                 this.isAuthenticated = true;
                 await userInfoStore.getUserInfo(email);
-                await statsStore.fetchUserGamesDocs(userCredential.user.uid);
+                statsStore.fetchUserGamesDocs(userCredential.user.uid);
                 localStorage.setItem('userUID', JSON.stringify(userCredential.user.uid));
                 localStorage.setItem('isAuthenticated', JSON.stringify(true));
                 return true; 
@@ -159,6 +163,32 @@ export const useAuthStore = defineStore({
             } else {
                 return false;
             }
+        },
+
+        async sendRecoveryEmail(email) {
+            const auth = getAuth();
+            try {
+                await sendPasswordResetEmail(auth, email);
+                return true;
+            } catch (error) {
+                console.error(error.message);
+                return false;
+            }
+        },
+
+        async resetPassword(actionCode, newPassword) {
+            try
+            {
+                const auth = getAuth();
+                await confirmPasswordReset(auth, actionCode, newPassword);
+                return true;
+            }
+            catch(error)
+            {
+                console.error(error);
+                return false;
+            }
+            
         },
         
         showToast (type, message)

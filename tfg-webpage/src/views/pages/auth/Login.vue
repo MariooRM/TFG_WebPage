@@ -5,34 +5,34 @@
             <div style="border-radius: 53px; padding: .3rem; background: linear-gradient(180deg, black 10%, rgba(33, 150, 243, 0) 30%)">
                 <div class="w-full surface-card pb-8 pt-4 px-5 sm:px-8" style="border-radius: 53px;">
                     <div class="text-center mb-5">
-                        <img src="../../../assets/images/Logo-nobg.png" alt="EM logo" class="mb-5 w-20rem flex-shrink-0"/>
+                        <img src="../../../assets/images/Logo02.png" alt="EM logo" class="mb-5 w-20rem flex-shrink-0"/>
 
                         <!-- <Avatar icon="pi pi-user" size="large" shape="circle" class="mb-3" /> -->
                         <div class="text-900 text-3xl font-medium mb-3">Welcome!</div>
-                        <span class="text-600 font-medium">Sign in to continue</span>
+                        <span class="text-600 font-medium text-xl">Sign in to continue</span>
                     </div>
 
                     <div @keydown.enter="handleEventKey" class="login-form">
                         <div class="input-fields">
                             <label for="email" class="block text-900 text-xl font-medium mb-2">Email</label>
                             <div>
-                                <InputText id="email" v-model="email" type="text" placeholder="Email address" class="w-full md:w-30rem" style="padding: 1rem" />
+                                <InputText id="email" v-model="email" type="text" placeholder="Email address" class="w-full md:w-30rem text-lg" style="padding: 1rem" />
                                 <span v-if="errorMessages.email" class="error-message text-red-500 block mt-2">{{ errorMessages.email }}</span>
                             </div>
 
                             <label for="password" class="block text-900 font-medium text-xl mb-2 mt-5">Password</label>
                             <div>
-                                <Password id="password" v-model="password" :feedback="false" placeholder="Password" :toggleMask="true" class="w-full" inputClass="w-full" :inputStyle="{ padding: '1rem' }"></Password>
+                                <Password id="password" v-model="password" :feedback="false" placeholder="Password" :toggleMask="true" class="w-full" inputClass="w-full text-lg" :inputStyle="{ padding: '1rem' }"></Password>
                                 <span v-if="errorMessages.password" class="error-message text-red-500 block mb-5 mt-2">{{ errorMessages.password }}</span>
                             </div>
                             
                          </div>
                         
                         <div class="flex align-items-center justify-content-left mb-5 gap-5 mt-5">
-                            <a class="font-medium no-underline ml-auto text-right cursor-pointer font-bold" style="color: lightslategray">Forgot password?</a>    
+                            <a class="font-medium text-lg no-underline ml-auto text-right cursor-pointer font-bold" style="color: lightslategray" onclick="window.location.href='/auth/forgot_password'">Forgot password?</a>    
                         </div>
                         <div class="flex align-items-center justify-content-center">
-                            <a class="font-medium no-underline ml-2 mb-2 text-center cursor-pointer font-bold" style="color: lightslategray" onclick="window.location.href='/auth/register'">Don't have an account? Register now</a>
+                            <a class="font-medium no-underline ml-2 mb-2 text-center cursor-pointer font-bold text-lg" style="color: lightslategray" onclick="window.location.href='/auth/register'">Don't have an account? Register now</a>
                         </div>
                         <Button id="signInButton" label="Sign In" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor, marginBottom: '5px', marginTop: '10px' }" @click="login"></Button>
                         <Button label="Back" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor }" @click="goBack"></Button> 
@@ -155,6 +155,9 @@
 
     function makeComprobations()
     {
+
+        
+
         if (!checkEmail() || !checkPassword())
         {
             return false;

@@ -11,31 +11,23 @@
           </div>
         </template>
       </Card>
-      <div class="w-full flex flex-column justify-content-center align-items-start mb-3">
-        <Paginator class="w-full" v-model:first="currentPage" :rows="1" :totalRecords="parseInt(statsStore.totalGames)" template="FirstPageLink PrevPageLink CurrentPageReport NextPageLink LastPageLink" />
-      </div>
+
       <Card class="stats-card w-full mb-3">
         <template #content>
-          <h2>Game slot #{{ statsStore.gamesData[currentPage]?.id }}</h2>
-          <div class="game-slot-div p-2 mt-5 flex flex-row gap-3" style="border-radius: 8px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
-            <div>
-              <h4>Played Time:</h4>
-              <h4>Kills:</h4>
-              <h4>Deaths:</h4>
-              <h4>K/D:</h4>
-              <h4>Headshots:</h4>
-              <h4>Memories:</h4>
-              <h4>Collectibles:</h4>
-            </div>
-            <div>
-              <h4>{{ statsStore.gamesData[currentPage]?.playedTime }}</h4>
-              <h4>{{ statsStore.gamesData[currentPage]?.kills }}</h4>
-              <h4>{{ statsStore.gamesData[currentPage]?.deaths }}</h4>
-              <h4>{{ statsStore.gamesData[currentPage]?.['k/d'] }}</h4>
-              <h4>{{ statsStore.gamesData[currentPage]?.headshots }}</h4>
-              <h4>{{ statsStore.gamesData[currentPage]?.memories }}</h4>
-              <h4>{{ statsStore.gamesData[currentPage]?.collectibles }}</h4>
-            </div>
+          <h2 class="text-center">Game slots</h2>
+          <div class="game-slot-div p-2 mt-5 flex justify-content-center align-items-center gap-3" style="border-radius: 8px; background: linear-gradient(to bottom, #f0f0f0, #d9d9d9);;">
+            
+            <VirtualScroller :items="gameSlots" :itemSize="parseInt(statsStore.totalGames)" class="border border-surface-200 dark:border-surface-700 rounded w-full bg-white" style="height: 200px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);">
+              <template v-slot:item="{ item, index }">
+                <div
+                  :class="['flex items-center p-2 cursor-pointer transition-colors duration-300 justify-content-center align-items-center', { 'bg-gray-100': parseInt(item) % 2 !== 0, 'hover:bg-gray-200': true }]"
+                  @click="goToGameDetails(item)"
+                >
+                  <h4>Slot #{{ parseInt(item) + 1 }}</h4>
+                </div>
+              </template>
+            </VirtualScroller>
+
           </div>
         </template>
       </Card>
@@ -67,7 +59,7 @@
               </div>
             </div>
 
-            <div class="third-row flex flex-row mb-7 gap-5 jusitfy-content-center align-items-center">
+            <div class="third-row flex flex-row gap-5 jusitfy-content-center align-items-center">
               <div class="memories-chart flex flex-column align-items-center">
                 <h3 class="text-xl">Memories</h3>
                 <Chart id="memories" type="pie" :data="memoriesChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
@@ -88,12 +80,23 @@
 
 
 <script setup>
-import { ref, watch, onMounted } from 'vue';
-import { useUserInfoStore, useStatsStore } from '@/stores';
+import { ref, watch, onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useUserInfoStore, useStatsStore, useAuthStore } from '@/stores';
 
+const router = useRouter();
 const userInfoStore = useUserInfoStore();
 const statsStore = useStatsStore();
-const currentPage = ref(0);
+const authStore = useAuthStore();
+
+const gameSlots = computed(() => {
+  const totalGames = statsStore.totalGames;
+  return totalGames > 0 ? Array.from({ length: totalGames }, (_, i) => `${i}`) : [];
+});
+
+onMounted(() => {
+  statsStore.fetchUserGamesDocs(authStore.userUID);
+});
 
 /**
  * Data for the Kills chart.
@@ -142,16 +145,13 @@ const chartColors = {
   hoverBackgroundColor: ['#6C757D', '#17A2B8', '#343A40', '#DC3545', '#6610F2', '#28A745']
 };
 
-
 /**
  * Sets the data for the Kills chart.
  */
-function setKillsChartData()
-{
-  const documentStyle = getComputedStyle(document.body);
+function setKillsChartData() {
   const gamesData = statsStore.gamesData;
 
-  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)+1}`);
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key) + 1}`);
   const data = Object.values(gamesData).map(game => game["kills"]);
 
   return {
@@ -164,17 +164,15 @@ function setKillsChartData()
       }
     ]
   };
-};
+}
 
 /**
  * Sets the data for the Deaths chart.
  */
-function setDeathsChartData() 
-{
-  const documentStyle = getComputedStyle(document.body);
+function setDeathsChartData() {
   const gamesData = statsStore.gamesData;
 
-  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)+1}`);
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key) + 1}`);
   const data = Object.values(gamesData).map(game => game["deaths"]);
 
   return {
@@ -187,17 +185,15 @@ function setDeathsChartData()
       }
     ]
   };
-};
+}
 
 /**
  * Sets the data for the Headshots chart.
  */
-function setHeadshotsChartData() 
-{
-  const documentStyle = getComputedStyle(document.body);
+function setHeadshotsChartData() {
   const gamesData = statsStore.gamesData;
 
-  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)+1}`);
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key) + 1}`);
   const data = Object.values(gamesData).map(game => game["headshots"]);
 
   return {
@@ -210,17 +206,15 @@ function setHeadshotsChartData()
       }
     ]
   };
-};
+}
 
 /**
  * Sets the data for the K/D chart.
  */
-function setKDChartData() 
-{
-  const documentStyle = getComputedStyle(document.body);
+function setKDChartData() {
   const gamesData = statsStore.gamesData;
 
-  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)+1}`);
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key) + 1}`);
   const data = Object.values(gamesData).map(game => game["k/d"]);
 
   return {
@@ -233,17 +227,15 @@ function setKDChartData()
       }
     ]
   };
-};
+}
 
 /**
  * Sets the data for the Collectibles chart.
  */
-function setCollectiblesChartData() 
-{
-  const documentStyle = getComputedStyle(document.body);
+function setCollectiblesChartData() {
   const gamesData = statsStore.gamesData;
 
-  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)+1}`);
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key) + 1}`);
   const data = Object.values(gamesData).map(game => game["collectibles"]);
 
   return {
@@ -256,17 +248,15 @@ function setCollectiblesChartData()
       }
     ]
   };
-};
+}
 
 /**
  * Sets the data for the Memories chart.
  */
-function setMemoriesChartData() 
-{
-  const documentStyle = getComputedStyle(document.body);
+function setMemoriesChartData() {
   const gamesData = statsStore.gamesData;
 
-  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)+1}`);
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key) + 1}`);
   const data = Object.values(gamesData).map(game => game["memories"]);
 
   return {
@@ -279,14 +269,12 @@ function setMemoriesChartData()
       }
     ]
   };
-};
-
+}
 
 /**
  * Sets the options for the chart.
  */
-function setChartOptions()
-{
+function setChartOptions() {
   const documentStyle = getComputedStyle(document.documentElement);
   const textColor = documentStyle.getPropertyValue('--text-color');
 
@@ -300,8 +288,13 @@ function setChartOptions()
       }
     }
   };
-};
+}
 
+function goToGameDetails(gameSlot)
+{
+  console.log(gameSlot, typeof gameSlot);
+  router.push(`/home/game_details?gameSlot=${encodeURIComponent(gameSlot)}`);
+}
 
 watch(() => statsStore.gamesData, () => {
   killsChartData.value = setKillsChartData();

@@ -62,13 +62,14 @@ const isOutsideClicked = (event) => {
 
 <template>
     <div class="layout-topbar">
-        <router-link to="/" class="layout-topbar-logo">
-            <img src="../assets/images/Logo-nobg.png" alt="Logo" height="120" class="mr-0 lg:mr-2" />
-        </router-link>
-
         <button class="p-link layout-menu-button layout-topbar-button" @click="onMenuToggle()">
             <i class="pi pi-bars"></i>
         </button>
+        <router-link to="/" class="layout-topbar-logo">
+            <img src="../assets/images/Logo02.png" alt="Logo" height="120" class="mr-0 lg:mr-2" />
+        </router-link>
+
+        
 
     </div>
 </template>
