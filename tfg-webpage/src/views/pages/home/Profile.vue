@@ -88,7 +88,7 @@
         </div>
       </template>
       <template #footer>
-        <ConfirmDialog group="headless">
+        <ConfirmDialog group="saveChanges">
             <template #container="{ message, acceptCallback, rejectCallback }">
                 <div class="flex flex-column align-items-center p-5 surface-overlay border-round">
                     <div class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem -mt-8">
@@ -103,9 +103,32 @@
                 </div>
             </template>
         </ConfirmDialog>
+
+        <ConfirmDialog group="deleteAccount">
+            <template #container="{ message, acceptCallback, rejectCallback }">
+                <div class="flex flex-column align-items-center p-5 surface-overlay border-round">
+                    <div class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem -mt-8">
+                        <i class="pi pi-exclamation-circle text-5xl"></i>
+                    </div>
+                    <span class="font-bold text-2xl block mb-2 mt-4">{{ message.header }}</span>
+                    <p class="mb-0">{{ message.message }}</p>
+                    <div class="flex align-items-center gap-3 mt-3 w-full">
+                      <Password id="deletePassword" v-model="deletePassword" inputClass="w-full" :feedback="false" :toggleMask="true" class="w-full" style="width: 100%; height: 3rem;" autocomplete="off" placeholder="Password"/>
+                    </div>                    
+                    <div class="flex align-items-center gap-2 mt-4">
+                        <Button :disabled="deletePasswordEnabled" label="Confirm" @click="acceptCallback"></Button>
+                        <Button label="Cancel" outlined @click="rejectCallback"></Button>
+                    </div>
+                </div>
+            </template>
+        </ConfirmDialog>
         <div class="flex justify-content-center align-items center">
           <Button class="md:w-3 sm:w-3 p-3" style="height: 50px;" @click="makeComprobations()" type="button" :disabled="!isSaveButtonEnabled" label="Save changes" icon="pi pi-save" :loading="loading"/>
         </div>
+        <div class="delete-account-div flex justify-content-end">
+            <Button class="w-1 p-3" style="height: 50px; background-color: red;" @click="showDeleteAccountDialog" type="button" icon="pi pi-trash" :loading="loading"/>
+        </div>
+        
       </template>
     </Card>
   </div>
@@ -143,6 +166,9 @@ const name = ref(userInfoStore.name);
 const surname = ref(userInfoStore.surname);
 const password = ref('********');
 
+const deletePassword = ref('');
+const deletePasswordEnabled = ref(true);
+
 const isSaveButtonEnabled = ref(false);
 const loading = ref(false);
 
@@ -157,8 +183,7 @@ const errorMessages = ref({
 let usernameIsValid = ref(false);
 let nameIsValid = ref(false);
 let currentPasswordIsValid = ref(false);
-let newPasswordIsValid = ref(false);
-let confirmNewPasswordIsValid = ref(false);
+
 
 onMounted(() => {
   originalUsername.value = username.value;
@@ -175,6 +200,12 @@ watch([username, name, surname], ([newUsername, newName, newSurname]) => {
   );
 });
 
+watch(deletePassword, (newDeletePassword) => {
+  deletePasswordEnabled.value = !(newDeletePassword === deletePassword.value && deletePassword.value.length > 0);
+});
+
+// Functions related to the profile image
+
 function onFileChange(event) {
   const file = event.target.files[0];
   if (file) {
@@ -189,6 +220,24 @@ function openFileInput() {
   }
 }
 
+
+// Functions related to the personal info
+async function makeComprobations() {
+  let allValid = true;
+
+  if (name.value !== originalName.value) {
+    const [nameError, nameValid] = userInfoStore.checkName(name.value);
+    errorMessages.value.name = nameError;
+    nameIsValid.value = nameValid;
+    if (!nameIsValid.value) {
+      allValid = false;
+    }
+  }
+
+  if (allValid) {
+    showConfirmDialog();
+  }
+}
 async function savePersonalInfo() {
   loading.value = true;
   await userInfoStore.updatePersonalInfo(name.value, surname.value);
@@ -198,13 +247,25 @@ async function savePersonalInfo() {
   }, 1000);
 }
 
+
+// Functions related to the dialogs
 function showConfirmDialog() {
   confirm.require({
-    group: 'headless',
+    group: 'saveChanges',
     message: 'Are you sure you want to save changes?',
     header: 'Confirmation',
     accept: savePersonalInfo,
     reject: () => window.location.reload(),
+  });
+}
+
+function showDeleteAccountDialog() {
+  confirm.require({
+    group: 'deleteAccount',
+    message: 'Please, enter your password. This action is irreversible.',
+    header: 'Delete account',
+    accept: deleteUserAccount,
+    reject: () => {},
   });
 }
 
@@ -220,6 +281,22 @@ function showModificationDialog(field) {
   } 
 }
 
+function OnDialogHide()
+{
+  usernameVisible.value = false;
+  passwordVisible.value = false;
+  errorMessages.value.username = '';
+  errorMessages.value.currentPassword = '';
+  errorMessages.value.password = '';
+  errorMessages.value.confirmPassword = '';
+  usernameToModify.value = '';
+  currentPassword.value = '';
+  newPassword.value = '';
+  confirmNewPassword.value = '';
+}
+
+
+// Functions to validate and update the username and password
 async function checkNewUsername()
 {
   if (usernameToModify.value != originalUsername.value) {
@@ -290,35 +367,11 @@ function checkPasswordAndConfirmPassword()
   return true;
 }
 
-function OnDialogHide()
+// Function to delete the account
+
+async function deleteUserAccount()
 {
-  usernameVisible.value = false;
-  passwordVisible.value = false;
-  errorMessages.value.username = '';
-  errorMessages.value.currentPassword = '';
-  errorMessages.value.password = '';
-  errorMessages.value.confirmPassword = '';
-  usernameToModify.value = '';
-  currentPassword.value = '';
-  newPassword.value = '';
-  confirmNewPassword.value = '';
-}
-
-async function makeComprobations() {
-  let allValid = true;
-
-  if (name.value !== originalName.value) {
-    const [nameError, nameValid] = userInfoStore.checkName(name.value);
-    errorMessages.value.name = nameError;
-    nameIsValid.value = nameValid;
-    if (!nameIsValid.value) {
-      allValid = false;
-    }
-  }
-
-  if (allValid) {
-    showConfirmDialog();
-  }
+  await authStore.deleteUserAccount(email.value, deletePassword.value);
 }
 
 function showToast (type, message)

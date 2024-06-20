@@ -2,8 +2,8 @@ import { defineStore } from "pinia";
 
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signOut, signInWithEmailAndPassword,
      setPersistence, browserLocalPersistence, updatePassword, EmailAuthProvider, sendPasswordResetEmail, 
-     reauthenticateWithCredential, confirmPasswordReset} from "firebase/auth";
-import { getFirestore, doc, setDoc, Timestamp} from "firebase/firestore";
+     reauthenticateWithCredential, confirmPasswordReset, deleteUser} from "firebase/auth";
+import { getFirestore, doc, setDoc, Timestamp, collection, deleteDoc, getDocs} from "firebase/firestore";
 
 import { toast } from 'vue3-toastify';
 import 'vue3-toastify/dist/index.css';
@@ -43,9 +43,9 @@ export const useAuthStore = defineStore({
             try {
                 try {
                     await setPersistence(auth, browserLocalPersistence);
-                    console.log("Persistencia local configurada correctamente.");
+                   
                   } catch (error) {
-                    console.error("Error al configurar la persistencia local:", error);
+                    console.error(error);
                   }
 
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
@@ -68,7 +68,7 @@ export const useAuthStore = defineStore({
             const userInfoStore = useUserInfoStore();
             const statsStore = useStatsStore();
             await signOut(auth); 
-            this.user = null;
+            this.userUID = null;
             this.isAuthenticated = false;
             userInfoStore.clearData();
             statsStore.clearData();
@@ -190,13 +190,73 @@ export const useAuthStore = defineStore({
             }
             
         },
+
+        async deleteUserAccount(email, password)
+        {
+            const auth = getAuth();
+            const userInfoStore = useUserInfoStore();
+            const statsStore = useStatsStore();
+            const db = getFirestore();
+            const user = auth.currentUser;
+            console.log(auth.currentUser);
+
+            try
+            {
+                const credential = EmailAuthProvider.credential(email, password);
+
+                if (credential)
+                {
+                    await reauthenticateWithCredential(user, credential);
+                    const userRef = doc(db, "users", auth.currentUser.uid);
+                    await deleteDoc(userRef);
+                    await deleteUser(user);
+                    //await this.deleteUserSubCollections(userUID);
+
+                    userInfoStore.clearData();
+                    statsStore.clearData();
+
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('isAuthenticated');
+                    this.showToast('info', 'Your account has been deleted');
+                    setTimeout(() => {
+                        router.push('/');
+                    }, 2000);
+                }
+                else
+                {
+                    this.showToast('error', 'Incorrect credentials, please try again');
+                }
+
+            }
+            catch(error)
+            {
+                this.showToast('error', 'Error while trying to delete your account');
+                console.error(error);
+            }
+        },
+
+        async deleteUserSubCollections(userId) {
+            const db = getFirestore();
+            const userRef = doc(db, 'users', userId);
+            const subcollections = ['games'];
+
+            for (const subcollection of subcollections) {
+                const queryRef = collection(userRef.collection(subcollection));
+                const snapshot = await getDocs(queryRef);
+
+                // Eliminar todos los documentos de la subcolección
+                snapshot.forEach(async doc => {
+                    await deleteDoc(doc.ref);
+                });
+            }
+        },
         
         showToast (type, message)
         {
             toast(message, {
                 "theme": "colored",
                 "type": type,
-                "autoClose": 2000,
+                "autoClose": 1500,
                 "dangerouslyHTMLString": true
                 });
         }
