@@ -35,13 +35,54 @@ export const router = createRouter({
                     name: 'leaderboard',
                     component: () => import('@/views/pages/home/Leaderboard.vue')
                 },
-            ]
+                
+                // Leaderboard views
+                {
+                    path: '/leaderboard/played_time',
+                    name: 'played_time_leaderboard',
+                    component: () => import('@/views/pages/home/leaderboard/PlayedTime.vue')
+                },
+                {
+                    path: '/leaderboard/kills',
+                    name: 'kills_leaderboard',
+                    component: () => import('@/views/pages/home/leaderboard/Kills.vue')
+                },
+                {
+                    path: '/leaderboard/deaths',
+                    name: 'deaths_leaderboard',
+                    component: () => import('@/views/pages/home/leaderboard/Deaths.vue')
+                },
+                {
+                    path: '/leaderboard/headshots',
+                    name: 'headshots_leaderboard',
+                    component: () => import('@/views/pages/home/leaderboard/Headshots.vue')
+                },
+                {
+                    path: '/leaderboard/kd',
+                    name: 'kd_leaderboard',
+                    component: () => import('@/views/pages/home/leaderboard/KD.vue')
+                },
+                {
+                    path: '/leaderboard/memories',
+                    name: 'memories_leaderboard',
+                    component: () => import('@/views/pages/home/leaderboard/Memories.vue')
+                },
+                {
+                    path: '/leaderboard/collectibles',
+                    name: 'collectibles_leaderboard',
+                    component: () => import('@/views/pages/home/leaderboard/Collectibles.vue')
+                },
+            ],
         },
+
+        // Main view
         {
             path: '/',
             name: 'landing',
             component: () => import('@/views/pages/Landing.vue'),
         },
+
+        // Auth views
         {
             path: '/auth/login',
             name: 'login',
@@ -63,6 +104,9 @@ export const router = createRouter({
             name: 'recovery_password',
             component: () => import('@/views/pages/auth/RecoveryPassword.vue')
         },
+
+        
+
     ]
 });
 
