@@ -156,8 +156,6 @@
     function makeComprobations()
     {
 
-        
-
         if (!checkEmail() || !checkPassword())
         {
             return false;

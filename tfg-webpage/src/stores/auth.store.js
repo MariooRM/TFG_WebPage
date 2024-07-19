@@ -19,6 +19,9 @@ export const useAuthStore = defineStore({
     }),
 
     actions: {
+        /**
+         * Initialize the authentication state of the user
+         */
         async initAuth() {
             const auth = getAuth();
             onAuthStateChanged(auth, user => {
@@ -36,6 +39,12 @@ export const useAuthStore = defineStore({
             });
         },
 
+        /**
+         * Log in the user
+         * @param {string} email 
+         * @param {string} password 
+         * @returns 
+         */
         async login(email, password) {
             const auth = getAuth();
             const userInfoStore = useUserInfoStore();
@@ -62,6 +71,9 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * Log out the user
+         */
         async logout() {
             console.log("Logging out");
             const auth = getAuth();
@@ -77,6 +89,15 @@ export const useAuthStore = defineStore({
             router.push('/');
         },
 
+        /**
+         * Register a new user
+         * @param {string} name 
+         * @param {string} surname 
+         * @param {string} email 
+         * @param {string} username 
+         * @param {string} password 
+         * @returns 
+         */
         async register(name, surname, email, username, password) {
             const auth = getAuth();
             try {
@@ -98,6 +119,12 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * Send email verification and create user document when verified
+         * @param {*} userCredential 
+         * @param {*} userData 
+         * @param {string} email 
+         */
         async sendEmail(userCredential, userData, email) {
             console.log("Enviando email");
             const db = getFirestore();
@@ -128,6 +155,11 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * Check the current password of the user
+         * @param {string} password 
+         * @returns 
+         */
         async checkCurrentPassword(password) {
             const auth = getAuth();
             const user = auth.currentUser;
@@ -149,6 +181,11 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * Change the user's password
+         * @param {string} newPassword 
+         * @returns 
+         */
         async changePassword(newPassword) {
             const auth = getAuth();
             const user = auth.currentUser;
@@ -165,6 +202,11 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * Send recovery email to the user
+         * @param {string} email 
+         * @returns 
+         */
         async sendRecoveryEmail(email) {
             const auth = getAuth();
             try {
@@ -176,6 +218,12 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * Reset user's password
+         * @param {string} actionCode 
+         * @param {string} newPassword 
+         * @returns 
+         */
         async resetPassword(actionCode, newPassword) {
             try
             {
@@ -191,6 +239,11 @@ export const useAuthStore = defineStore({
             
         },
 
+        /**
+         * Delete user account
+         * @param {string} email 
+         * @param {string} password 
+         */
         async deleteUserAccount(email, password)
         {
             const auth = getAuth();
@@ -235,6 +288,10 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * Delete all the subcollections related to the user's document
+         * @param {string} userId 
+         */
         async deleteUserSubCollections(userId) {
             const db = getFirestore();
             const userRef = doc(db, 'users', userId);
@@ -251,6 +308,11 @@ export const useAuthStore = defineStore({
             }
         },
         
+        /**
+         * Show toast message
+         * @param {string} type 
+         * @param {string} message 
+         */
         showToast (type, message)
         {
             toast(message, {

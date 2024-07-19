@@ -2,7 +2,6 @@ import { defineStore } from "pinia";
 import { getFirestore, doc, collection, where, getDocs, query, updateDoc } from "firebase/firestore";
 import { useAuthStore } from "./auth.store";
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
-import { getAuth } from "firebase/auth";
 
 const defaultProfileImgURL = 'https://firebasestorage.googleapis.com/v0/b/tfg-mariorodrigomarcos.appspot.com/o/profile_images%2FProfile-icon.jpg?alt=media&token=92a5ee1e-7cbe-44cc-8f9d-46610b213b4f';
 
