@@ -1,4 +1,51 @@
-import { defineStore } from "pinia";
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>auth.store.js - Documentation</title>
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-AuthStore.html">AuthStore</a><ul class='methods'><li data-type='method'><a href="module-AuthStore.html#~changePassword">changePassword</a></li><li data-type='method'><a href="module-AuthStore.html#~checkCurrentPassword">checkCurrentPassword</a></li><li data-type='method'><a href="module-AuthStore.html#~deleteUser">deleteUser</a></li><li data-type='method'><a href="module-AuthStore.html#~deleteUserSubCollections">deleteUserSubCollections</a></li><li data-type='method'><a href="module-AuthStore.html#~initAuth">initAuth</a></li><li data-type='method'><a href="module-AuthStore.html#~login">login</a></li><li data-type='method'><a href="module-AuthStore.html#~logout">logout</a></li><li data-type='method'><a href="module-AuthStore.html#~register">register</a></li><li data-type='method'><a href="module-AuthStore.html#~resetPassword">resetPassword</a></li><li data-type='method'><a href="module-AuthStore.html#~sendEmail">sendEmail</a></li><li data-type='method'><a href="module-AuthStore.html#~sendRecoveryEmail">sendRecoveryEmail</a></li><li data-type='method'><a href="module-AuthStore.html#~showToast">showToast</a></li></ul></li><li><a href="module-StatsStore.html">StatsStore</a><ul class='methods'><li data-type='method'><a href="module-StatsStore.html#~clearData">clearData</a></li><li data-type='method'><a href="module-StatsStore.html#~fetchUserGamesDocs">fetchUserGamesDocs</a></li></ul></li><li><a href="module-UserInfoStore.html">UserInfoStore</a><ul class='methods'><li data-type='method'><a href="module-UserInfoStore.html#~checkConfirmPassword">checkConfirmPassword</a></li><li data-type='method'><a href="module-UserInfoStore.html#~checkEmail">checkEmail</a></li><li data-type='method'><a href="module-UserInfoStore.html#~checkName">checkName</a></li><li data-type='method'><a href="module-UserInfoStore.html#~checkPassword">checkPassword</a></li><li data-type='method'><a href="module-UserInfoStore.html#~checkUsername">checkUsername</a></li><li data-type='method'><a href="module-UserInfoStore.html#~clearData">clearData</a></li><li data-type='method'><a href="module-UserInfoStore.html#~emailExists">emailExists</a></li><li data-type='method'><a href="module-UserInfoStore.html#~getUserInfo">getUserInfo</a></li><li data-type='method'><a href="module-UserInfoStore.html#~updateEmail">updateEmail</a></li><li data-type='method'><a href="module-UserInfoStore.html#~updatePersonalInfo">updatePersonalInfo</a></li><li data-type='method'><a href="module-UserInfoStore.html#~updateProfileImg">updateProfileImg</a></li><li data-type='method'><a href="module-UserInfoStore.html#~updateUsername">updateUsername</a></li><li data-type='method'><a href="module-UserInfoStore.html#~usernameExists">usernameExists</a></li></ul></li></ul>
+    
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">auth.store.js</h1>
+    
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { defineStore } from "pinia";
 
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signOut, signInWithEmailAndPassword,
      setPersistence, browserLocalPersistence, updatePassword, EmailAuthProvider, sendPasswordResetEmail, 
@@ -56,7 +103,7 @@ export const useAuthStore = defineStore({
          * @description Log in the user
          * @param {string} email - The user's email
          * @param {string} password - The user's password
-         * @returns {Promise<boolean>} - True if login is successful, false otherwise
+         * @returns {Promise&lt;boolean>} - True if login is successful, false otherwise
          */
         async login(email, password) {
             const auth = getAuth();
@@ -110,7 +157,7 @@ export const useAuthStore = defineStore({
          * @param {string} email - The user's email
          * @param {string} username - The user's username
          * @param {string} password - The user's password
-         * @returns {Promise<object>} - User credential and user data
+         * @returns {Promise&lt;object>} - User credential and user data
          */
         async register(name, surname, email, username, password) {
             const auth = getAuth();
@@ -174,7 +221,7 @@ export const useAuthStore = defineStore({
          * @function checkCurrentPassword
          * @description Check the current password of the user
          * @param {string} password - The user's current password
-         * @returns {Promise<Array.<string, boolean>>} - A tuple with a message and a boolean indicating success
+         * @returns {Promise&lt;Array.&lt;string, boolean>>} - A tuple with a message and a boolean indicating success
          */
         async checkCurrentPassword(password) {
             const auth = getAuth();
@@ -201,7 +248,7 @@ export const useAuthStore = defineStore({
          * @function changePassword
          * @description Change the user's password
          * @param {string} newPassword - The new password
-         * @returns {Promise<boolean>} - True if the password was successfully changed, false otherwise
+         * @returns {Promise&lt;boolean>} - True if the password was successfully changed, false otherwise
          */
         async changePassword(newPassword) {
             const auth = getAuth();
@@ -223,7 +270,7 @@ export const useAuthStore = defineStore({
          * @function sendRecoveryEmail
          * @description Send recovery email to the user
          * @param {string} email - The user's email
-         * @returns {Promise<boolean>} - True if the email was sent successfully, false otherwise
+         * @returns {Promise&lt;boolean>} - True if the email was sent successfully, false otherwise
          */
         async sendRecoveryEmail(email) {
             const auth = getAuth();
@@ -241,7 +288,7 @@ export const useAuthStore = defineStore({
          * @description Reset user's password
          * @param {string} actionCode - The action code from the password reset email
          * @param {string} newPassword - The new password
-         * @returns {Promise<boolean>} - True if the password was successfully reset, false otherwise
+         * @returns {Promise&lt;boolean>} - True if the password was successfully reset, false otherwise
          */
         async resetPassword(actionCode, newPassword) {
             try
@@ -345,3 +392,28 @@ export const useAuthStore = defineStore({
         }
     }
 });
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 4.0.3</a> on Fri Jul 19 2024 13:18:02 GMT+0200 (hora de verano de Europa central) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+
+
+</body>
+</html>
