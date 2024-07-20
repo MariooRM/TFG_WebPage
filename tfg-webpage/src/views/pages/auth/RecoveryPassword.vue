@@ -44,6 +44,11 @@
 </template>
 
 <script setup>
+/**
+ * @module Auth/RecoveryPassword
+ * @description Recovery password view for password reset
+ * @autor Mario Rodrigo Marcos @MariooRM on GitHub
+ */
     import AppConfig from '@/layout/AppConfig.vue';
     import { useLayout } from '@/layout/composables/layout';
 
@@ -75,6 +80,10 @@
         confirmNewPassword: ''
     })
 
+    /**
+     * @event onMounted
+     * @description Get the oobCode from the URL query
+     */
     onMounted(() => {
         const route = router.currentRoute.value;
         if (route.query.oobCode) {
@@ -86,6 +95,11 @@
         return layoutConfig.darkTheme.value ? 'white' : 'black';
     });
 
+    /**
+     * @event handleEventKey
+     * @description Handles the keydown event for the form
+     * @param {KeyboardEvent} event
+     */
     function handleEventKey(event) {
         if (event.key === 'Enter') {
             const recoveryButton = document.getElementById('recoveryButton');
@@ -95,12 +109,10 @@
         }
     }
 
-
-    function goBack()
-    {
-        router.push("/");
-    }
-
+    /**
+     * @event resetPassword
+     * @description Resets the user's password
+     */
     async function resetPassword()
     {
         // Check password integrity
@@ -133,6 +145,12 @@
         
     }
 
+    /**
+     * @event showToast
+     * @description Shows a toast notification
+     * @param {string} type - Notification type (info, success, error, etc.)
+     * @param {string} message - Notification message
+     */
     function showToast (type, message)
     {
         toast(message, {

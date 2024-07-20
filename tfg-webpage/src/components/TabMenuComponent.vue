@@ -1,3 +1,4 @@
+
 <template>
   <div class="tabmenu-div" style="width: 100%;">
     <TabMenu :model="items" :activeIndex="activeIndex" @tab-change="handleTabChange" class="text-xl flex align-items-center mb-5" style="border-radius: 7px; width: 100%; background-color: white;"/>
@@ -6,6 +7,12 @@
 </template>
 
 <script setup>
+/**
+ * @module Components/TabMenuComponent
+ * @description Tabmenu component used in leaderboard views
+ * @author Mario Rodrigo Marcos @MariooRM on GitHub
+ * 
+ */
 import { ref, watch } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 
@@ -19,6 +26,7 @@ import CollectiblesIcon from '@/assets/images/icons/collectibles-icon.png';
 
 const router = useRouter();
 const route = useRoute();
+const num = ref(0);
 
 const items = ref([
   { label: 'Played time', icon: PlayedTimeIcon, to: '/leaderboard/played_time' },
@@ -30,6 +38,10 @@ const items = ref([
   { label: 'Collectibles', icon: CollectiblesIcon, to: '/collectibles' }
 ]);
 
+/**
+ * A number
+ * @type {ref<Number>}
+ */
 const activeIndex = ref(0);
 
 watch(

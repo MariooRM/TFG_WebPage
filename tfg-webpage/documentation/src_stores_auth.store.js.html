@@ -1,0 +1,425 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: src/stores/auth.store.js | Source: src/stores/auth.store.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Source: src/stores/auth.store.js</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Modules</h3><ul><li><a href="module-AuthStore.html">AuthStore</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:AuthStore_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-AuthStore.html#~changePassword">changePassword</a></li><li><a href="module-AuthStore.html#~checkCurrentPassword">checkCurrentPassword</a></li><li><a href="module-AuthStore.html#~deleteUser">deleteUser</a></li><li><a href="module-AuthStore.html#~deleteUserSubCollections">deleteUserSubCollections</a></li><li><a href="module-AuthStore.html#~initAuth">initAuth</a></li><li><a href="module-AuthStore.html#~login">login</a></li><li><a href="module-AuthStore.html#~logout">logout</a></li><li><a href="module-AuthStore.html#~register">register</a></li><li><a href="module-AuthStore.html#~resetPassword">resetPassword</a></li><li><a href="module-AuthStore.html#~sendEmail">sendEmail</a></li><li><a href="module-AuthStore.html#~sendRecoveryEmail">sendRecoveryEmail</a></li><li><a href="module-AuthStore.html#~showToast">showToast</a></li></ul><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-AuthStore.html#~UserAuthState">UserAuthState</a></li></ul></div></li><li><a href="module-Stats.html">Stats</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Stats_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-Stats.html#~chartOptions">chartOptions</a></li><li><a href="module-Stats.html#~collectiblesChartData">collectiblesChartData</a></li><li><a href="module-Stats.html#~deathsChartData">deathsChartData</a></li><li><a href="module-Stats.html#~headshotsChartData">headshotsChartData</a></li><li><a href="module-Stats.html#~kdChartData">kdChartData</a></li><li><a href="module-Stats.html#~killsChartData">killsChartData</a></li><li><a href="module-Stats.html#~memoriesChartData">memoriesChartData</a></li></ul><div class="member-type">Events</div><ul class="inner"><li><a href="module-Stats.html#~event:goToGameDetails">goToGameDetails</a></li><li><a href="module-Stats.html#~event:setChartOptions">setChartOptions</a></li><li><a href="module-Stats.html#~event:setCollectiblesChartData">setCollectiblesChartData</a></li><li><a href="module-Stats.html#~event:setDeathsChartData">setDeathsChartData</a></li><li><a href="module-Stats.html#~event:setHeadshotsChartData">setHeadshotsChartData</a></li><li><a href="module-Stats.html#~event:setKDChartData">setKDChartData</a></li><li><a href="module-Stats.html#~event:setKillsChartData">setKillsChartData</a></li><li><a href="module-Stats.html#~event:setMemoriesChartData">setMemoriesChartData</a></li></ul></div></li><li><a href="module-StatsStore.html">StatsStore</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:StatsStore_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-StatsStore.html#~clearData">clearData</a></li><li><a href="module-StatsStore.html#~fetchUserGamesDocs">fetchUserGamesDocs</a></li></ul><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-StatsStore.html#~UserStatsState">UserStatsState</a></li></ul></div></li><li><a href="module-TabMenuComponents.html">TabMenuComponents</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:TabMenuComponents_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-TabMenuComponents.html#~activeIndex">activeIndex</a></li></ul></div></li><li><a href="module-UserInfoStore.html">UserInfoStore</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:UserInfoStore_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-UserInfoStore.html#~checkConfirmPassword">checkConfirmPassword</a></li><li><a href="module-UserInfoStore.html#~checkEmail">checkEmail</a></li><li><a href="module-UserInfoStore.html#~checkName">checkName</a></li><li><a href="module-UserInfoStore.html#~checkPassword">checkPassword</a></li><li><a href="module-UserInfoStore.html#~checkUsername">checkUsername</a></li><li><a href="module-UserInfoStore.html#~clearData">clearData</a></li><li><a href="module-UserInfoStore.html#~emailExists">emailExists</a></li><li><a href="module-UserInfoStore.html#~getUserInfo">getUserInfo</a></li><li><a href="module-UserInfoStore.html#~updateEmail">updateEmail</a></li><li><a href="module-UserInfoStore.html#~updatePersonalInfo">updatePersonalInfo</a></li><li><a href="module-UserInfoStore.html#~updateProfileImg">updateProfileImg</a></li><li><a href="module-UserInfoStore.html#~updateUsername">updateUsername</a></li><li><a href="module-UserInfoStore.html#~usernameExists">usernameExists</a></li></ul><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-UserInfoStore.html#~UserInfoState">UserInfoState</a></li></ul></div></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { defineStore } from "pinia";
+
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, sendEmailVerification, signOut, signInWithEmailAndPassword,
+     setPersistence, browserLocalPersistence, updatePassword, EmailAuthProvider, sendPasswordResetEmail, 
+     reauthenticateWithCredential, confirmPasswordReset, deleteUser} from "firebase/auth";
+import { getFirestore, doc, setDoc, Timestamp, collection, deleteDoc, getDocs} from "firebase/firestore";
+
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+import { router } from '@/router';
+import { useUserInfoStore } from './userInfo.store';
+import { useStatsStore } from './stats.store';
+
+/**
+ * This is the store used for managing user authentication.
+ * @module AuthStore
+ */
+export const useAuthStore = defineStore({
+    id: 'auth',
+    /**
+     * Defines the initial state of the user authentication store.
+     * @typedef {Object} UserAuthState
+     * @property {string|null} userUID - The user's UID.
+     * @property {string|null} isAuthenticated - The user's authentication state.
+     */
+    state: () => ({
+        
+        userUID: localStorage.getItem('userUID') || null,
+        isAuthenticated: localStorage.getItem('isAuthenticated') || false
+    }),
+
+    actions: {
+        /**
+         * @function initAuth
+         * @description Initialize the authentication state of the user
+         */
+        async initAuth() {
+            const auth = getAuth();
+            onAuthStateChanged(auth, user => {
+                if (user) {
+                    this.userUID = user.uid;
+                    this.isAuthenticated = true;
+                    localStorage.setItem('userUID', user.uid);
+                    localStorage.setItem('isAuthenticated', true);
+                } else {
+                    this.userUID = null;
+                    this.isAuthenticated = false;
+                    localStorage.removeItem('userUID');
+                    localStorage.removeItem('isAuthenticated');
+                }
+            });
+        },
+
+        /**
+         * @function login
+         * @description Log in the user
+         * @param {string} email - The user's email
+         * @param {string} password - The user's password
+         * @returns {Promise&lt;boolean>} - True if login is successful, false otherwise
+         */
+        async login(email, password) {
+            const auth = getAuth();
+            const userInfoStore = useUserInfoStore();
+            const statsStore = useStatsStore();
+            try {
+                try {
+                    await setPersistence(auth, browserLocalPersistence);
+                  } catch (error) {
+                    console.error(error);
+                  }
+
+                const userCredential = await signInWithEmailAndPassword(auth, email, password);
+                this.userUID = userCredential.user.uid;
+                this.isAuthenticated = true;
+                await userInfoStore.getUserInfo(email);
+                statsStore.fetchUserGamesDocs(userCredential.user.uid);
+                localStorage.setItem('userUID', JSON.stringify(userCredential.user.uid));
+                localStorage.setItem('isAuthenticated', JSON.stringify(true));
+                return true; 
+            } catch (error) {
+                console.error("Error during login:", error);
+                return false; 
+            }
+        },
+
+        /**
+         * @function logout
+         * @description Log out the user
+         */
+        async logout() {
+            console.log("Logging out");
+            const auth = getAuth();
+            const userInfoStore = useUserInfoStore();
+            const statsStore = useStatsStore();
+            await signOut(auth); 
+            this.userUID = null;
+            this.isAuthenticated = false;
+            userInfoStore.clearData();
+            statsStore.clearData();
+            localStorage.removeItem('user');
+            localStorage.removeItem('isAuthenticated');
+            router.push('/');
+        },
+
+        /**
+         * @function register
+         * @description Register a new user
+         * @param {string} name - The user's name
+         * @param {string} surname - The user's surname
+         * @param {string} email - The user's email
+         * @param {string} username - The user's username
+         * @param {string} password - The user's password
+         * @returns {Promise&lt;object>} - User credential and user data
+         */
+        async register(name, surname, email, username, password) {
+            const auth = getAuth();
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        
+                const userData = {
+                name: name,
+                surname: surname,
+                email: email,
+                username: username,
+                createdAt: Timestamp.now(),
+                profileImg: ''
+                };
+    
+                return { userCredential, userData };
+            } 
+            catch (error) {
+                console.log(error.message);
+            }
+        },
+
+        /**
+         * @function sendEmail
+         * @description Send email verification and create user document when verified
+         * @param {object} userCredential - The user credential object
+         * @param {object} userData - The user data object
+         * @param {string} email - The user's email
+         */
+        async sendEmail(userCredential, userData, email) {
+            console.log("Enviando email");
+            const db = getFirestore();
+            const user = userCredential.user;    
+            try {
+                // Email verification
+                await sendEmailVerification(user);
+                this.showToast('info', 'A verification email has been sent! Please, check your inbox');
+                // Polling to check user verification status
+                const intervalId = setInterval(async () => {
+                    await user.reload();
+                    if (user.emailVerified) {
+                        clearInterval(intervalId); // Stop polling when user is verified
+                        console.log("Verified");
+    
+                        // Create user document
+                        const userRef = doc(db, "users", user.uid);
+                        setDoc(userRef, userData);
+                        this.showToast('info', 'Congratulations! Your account has been created');
+                        setTimeout(() => {
+                            router.push(`/auth/login?email=${encodeURIComponent(email)}`);
+                        }, 2000);
+                    }
+                }, 5000); // Check every 5 secs
+    
+            } catch (error) {
+                console.log(error.message);
+            }
+        },
+
+        /**
+         * @function checkCurrentPassword
+         * @description Check the current password of the user
+         * @param {string} password - The user's current password
+         * @returns {Promise&lt;Array.&lt;string, boolean>>} - A tuple with a message and a boolean indicating success
+         */
+        async checkCurrentPassword(password) {
+            const auth = getAuth();
+            const user = auth.currentUser;
+        
+            if (user) {
+                const credential = EmailAuthProvider.credential(user.email, password);
+                try {
+                    await reauthenticateWithCredential(user, credential);
+                    return ['', true];
+                } catch (error) {
+                    if (error.code === 'auth/invalid-credential') {
+                        return ['Incorrect password. You have 6 total attempts', false];
+                    } else if (error.code === 'auth/too-many-requests') {
+                        return ['Too many attempts, please try again later', false];
+                    }
+                }
+            } else {
+                return ['No user is currently signed in.', false];
+            }
+        },
+
+        /**
+         * @function changePassword
+         * @description Change the user's password
+         * @param {string} newPassword - The new password
+         * @returns {Promise&lt;boolean>} - True if the password was successfully changed, false otherwise
+         */
+        async changePassword(newPassword) {
+            const auth = getAuth();
+            const user = auth.currentUser;
+        
+            if (user) {
+                try {
+                    await updatePassword(user, newPassword);
+                    return true;
+                } catch (error) {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        },
+
+        /**
+         * @function sendRecoveryEmail
+         * @description Send recovery email to the user
+         * @param {string} email - The user's email
+         * @returns {Promise&lt;boolean>} - True if the email was sent successfully, false otherwise
+         */
+        async sendRecoveryEmail(email) {
+            const auth = getAuth();
+            try {
+                await sendPasswordResetEmail(auth, email);
+                return true;
+            } catch (error) {
+                console.error(error.message);
+                return false;
+            }
+        },
+
+        /**
+         * @function resetPassword
+         * @description Reset user's password
+         * @param {string} actionCode - The action code from the password reset email
+         * @param {string} newPassword - The new password
+         * @returns {Promise&lt;boolean>} - True if the password was successfully reset, false otherwise
+         */
+        async resetPassword(actionCode, newPassword) {
+            try
+            {
+                const auth = getAuth();
+                await confirmPasswordReset(auth, actionCode, newPassword);
+                return true;
+            }
+            catch(error)
+            {
+                console.error(error);
+                return false;
+            }
+            
+        },
+
+        /**
+         * @function deleteUser
+         * @description Delete user account
+         * @param {string} email - The user's email
+         * @param {string} password - The user's password
+         */
+        async deleteUserAccount(email, password)
+        {
+            const auth = getAuth();
+            const userInfoStore = useUserInfoStore();
+            const statsStore = useStatsStore();
+            const db = getFirestore();
+            const user = auth.currentUser;
+            console.log(auth.currentUser);
+
+            try
+            {
+                const credential = EmailAuthProvider.credential(email, password);
+
+                if (credential)
+                {
+                    await reauthenticateWithCredential(user, credential);
+                    const userRef = doc(db, "users", auth.currentUser.uid);
+                    await deleteDoc(userRef);
+                    await deleteUser(user);
+
+                    userInfoStore.clearData();
+                    statsStore.clearData();
+
+                    localStorage.removeItem('user');
+                    localStorage.removeItem('isAuthenticated');
+                    this.showToast('info', 'Your account has been deleted');
+                    setTimeout(() => {
+                        router.push('/');
+                    }, 2000);
+                }
+                else
+                {
+                    this.showToast('error', 'Incorrect credentials, please try again');
+                }
+
+            }
+            catch(error)
+            {
+                this.showToast('error', 'Error while trying to delete your account');
+                console.error(error);
+            }
+        },
+
+        /**
+         * @function deleteUserSubCollections
+         * @description Delete all the subcollections related to the user's document
+         * @param {string} userId - The user's ID
+         */
+        async deleteUserSubCollections(userId) {
+            const db = getFirestore();
+            const userRef = doc(db, 'users', userId);
+            const subcollections = ['games'];
+
+            for (const subcollection of subcollections) {
+                const queryRef = collection(userRef.collection(subcollection));
+                const snapshot = await getDocs(queryRef);
+
+                // Eliminar todos los documentos de la subcolección
+                snapshot.forEach(async doc => {
+                    await deleteDoc(doc.ref);
+                });
+            }
+        },
+        
+        /**
+         * @function showToast
+         * @description Show toast message
+         * @param {string} type - The type of toast (e.g., 'info', 'error')
+         * @param {string} message - The message to display in the toast
+         */
+        showToast (type, message)
+        {
+            toast(message, {
+                "theme": "colored",
+                "type": type,
+                "autoClose": 1500,
+                "dangerouslyHTMLString": true
+            });
+        }
+    }
+});
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">NHN Entertainment. Frontend Development Lab</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

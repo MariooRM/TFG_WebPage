@@ -26,18 +26,22 @@
   </template>
   
   <script setup>
-  import { useUserInfoStore } from '@/stores';
-  import TabMenuComponent from '@/components/TabMenuComponent.vue';
-  
-  const userInfoStore = useUserInfoStore();
-  
-  const items = [
-    { rank: 1, playedTime: '2:30:00', username: 'Player 1', profileImg: 'path/to/paco.jpg' },
-    { rank: 2, playedTime: '2:00:00', username: 'Player 2', profileImg: 'path/to/jugador2.jpg' },
-    { rank: 3, playedTime: '1:45:00', username: 'Player 3', profileImg: 'path/to/jugador3.jpg' },
-    { rank: 4, playedTime: '1:15:00', username: 'Player 4', profileImg: 'path/to/jugador4.jpg' },
-    { rank: 5, playedTime: '1:00:00', username: 'Player 5', profileImg: 'path/to/jugador5.jpg' }
-  ];
+  /**
+   * @module Leaderboard/Headshots
+   * @description Headshots view for the leaderboard page
+   */
+    import { useUserInfoStore } from '@/stores';
+    import TabMenuComponent from '@/components/TabMenuComponent.vue';
+    
+    const userInfoStore = useUserInfoStore();
+    
+    const items = [
+      { rank: 1, playedTime: '2:30:00', username: 'Player 1', profileImg: 'path/to/paco.jpg' },
+      { rank: 2, playedTime: '2:00:00', username: 'Player 2', profileImg: 'path/to/jugador2.jpg' },
+      { rank: 3, playedTime: '1:45:00', username: 'Player 3', profileImg: 'path/to/jugador3.jpg' },
+      { rank: 4, playedTime: '1:15:00', username: 'Player 4', profileImg: 'path/to/jugador4.jpg' },
+      { rank: 5, playedTime: '1:00:00', username: 'Player 5', profileImg: 'path/to/jugador5.jpg' }
+    ];
   </script>
   
   <style scoped>

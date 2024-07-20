@@ -6,8 +6,9 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 const defaultProfileImgURL = 'https://firebasestorage.googleapis.com/v0/b/tfg-mariorodrigomarcos.appspot.com/o/profile_images%2FProfile-icon.jpg?alt=media&token=92a5ee1e-7cbe-44cc-8f9d-46610b213b4f';
 
 /**
- * This is the store used for managing user personal information from Firestore and Cloud Storage.
- * @module UserInfoStore
+ * @module Stores/UserInfoStore
+ * @description This is the store used for managing user personal information from Firestore and Cloud Storage.
+ * @author Mario Rodrigo Marcos @MariooRM on GitHub
  */
 export const useUserInfoStore = defineStore({
     id: 'info',

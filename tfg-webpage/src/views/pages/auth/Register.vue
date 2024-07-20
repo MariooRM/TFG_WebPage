@@ -76,6 +76,11 @@
 </template>
 
 <script setup>
+/**
+ * @module Auth/Register
+ * @description Register view for user registration
+ * @autor Mario Rodrigo Marcos @MariooRM on GitHub
+ */
     import { useLayout } from '@/layout/composables/layout';
     import AppConfig from '@/layout/AppConfig.vue';
     
@@ -124,6 +129,11 @@
         return layoutConfig.darkTheme.value ? 'white' : 'black';
     });
 
+    /**
+     * @event handleEventKey
+     * @description Handles the keydown event for the form
+     * @param {KeyboardEvent} event
+     */
     function handleEventKey(event) {
         if (event.key === 'Enter') {
             const nextButton = document.getElementById('nextButton');
@@ -133,6 +143,10 @@
         }
     }
 
+    /**
+     * @event goBack
+     * @description Goes back to the previous registration phase
+     */
     function goBack()
     {
         if (phase.value == 1)
@@ -156,6 +170,10 @@
         }
     }
 
+    /**
+     * @event goNext
+     * @description Goes to the next registration phase
+     */
     async function goNext()
     {
         if (phase.value == 1) // Name comprobation
@@ -217,6 +235,12 @@
         }
     }
 
+    /**
+     * @event showToast
+     * @description Shows a toast notification
+     * @param {string} type - Notification type (info, success, error, etc.)
+     * @param {string} message - Notification message
+     */
     function showToast (type, message)
     {
         toast(message, {
@@ -227,6 +251,11 @@
             })
     }
 
+    /**
+     * @event checkPasswordAndConfirmPassword
+     * @description Checks if the password and confirm password fields are valid
+     * @returns {boolean}
+     */
     function checkPasswordAndConfirmPassword()
     {
         const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;

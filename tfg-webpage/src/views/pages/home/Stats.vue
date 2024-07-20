@@ -80,6 +80,10 @@
 
 
 <script setup>
+/**
+ * User stats view
+ * @module Home/Stats
+ */
 import { ref, watch, onMounted, computed } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUserInfoStore, useStatsStore, useAuthStore } from '@/stores';
@@ -98,45 +102,46 @@ onMounted(() => {
   statsStore.fetchUserGamesDocs(authStore.userUID);
 });
 
+
 /**
  * Data for the Kills chart.
- * @type {import('vue').Ref<Chart.ChartData>}
+ * @type {ref<Chart.ChartData>}
  */
 const killsChartData = ref();
 
 /**
  * Data for the Deaths chart.
- * @type {import('vue').Ref<Chart.ChartData>}
+ * @type {ref<Chart.ChartData>}
  */
 const deathsChartData = ref();
 
 /**
  * Data for the Headshots chart.
- * @type {import('vue').Ref<Chart.ChartData>}
+ * @type {ref<Chart.ChartData>}
  */
 const headshotsChartData = ref();
 
 /**
  * Data for the K/D chart.
- * @type {import('vue').Ref<Chart.ChartData>}
+ * @type {ref<Chart.ChartData>}
  */
 const kdChartData = ref();
 
 /**
  * Data for the Memories chart.
- * @type {import('vue').Ref<Chart.ChartData>}
+ * @type {ref<Chart.ChartData>}
  */
 const memoriesChartData = ref();
 
 /**
  * Data for the Collectibles chart.
- * @type {import('vue').Ref<Chart.ChartData>}
+ * @type {ref<Chart.ChartData>}
  */
 const collectiblesChartData = ref();
 
 /**
  * Options for the chart.
- * @type {import('vue').Ref<Chart.ChartOptions>}
+ * @type {ref<Chart.ChartData>}
  */
 const chartOptions = ref();
 
@@ -146,7 +151,9 @@ const chartColors = {
 };
 
 /**
- * Sets the data for the Kills chart.
+ * @event setKillsChartData
+ * @description Sets the data for the Kills chart.
+ * @returns {Chart.ChartData}
  */
 function setKillsChartData() {
   const gamesData = statsStore.gamesData;
@@ -167,7 +174,9 @@ function setKillsChartData() {
 }
 
 /**
- * Sets the data for the Deaths chart.
+ * @event setDeathsChartData
+ * @description Sets the data for the Deaths chart.
+ * @returns {Chart.ChartData}
  */
 function setDeathsChartData() {
   const gamesData = statsStore.gamesData;
@@ -188,7 +197,9 @@ function setDeathsChartData() {
 }
 
 /**
- * Sets the data for the Headshots chart.
+ * @event setHeadshotsChartData
+ * @description Sets the data for the Headshots chart.
+ * @returns {Chart.ChartData}
  */
 function setHeadshotsChartData() {
   const gamesData = statsStore.gamesData;
@@ -209,7 +220,9 @@ function setHeadshotsChartData() {
 }
 
 /**
- * Sets the data for the K/D chart.
+ * @event setKDChartData
+ * @description Sets the data for the K/D chart.
+ * @returns {Chart.ChartData}
  */
 function setKDChartData() {
   const gamesData = statsStore.gamesData;
@@ -230,7 +243,9 @@ function setKDChartData() {
 }
 
 /**
- * Sets the data for the Collectibles chart.
+ * @event setCollectiblesChartData
+ * @description Sets the data for the Collectibles chart.
+ * @returns {Chart.ChartData}
  */
 function setCollectiblesChartData() {
   const gamesData = statsStore.gamesData;
@@ -251,7 +266,9 @@ function setCollectiblesChartData() {
 }
 
 /**
- * Sets the data for the Memories chart.
+ * @event setMemoriesChartData
+ * @description Sets the data for the Memories chart.
+ * @returns {Chart.ChartData}
  */
 function setMemoriesChartData() {
   const gamesData = statsStore.gamesData;
@@ -272,7 +289,9 @@ function setMemoriesChartData() {
 }
 
 /**
- * Sets the options for the chart.
+ * @event setChartOptions
+ * @description Sets the options for the chart.
+ * @returns {Chart.ChartData}
  */
 function setChartOptions() {
   const documentStyle = getComputedStyle(document.documentElement);
@@ -290,11 +309,18 @@ function setChartOptions() {
   };
 }
 
+/**
+ * @event goToGameDetails
+ * @description Redirects to the game slot details page.
+ * @param gameSlot 
+ */
+
 function goToGameDetails(gameSlot)
 {
   console.log(gameSlot, typeof gameSlot);
   router.push(`/home/game_details?gameSlot=${encodeURIComponent(gameSlot)}`);
 }
+
 
 watch(() => statsStore.gamesData, () => {
   killsChartData.value = setKillsChartData();

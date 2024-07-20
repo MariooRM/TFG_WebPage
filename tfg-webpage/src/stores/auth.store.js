@@ -12,8 +12,9 @@ import { useUserInfoStore } from './userInfo.store';
 import { useStatsStore } from './stats.store';
 
 /**
- * This is the store used for managing user authentication.
- * @module AuthStore
+ * @module Stores/AuthStore
+ * @description This is the store used for managing user authentication.
+ * @author Mario Rodrigo Marcos @MariooRM on GitHub
  */
 export const useAuthStore = defineStore({
     id: 'auth',

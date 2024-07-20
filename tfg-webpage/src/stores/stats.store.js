@@ -2,8 +2,9 @@ import { defineStore } from "pinia";
 import { getFirestore, collection, onSnapshot } from "firebase/firestore";
 
 /**
- * This is the store used for managing user stats information from Firestore.
- * @module StatsStore
+ * @module Stores/StatsStore
+ * @description This is the store used for managing user stats information from Firestore.
+ * @author Mario Rodrigo Marcos @MariooRM on GitHub
  */
 export const useStatsStore = defineStore({
   id: 'stats',
