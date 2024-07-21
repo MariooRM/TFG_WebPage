@@ -22,6 +22,25 @@
  npm run build
  ```
 
+ ### Initialize firebase tools
+ This project supports hosting on Firebase Hosting service. If starting working within the project, you will need to follow
+ these steps:
+
+ #### Login with Firebase account
+ Run this command and select your account or introduce your email and password. The
+ ```bash
+ firebase login
+ ```
+
+ #### Project selection
+ Once you have logged in, you will have to select this project on the deployed list.
+
+ #### Firebase initialization
+ Initialize Firebase services by running:
+  ```bash
+ firebase init
+ ```
+
  ### Firebase hosting
  This project has Firebase tools integrated, so the webapp can be hosted running this command:
  ```bash
