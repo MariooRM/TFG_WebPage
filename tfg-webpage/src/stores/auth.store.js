@@ -11,14 +11,30 @@ import { router } from '@/router';
 import { useUserInfoStore } from './userInfo.store';
 import { useStatsStore } from './stats.store';
 
+/**
+ * @module Stores/AuthStore
+ * @description This is the store used for managing user authentication.
+ * @author Mario Rodrigo Marcos @MariooRM on GitHub
+ */
 export const useAuthStore = defineStore({
     id: 'auth',
+    /**
+     * Defines the initial state of the user authentication store.
+     * @typedef {Object} UserAuthState
+     * @property {string|null} userUID - The user's UID.
+     * @property {string|null} isAuthenticated - The user's authentication state.
+     */
     state: () => ({
+        
         userUID: localStorage.getItem('userUID') || null,
         isAuthenticated: localStorage.getItem('isAuthenticated') || false
     }),
 
     actions: {
+        /**
+         * @function initAuth
+         * @description Initialize the authentication state of the user
+         */
         async initAuth() {
             const auth = getAuth();
             onAuthStateChanged(auth, user => {
@@ -36,6 +52,13 @@ export const useAuthStore = defineStore({
             });
         },
 
+        /**
+         * @function login
+         * @description Log in the user
+         * @param {string} email - The user's email
+         * @param {string} password - The user's password
+         * @returns {Promise<boolean>} - True if login is successful, false otherwise
+         */
         async login(email, password) {
             const auth = getAuth();
             const userInfoStore = useUserInfoStore();
@@ -43,7 +66,6 @@ export const useAuthStore = defineStore({
             try {
                 try {
                     await setPersistence(auth, browserLocalPersistence);
-                   
                   } catch (error) {
                     console.error(error);
                   }
@@ -62,6 +84,10 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * @function logout
+         * @description Log out the user
+         */
         async logout() {
             console.log("Logging out");
             const auth = getAuth();
@@ -77,6 +103,16 @@ export const useAuthStore = defineStore({
             router.push('/');
         },
 
+        /**
+         * @function register
+         * @description Register a new user
+         * @param {string} name - The user's name
+         * @param {string} surname - The user's surname
+         * @param {string} email - The user's email
+         * @param {string} username - The user's username
+         * @param {string} password - The user's password
+         * @returns {Promise<object>} - User credential and user data
+         */
         async register(name, surname, email, username, password) {
             const auth = getAuth();
             try {
@@ -98,6 +134,13 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * @function sendEmail
+         * @description Send email verification and create user document when verified
+         * @param {object} userCredential - The user credential object
+         * @param {object} userData - The user data object
+         * @param {string} email - The user's email
+         */
         async sendEmail(userCredential, userData, email) {
             console.log("Enviando email");
             const db = getFirestore();
@@ -128,6 +171,12 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * @function checkCurrentPassword
+         * @description Check the current password of the user
+         * @param {string} password - The user's current password
+         * @returns {Promise<Array.<string, boolean>>} - A tuple with a message and a boolean indicating success
+         */
         async checkCurrentPassword(password) {
             const auth = getAuth();
             const user = auth.currentUser;
@@ -149,6 +198,12 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * @function changePassword
+         * @description Change the user's password
+         * @param {string} newPassword - The new password
+         * @returns {Promise<boolean>} - True if the password was successfully changed, false otherwise
+         */
         async changePassword(newPassword) {
             const auth = getAuth();
             const user = auth.currentUser;
@@ -165,6 +220,12 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * @function sendRecoveryEmail
+         * @description Send recovery email to the user
+         * @param {string} email - The user's email
+         * @returns {Promise<boolean>} - True if the email was sent successfully, false otherwise
+         */
         async sendRecoveryEmail(email) {
             const auth = getAuth();
             try {
@@ -176,6 +237,13 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * @function resetPassword
+         * @description Reset user's password
+         * @param {string} actionCode - The action code from the password reset email
+         * @param {string} newPassword - The new password
+         * @returns {Promise<boolean>} - True if the password was successfully reset, false otherwise
+         */
         async resetPassword(actionCode, newPassword) {
             try
             {
@@ -191,6 +259,12 @@ export const useAuthStore = defineStore({
             
         },
 
+        /**
+         * @function deleteUser
+         * @description Delete user account
+         * @param {string} email - The user's email
+         * @param {string} password - The user's password
+         */
         async deleteUserAccount(email, password)
         {
             const auth = getAuth();
@@ -210,7 +284,6 @@ export const useAuthStore = defineStore({
                     const userRef = doc(db, "users", auth.currentUser.uid);
                     await deleteDoc(userRef);
                     await deleteUser(user);
-                    //await this.deleteUserSubCollections(userUID);
 
                     userInfoStore.clearData();
                     statsStore.clearData();
@@ -235,6 +308,11 @@ export const useAuthStore = defineStore({
             }
         },
 
+        /**
+         * @function deleteUserSubCollections
+         * @description Delete all the subcollections related to the user's document
+         * @param {string} userId - The user's ID
+         */
         async deleteUserSubCollections(userId) {
             const db = getFirestore();
             const userRef = doc(db, 'users', userId);
@@ -251,6 +329,12 @@ export const useAuthStore = defineStore({
             }
         },
         
+        /**
+         * @function showToast
+         * @description Show toast message
+         * @param {string} type - The type of toast (e.g., 'info', 'error')
+         * @param {string} message - The message to display in the toast
+         */
         showToast (type, message)
         {
             toast(message, {
@@ -258,8 +342,7 @@ export const useAuthStore = defineStore({
                 "type": type,
                 "autoClose": 1500,
                 "dangerouslyHTMLString": true
-                });
+            });
         }
-        
     }
 });

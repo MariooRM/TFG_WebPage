@@ -1,0 +1,534 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: views/pages/home/Profile.vue | Source: views/pages/home/Profile.vue</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Source: views/pages/home/Profile.vue</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Modules</h3><ul><li><a href="module-Auth_ForgotPassword.html">Auth/ForgotPassword</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Auth/ForgotPassword_sub"><div class="member-type">Events</div><ul class="inner"><li><a href="module-Auth_Register.html#~event:goBack">goBack</a></li><li><a href="module-Auth_Register.html#~event:handleEventKey">handleEventKey</a></li><li><a href="module-Auth_ForgotPassword.html#~event:sendRecoveryEmail">sendRecoveryEmail</a></li><li><a href="module-Home_Profile.html#~event:showToast">showToast</a></li></ul></div></li><li><a href="module-Auth_Login.html">Auth/Login</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Auth/Login_sub"><div class="member-type">Events</div><ul class="inner"><li><a href="module-Auth_Login.html#~event:checkEmail">checkEmail</a></li><li><a href="module-Auth_Login.html#~event:checkPassword">checkPassword</a></li><li><a href="module-Auth_Register.html#~event:goBack">goBack</a></li><li><a href="module-Auth_Register.html#~event:handleEventKey">handleEventKey</a></li><li><a href="module-Auth_Login.html#~event:login">login</a></li><li><a href="module-Home_Profile.html#~event:makeComprobations">makeComprobations</a></li><li><a href="module-Home_Profile.html#~event:onMounted">onMounted</a></li><li><a href="module-Home_Profile.html#~event:showToast">showToast</a></li></ul></div></li><li><a href="module-Auth_RecoveryPassword.html">Auth/RecoveryPassword</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Auth/RecoveryPassword_sub"><div class="member-type">Events</div><ul class="inner"><li><a href="module-Auth_Register.html#~event:handleEventKey">handleEventKey</a></li><li><a href="module-Home_Profile.html#~event:onMounted">onMounted</a></li><li><a href="module-Auth_RecoveryPassword.html#~event:resetPassword">resetPassword</a></li><li><a href="module-Home_Profile.html#~event:showToast">showToast</a></li></ul></div></li><li><a href="module-Auth_Register.html">Auth/Register</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Auth/Register_sub"><div class="member-type">Events</div><ul class="inner"><li><a href="module-Home_Profile.html#~event:checkPasswordAndConfirmPassword">checkPasswordAndConfirmPassword</a></li><li><a href="module-Auth_Register.html#~event:goBack">goBack</a></li><li><a href="module-Auth_Register.html#~event:goNext">goNext</a></li><li><a href="module-Auth_Register.html#~event:handleEventKey">handleEventKey</a></li><li><a href="module-Home_Profile.html#~event:showToast">showToast</a></li></ul></div></li><li><a href="module-Components_TabMenuComponent.html">Components/TabMenuComponent</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Components/TabMenuComponent_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-Components_TabMenuComponent.html#~activeIndex">activeIndex</a></li></ul></div></li><li><a href="module-Home_Dashboard.html">Home/Dashboard</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Home/Dashboard_sub"></div></li><li><a href="module-Home_GameDetails.html">Home/GameDetails</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Home/GameDetails_sub"><div class="member-type">Events</div><ul class="inner"><li><a href="module-Home_Profile.html#~event:onMounted">onMounted</a></li></ul></div></li><li><a href="module-Home_Profile.html">Home/Profile</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Home/Profile_sub"><div class="member-type">Events</div><ul class="inner"><li><a href="module-Home_Profile.html#~event:OnDialogHide">OnDialogHide</a></li><li><a href="module-Home_Profile.html#~event:checkNewUsername">checkNewUsername</a></li><li><a href="module-Home_Profile.html#~event:checkPasswordAndConfirmPassword">checkPasswordAndConfirmPassword</a></li><li><a href="module-Home_Profile.html#~event:checkPasswordInputs">checkPasswordInputs</a></li><li><a href="module-Home_Profile.html#~event:deleteUserAccount">deleteUserAccount</a></li><li><a href="module-Home_Profile.html#~event:makeComprobations">makeComprobations</a></li><li><a href="module-Home_Profile.html#~event:onFileChange">onFileChange</a></li><li><a href="module-Home_Profile.html#~event:onMounted">onMounted</a></li><li><a href="module-Home_Profile.html#~event:openFileInput">openFileInput</a></li><li><a href="module-Home_Profile.html#~event:savePersonalInfo">savePersonalInfo</a></li><li><a href="module-Home_Profile.html#~event:showConfirmDialog">showConfirmDialog</a></li><li><a href="module-Home_Profile.html#~event:showDeleteAccountDialog">showDeleteAccountDialog</a></li><li><a href="module-Home_Profile.html#~event:showModificationDialog">showModificationDialog</a></li><li><a href="module-Home_Profile.html#~event:showToast">showToast</a></li></ul></div></li><li><a href="module-Home_Stats.html">Home/Stats</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Home/Stats_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-Home_Stats.html#~chartOptions">chartOptions</a></li><li><a href="module-Home_Stats.html#~collectiblesChartData">collectiblesChartData</a></li><li><a href="module-Home_Stats.html#~deathsChartData">deathsChartData</a></li><li><a href="module-Home_Stats.html#~headshotsChartData">headshotsChartData</a></li><li><a href="module-Home_Stats.html#~kdChartData">kdChartData</a></li><li><a href="module-Home_Stats.html#~killsChartData">killsChartData</a></li><li><a href="module-Home_Stats.html#~memoriesChartData">memoriesChartData</a></li></ul><div class="member-type">Events</div><ul class="inner"><li><a href="module-Home_Stats.html#~event:goToGameDetails">goToGameDetails</a></li><li><a href="module-Home_Stats.html#~event:setChartOptions">setChartOptions</a></li><li><a href="module-Home_Stats.html#~event:setCollectiblesChartData">setCollectiblesChartData</a></li><li><a href="module-Home_Stats.html#~event:setDeathsChartData">setDeathsChartData</a></li><li><a href="module-Home_Stats.html#~event:setHeadshotsChartData">setHeadshotsChartData</a></li><li><a href="module-Home_Stats.html#~event:setKDChartData">setKDChartData</a></li><li><a href="module-Home_Stats.html#~event:setKillsChartData">setKillsChartData</a></li><li><a href="module-Home_Stats.html#~event:setMemoriesChartData">setMemoriesChartData</a></li></ul></div></li><li><a href="module-Leaderboard_Collectibles.html">Leaderboard/Collectibles</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/Collectibles_sub"></div></li><li><a href="module-Leaderboard_Deaths.html">Leaderboard/Deaths</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/Deaths_sub"></div></li><li><a href="module-Leaderboard_Headshots.html">Leaderboard/Headshots</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/Headshots_sub"></div></li><li><a href="module-Leaderboard_KD.html">Leaderboard/KD</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/KD_sub"></div></li><li><a href="module-Leaderboard_Kills.html">Leaderboard/Kills</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/Kills_sub"></div></li><li><a href="module-Leaderboard_Memories.html">Leaderboard/Memories</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/Memories_sub"></div></li><li><a href="module-Leaderboard_PlayedTime.html">Leaderboard/PlayedTime</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/PlayedTime_sub"></div></li><li><a href="module-Stores_AuthStore.html">Stores/AuthStore</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Stores/AuthStore_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Stores_AuthStore.html#~changePassword">changePassword</a></li><li><a href="module-Stores_AuthStore.html#~checkCurrentPassword">checkCurrentPassword</a></li><li><a href="module-Stores_AuthStore.html#~deleteUser">deleteUser</a></li><li><a href="module-Stores_AuthStore.html#~deleteUserSubCollections">deleteUserSubCollections</a></li><li><a href="module-Stores_AuthStore.html#~initAuth">initAuth</a></li><li><a href="module-Stores_AuthStore.html#~login">login</a></li><li><a href="module-Stores_AuthStore.html#~logout">logout</a></li><li><a href="module-Stores_AuthStore.html#~register">register</a></li><li><a href="module-Stores_AuthStore.html#~resetPassword">resetPassword</a></li><li><a href="module-Stores_AuthStore.html#~sendEmail">sendEmail</a></li><li><a href="module-Stores_AuthStore.html#~sendRecoveryEmail">sendRecoveryEmail</a></li><li><a href="module-Stores_AuthStore.html#~showToast">showToast</a></li></ul><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-Stores_AuthStore.html#~UserAuthState">UserAuthState</a></li></ul></div></li><li><a href="module-Stores_StatsStore.html">Stores/StatsStore</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Stores/StatsStore_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Stores_StatsStore.html#~clearData">clearData</a></li><li><a href="module-Stores_StatsStore.html#~fetchUserGamesDocs">fetchUserGamesDocs</a></li></ul><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-Stores_StatsStore.html#~UserStatsState">UserStatsState</a></li></ul></div></li><li><a href="module-Stores_UserInfoStore.html">Stores/UserInfoStore</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Stores/UserInfoStore_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Stores_UserInfoStore.html#~checkConfirmPassword">checkConfirmPassword</a></li><li><a href="module-Stores_UserInfoStore.html#~checkEmail">checkEmail</a></li><li><a href="module-Stores_UserInfoStore.html#~checkName">checkName</a></li><li><a href="module-Stores_UserInfoStore.html#~checkPassword">checkPassword</a></li><li><a href="module-Stores_UserInfoStore.html#~checkUsername">checkUsername</a></li><li><a href="module-Stores_UserInfoStore.html#~clearData">clearData</a></li><li><a href="module-Stores_UserInfoStore.html#~emailExists">emailExists</a></li><li><a href="module-Stores_UserInfoStore.html#~getUserInfo">getUserInfo</a></li><li><a href="module-Stores_UserInfoStore.html#~updateEmail">updateEmail</a></li><li><a href="module-Stores_UserInfoStore.html#~updatePersonalInfo">updatePersonalInfo</a></li><li><a href="module-Stores_UserInfoStore.html#~updateProfileImg">updateProfileImg</a></li><li><a href="module-Stores_UserInfoStore.html#~updateUsername">updateUsername</a></li><li><a href="module-Stores_UserInfoStore.html#~usernameExists">usernameExists</a></li></ul><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-Stores_UserInfoStore.html#~UserInfoState">UserInfoState</a></li></ul></div></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>&lt;template>
+  &lt;div class="profile-container flex justify-content-center mb-5">
+    &lt;Card style="width: 50rem; overflow: hidden; ">
+      &lt;template #header>
+        &lt;div class="profile-div flex justify-content-center align-items-center w-full mt-3 mb-3" style=" flex-direction: column;">
+          &lt;div class="profile-img-div mb-3" style=" border-radius: 50%; width: 200px; height: 200px; ">
+            &lt;img :src="userInfoStore.profileImg" alt="ProfileImg" class="profile-img" style="object-fit: cover; border-radius: 50%; width: 100%; height: 100%; " />
+          &lt;/div>
+          &lt;button class="p-button" @click="openFileInput" style="background-color: black; color: white; padding: 10px 20px; border: none; cursor: pointer;">Choose Image&lt;/button>
+          &lt;input type="file" style="display: none;" ref="fileInput" @change="onFileChange" accept="image/*">
+        &lt;/div>
+      &lt;/template>
+
+      &lt;template #content>
+        &lt;div class="profile-info-div flex flex-column justify-content-center align-items-center mb-3" style="">
+          &lt;h4 class="mb-1 w-full sm:mb-2" style="text-align: center;">Account info&lt;/h4>
+          &lt;div class="flex flex-column gap-2 w-full" style="max-width: 25rem;">
+            &lt;label class="lg:ml-2 font-bold" for="email">Email&lt;/label>
+            &lt;div class="input-div flex justify-content-center align-items-center w-full" style="">
+              &lt;InputText id="email" v-model="email" type="text" disabled class="w-full" style="padding: 1rem; height: 3rem;" />
+              &lt;i class="pi pi-verified ml-2" style="font-size: 2.5rem; color: gold">&lt;/i>
+            &lt;/div>
+          &lt;/div>
+          &lt;div class="flex flex-column gap-2 w-full mt-3" style="max-width: 25rem;">
+            &lt;label class="font-bold" for="username">Username&lt;/label>
+            &lt;div class="input-div flex justify-content-center align-items-center w-full">
+              &lt;InputText id="username" v-model="username" type="text" class="w-full" disabled style="padding: 1rem; height: 3rem;" />
+              &lt;Button icon="pi pi-pencil" @click="showModificationDialog('username')" class="p-button ml-2" style="background-color: black; height: 3rem; width: 3rem;"/>
+            &lt;/div>
+          &lt;/div>
+          &lt;div class="flex flex-column gap-2 w-full mt-3" style="max-width: 25rem;">
+            &lt;label class="font-bold" for="username">Password&lt;/label>
+            &lt;div class="input-div flex justify-content-center align-items-center w-full">
+              &lt;InputText id="password" v-model="password" type="text" class="w-full" placeholder="********" disabled style="padding: 1rem; height: 3rem;" />
+              &lt;Button icon="pi pi-pencil" @click="showModificationDialog('password')" class="p-button ml-2" style="background-color: black; height: 3rem; width: 3rem;"/>
+            &lt;/div>
+          &lt;/div>
+          &lt;Dialog v-model:visible="usernameVisible" @hide="OnDialogHide()" modal header="Edit Profile" class="md:w-30rem sm:w-25rem">
+            &lt;span class="p-text-secondary block mb-5">Update your username information.&lt;/span>
+            &lt;div class="flex align-items-center gap-3 mb-3">
+              &lt;span>Current username: &lt;span style="font-weight: bold;">{{ originalUsername }}&lt;/span>&lt;/span>
+            &lt;/div>
+            &lt;div class="flex align-items-center gap-3">
+                &lt;InputText id="usernameToModify" v-model="usernameToModify" class="flex-auto" style="height: 3rem;" autocomplete="off" placeholder="New username"/>
+            &lt;/div>
+            &lt;span v-if="errorMessages.username" class="error-message text-red-500 block mt-1" style="font-size: 13px;">{{ errorMessages.username }}&lt;/span>
+            &lt;div class="flex justify-content-center gap-5 mt-5">
+                &lt;Button type="button" label="Cancel" severity="secondary" @click="OnDialogHide()">&lt;/Button>
+                &lt;Button type="button" label="Save" @click="checkNewUsername()">&lt;/Button>
+            &lt;/div>
+          &lt;/Dialog>
+          &lt;Dialog v-model:visible="passwordVisible" @hide="OnDialogHide()" modal header="Edit Profile" class="md:w-30rem sm:w-25rem">
+              &lt;span class="p-text-secondary block mb-5">Update your profile information.&lt;/span>
+              
+              &lt;div class="flex align-items-center gap-3">
+                  &lt;Password id="currentPassword" v-model="currentPassword" inputClass="w-full" :feedback="false" :toggleMask="true" class="w-full" style="width: 100%; height: 3rem;" autocomplete="off" placeholder="Current password"/>
+              &lt;/div>
+              &lt;span v-if="errorMessages.currentPassword" class="error-message text-red-500 block mt-1" style="font-size: 13px;">{{ errorMessages.currentPassword }}&lt;/span>
+              
+              &lt;div class="flex align-items-center gap-3 mt-3">
+                &lt;Password id="newPassword" v-model="newPassword" inputClass="w-full" :feedback="false" :toggleMask="true" class="w-full" style="width: 100%; height: 3rem;" autocomplete="off" placeholder="New password"/>
+              &lt;/div>
+              &lt;span v-if="errorMessages.newPassword" class="error-message text-red-500 block mt-1" style="font-size: 13px;">{{ errorMessages.newPassword }}&lt;/span>
+              
+              &lt;div class="flex align-items-center gap-3 mt-3">
+                &lt;Password id="confirmNewPassword" v-model="confirmNewPassword" inputClass="w-full" :feedback="false" :toggleMask="true" class="w-full" style="width: 100%; height: 3rem;" autocomplete="off" placeholder="Confirm new password"/>
+              &lt;/div>
+              &lt;span v-if="errorMessages.confirmNewPassword" class="error-message text-red-500 block mt-1" style="font-size: 13px;">{{ errorMessages.confirmNewPassword }}&lt;/span>
+              &lt;div class="flex justify-content-center gap-5 mt-5">
+                  &lt;Button type="button" label="Cancel" severity="secondary" @click="OnDialogHide()">&lt;/Button>
+                  &lt;Button type="button" label="Save" @click="checkPasswordInputs()">&lt;/Button>
+              &lt;/div>
+          &lt;/Dialog>
+          &lt;h4 class="mb-1 w-full sm:mb-2 mt-6" style="text-align: center;">Personal info&lt;/h4>
+          &lt;div class="flex flex-column gap-2 w-full" style="max-width: 25rem;">
+            &lt;label class="font-bold" for="name">Name&lt;/label>
+            &lt;div class="input-div flex flex-column justify-content-center align-items-center w-full">
+              &lt;InputText id="name" v-model="name" type="text" class="w-full" style="padding: 1rem; height: 3rem;" />
+            &lt;/div>
+            &lt;span v-if="errorMessages.name" class="error-message text-red-500 block">{{ errorMessages.name }}&lt;/span>
+          &lt;/div>
+          &lt;div class="flex flex-column gap-2 w-full mt-3" style="max-width: 25rem;">
+            &lt;label class="font-bold" for="surname">Surname&lt;/label>
+            &lt;div class="input-div flex justify-content-center align-items-center w-full" style="">
+              &lt;InputText id="surname" v-model="surname" type="text" class="w-full" style="padding: 1rem; height: 3rem;" />
+            &lt;/div>
+          &lt;/div>
+        &lt;/div>
+      &lt;/template>
+      &lt;template #footer>
+        &lt;ConfirmDialog group="saveChanges">
+            &lt;template #container="{ message, acceptCallback, rejectCallback }">
+                &lt;div class="flex flex-column align-items-center p-5 surface-overlay border-round">
+                    &lt;div class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem -mt-8">
+                        &lt;i class="pi pi-exclamation-circle text-5xl">&lt;/i>
+                    &lt;/div>
+                    &lt;span class="font-bold text-2xl block mb-2 mt-4">{{ message.header }}&lt;/span>
+                    &lt;p class="mb-0">{{ message.message }}&lt;/p>
+                    &lt;div class="flex align-items-center gap-2 mt-4">
+                        &lt;Button label="Confirm" @click="acceptCallback">&lt;/Button>
+                        &lt;Button label="Cancel" outlined @click="rejectCallback">&lt;/Button>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/template>
+        &lt;/ConfirmDialog>
+
+        &lt;ConfirmDialog group="deleteAccount">
+            &lt;template #container="{ message, acceptCallback, rejectCallback }">
+                &lt;div class="flex flex-column align-items-center p-5 surface-overlay border-round">
+                    &lt;div class="border-circle bg-primary inline-flex justify-content-center align-items-center h-6rem w-6rem -mt-8">
+                        &lt;i class="pi pi-exclamation-circle text-5xl">&lt;/i>
+                    &lt;/div>
+                    &lt;span class="font-bold text-2xl block mb-2 mt-4">{{ message.header }}&lt;/span>
+                    &lt;p class="mb-0">{{ message.message }}&lt;/p>
+                    &lt;div class="flex align-items-center gap-3 mt-3 w-full">
+                      &lt;Password id="deletePassword" v-model="deletePassword" inputClass="w-full" :feedback="false" :toggleMask="true" class="w-full" style="width: 100%; height: 3rem;" autocomplete="off" placeholder="Password"/>
+                    &lt;/div>                    
+                    &lt;div class="flex align-items-center gap-2 mt-4">
+                        &lt;Button :disabled="deletePasswordEnabled" label="Confirm" @click="acceptCallback">&lt;/Button>
+                        &lt;Button label="Cancel" outlined @click="rejectCallback">&lt;/Button>
+                    &lt;/div>
+                &lt;/div>
+            &lt;/template>
+        &lt;/ConfirmDialog>
+        &lt;div class="flex justify-content-center align-items center">
+          &lt;Button class="md:w-3 sm:w-3 p-3" style="height: 50px;" @click="makeComprobations()" type="button" :disabled="!isSaveButtonEnabled" label="Save changes" icon="pi pi-save" :loading="loading"/>
+        &lt;/div>
+        &lt;div class="delete-account-div flex justify-content-end">
+            &lt;Button class="w-1 p-3" style="height: 50px; background-color: red;" @click="showDeleteAccountDialog" type="button" icon="pi pi-trash" :loading="loading"/>
+        &lt;/div>
+        
+      &lt;/template>
+    &lt;/Card>
+  &lt;/div>
+&lt;/template>
+
+&lt;script setup>
+/**
+ * @module Home/Profile
+ * @description Profile page where the user can see and modify their personal information and profile image, as well as delete their account
+ * @author Mario Rodrigo Marcos @MariooRM on GitHub
+ */
+import { ref, watch, onMounted } from 'vue';
+import { useUserInfoStore, useAuthStore } from '@/stores';
+import { useConfirm } from 'primevue/useconfirm';
+
+import { toast } from 'vue3-toastify';
+import 'vue3-toastify/dist/index.css';
+
+
+const userInfoStore = useUserInfoStore();
+const authStore = useAuthStore();
+const confirm = useConfirm();
+
+const usernameVisible = ref(false);
+const passwordVisible = ref(false);
+
+const originalName = ref('')
+const originalSurname = ref('')
+const originalUsername = ref('')
+const originalEmail = ref('')
+
+const usernameToModify = ref('');
+const currentPassword = ref('');
+const newPassword = ref('');
+const confirmNewPassword = ref('');
+
+const username = ref(userInfoStore.username);
+const email = ref(userInfoStore.email);
+const name = ref(userInfoStore.name);
+const surname = ref(userInfoStore.surname);
+const password = ref('********');
+
+const deletePassword = ref('');
+const deletePasswordEnabled = ref(true);
+
+const isSaveButtonEnabled = ref(false);
+const loading = ref(false);
+
+const errorMessages = ref({
+        name: '',
+        username: '',
+        currentPassword: '',
+        newPassword: '',
+        confirmNewPassword: '',
+    });
+
+let usernameIsValid = ref(false);
+let nameIsValid = ref(false);
+let currentPasswordIsValid = ref(false);
+
+/**
+ * @event onMounted
+ * @description Initializes the original values of the user's personal information
+ */
+onMounted(() => {
+  originalUsername.value = username.value;
+  originalEmail.value = email.value;
+  originalName.value = name.value;
+  originalSurname.value = surname.value;
+});
+
+watch([username, name, surname], ([newUsername, newName, newSurname]) => {
+  isSaveButtonEnabled.value = (
+    newUsername !== originalUsername.value ||
+    newName !== originalName.value ||
+    newSurname !== originalSurname.value
+  );
+});
+
+watch(deletePassword, (newDeletePassword) => {
+  deletePasswordEnabled.value = !(newDeletePassword === deletePassword.value &amp;&amp; deletePassword.value.length > 0);
+});
+
+// Functions related to the profile image
+
+/**
+ * @event onFileChange
+ * @description Updates the user's profile image when a new image is selected
+ * @param event 
+ */
+function onFileChange(event) {
+  const file = event.target.files[0];
+  if (file) {
+    userInfoStore.updateProfileImg(file); 
+  }
+}
+
+/**
+ * @event openFileInput
+ * @description Opens the file input dialog to select a new profile image
+ */
+function openFileInput() {
+  const fileInput = document.querySelector('input[type="file"]');
+  if (fileInput) {
+    fileInput.click();
+  }
+}
+
+
+// Functions related to the personal info
+/**
+ * @event makeComprobations
+ * @description Checks if the new personal information is valid and shows a confirmation dialog
+ */
+async function makeComprobations() {
+  let allValid = true;
+
+  if (name.value !== originalName.value) {
+    const [nameError, nameValid] = userInfoStore.checkName(name.value);
+    errorMessages.value.name = nameError;
+    nameIsValid.value = nameValid;
+    if (!nameIsValid.value) {
+      allValid = false;
+    }
+  }
+
+  if (allValid) {
+    showConfirmDialog();
+  }
+}
+
+/**
+ * @event savePersonalInfo
+ * @description Saves the new personal information in Firestore
+ */
+async function savePersonalInfo() {
+  loading.value = true;
+  await userInfoStore.updatePersonalInfo(name.value, surname.value);
+  setTimeout(() => {
+    loading.value = false;
+    window.location.reload();
+  }, 1000);
+}
+
+
+// Functions related to the dialogs
+/**
+ * @event showConfirmDialog
+ * @description Shows a confirmation dialog to save the changes
+ */
+function showConfirmDialog() {
+  confirm.require({
+    group: 'saveChanges',
+    message: 'Are you sure you want to save changes?',
+    header: 'Confirmation',
+    accept: savePersonalInfo,
+    reject: () => window.location.reload(),
+  });
+}
+
+/**
+ * @event showDeleteAccountDialog
+ * @description Shows a confirmation dialog to delete the account
+ */
+function showDeleteAccountDialog() {
+  confirm.require({
+    group: 'deleteAccount',
+    message: 'Please, enter your password. This action is irreversible.',
+    header: 'Delete account',
+    accept: deleteUserAccount,
+    reject: () => {},
+  });
+}
+
+/**
+ * @event showModificationDialog
+ * @description Shows the dialog to modify the username or password
+ * @param field 
+ */
+function showModificationDialog(field) {
+ 
+  if (field == 'username')
+  {
+     usernameVisible.value = true;
+  } 
+  else
+  {
+    passwordVisible.value = true;
+  } 
+}
+
+/**
+ * @event OnDialogHide
+ * @description Hides the dialog and resets the error messages
+ */
+function OnDialogHide()
+{
+  usernameVisible.value = false;
+  passwordVisible.value = false;
+  errorMessages.value.username = '';
+  errorMessages.value.currentPassword = '';
+  errorMessages.value.password = '';
+  errorMessages.value.confirmPassword = '';
+  usernameToModify.value = '';
+  currentPassword.value = '';
+  newPassword.value = '';
+  confirmNewPassword.value = '';
+}
+
+
+// Functions to validate and update the username and password
+/**
+ * @event checkNewUsername
+ * @description Checks if the new username is valid and updates it in Firestore
+ */
+async function checkNewUsername()
+{
+  if (usernameToModify.value != originalUsername.value) {
+    const [usernameError, usernameValid] = await userInfoStore.checkUsername(usernameToModify.value);
+    errorMessages.value.username = usernameError;
+    usernameIsValid.value = usernameValid;
+    if (usernameIsValid.value) {
+      await userInfoStore.updateUsername(usernameToModify.value);
+      window.location.reload();
+    }
+  }
+  else
+  {
+    errorMessages.value.username = 'Your new username must be different from your current one';
+    return;
+  }
+  }
+
+/**
+ * @event checkPasswordInputs
+ * @description Checks if the new password is valid and updates it in Firestore
+ */
+async function checkPasswordInputs()
+{
+  // We first check if the current password is correct
+  if (!currentPassword.value)
+  {
+    errorMessages.value.currentPassword = 'You must provide your current password';
+    return;
+  }
+  
+  [errorMessages.value.currentPassword, currentPasswordIsValid] = await authStore.checkCurrentPassword(currentPassword.value);
+  if (!currentPasswordIsValid) 
+  {
+    return;
+  }
+  else
+  {
+    if (checkPasswordAndConfirmPassword())
+    {
+      await authStore.changePassword(newPassword.value);
+      showToast('info', 'Password successfully updated');
+      setTimeout(() => {
+                      window.location.reload();
+                    }, 2000);
+    }
+  }
+}
+
+/**
+ * @event checkPasswordAndConfirmPassword
+ * @description Checks if the new password and the confirmation password are valid
+ */
+function checkPasswordAndConfirmPassword()
+{
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+  if (!newPassword.value || !passwordRegex.test(newPassword.value))
+  {
+      errorMessages.value.newPassword = 'Insecure password, please try again';
+      return false;
+  }
+  else errorMessages.value.newPassword = '';
+
+  if (!confirmNewPassword.value)
+  {
+      errorMessages.value.confirmNewPassword = 'Password confirmation is needed';
+      return false; 
+  }
+  else if (newPassword.value != confirmNewPassword.value)
+  {
+      errorMessages.value.confirmNewPassword = 'Passwords do not match';
+      return false;
+  }
+  else errorMessages.value.confirmNewPassword = '';
+  
+  return true;
+}
+
+// Function to delete the account
+
+/**
+ * @event deleteUserAccount
+ * @description Deletes the user's account from Firestore
+ */
+async function deleteUserAccount()
+{
+  await authStore.deleteUserAccount(email.value, deletePassword.value);
+}
+
+/**
+ * @event showToast
+ * @description Shows a toast message
+ * @param type 
+ * @param message 
+ */
+function showToast (type, message)
+{
+    toast(message, {
+        "theme": "colored",
+        "type": type,
+        "autoClose": 1500,
+        "dangerouslyHTMLString": true
+        })
+}
+&lt;/script>
+
+&lt;style scoped>
+
+&lt;/style>
+
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">NHN Entertainment. Frontend Development Lab</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

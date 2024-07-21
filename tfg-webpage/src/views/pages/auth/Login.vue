@@ -45,6 +45,11 @@
 </template>
 
 <script setup>
+/**
+ * @module Auth/Login
+ * @description Login view for email and password input and login
+ * @autor Mario Rodrigo Marcos @MariooRM on GitHub
+ */
     import AppConfig from '@/layout/AppConfig.vue';
     import { useLayout } from '@/layout/composables/layout';
 
@@ -67,6 +72,10 @@
         password: ''
     })
 
+    /**
+     * @event onMounted
+     * @description Initializes the email value if it comes from the register view
+     */
     onMounted(() => {
         const route = router.currentRoute.value;
         if (route.query.email) {
@@ -78,6 +87,11 @@
         return layoutConfig.darkTheme.value ? 'white' : 'black';
     });
 
+    /**
+     * @event handleEventKey
+     * @description Handles the keydown event for the form
+     * @param {KeyboardEvent} event
+     */
     function handleEventKey(event) {
         if (event.key === 'Enter') {
             const signInButton = document.getElementById('signInButton');
@@ -87,35 +101,50 @@
         }
     }
 
-    async function login() {
-    if (!makeComprobations()) {
-        return;
-    } else {
-        authStore.login(email.value, password.value)
-            .then((logged) => { 
-                if (logged) {
-                    console.log("Logged in successfully");
-                    showToast('info', 'Successfully logged in!');
-                    setTimeout(() => {
-                        router.push('/home/dashboard');
-                    }, 2000);
-                } else {
-                    showToast('error', 'Wrong email or password, please try again');
-                }
-            })
-            .catch((error) => {
-                console.error("Error during login:", error);
-                showToast('error', 'An error occurred during login. Please try again later.');
-            });
+    /**
+     * @event login
+     * @description Logs in the user
+     */
+    async function login() 
+    {
+        if (!makeComprobations()) {
+            return;
+        } 
+        else {
+            authStore.login(email.value, password.value)
+                .then((logged) => { 
+                    if (logged) {
+                        console.log("Logged in successfully");
+                        showToast('info', 'Successfully logged in!');
+                        setTimeout(() => {
+                            router.push('/home/dashboard');
+                        }, 2000);
+                    } else {
+                        showToast('error', 'Wrong email or password, please try again');
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error during login:", error);
+                    showToast('error', 'An error occurred during login. Please try again later.');
+                });
+        }
     }
-}
 
-
+    /**
+     * @event goBack
+     * @description Returns to the landing page
+     */
     function goBack()
     {
         router.push("/");
     }
 
+    /**
+     * @event showToast
+     * @description Shows a toast notification
+     * @param {string} type - Notification type (info, success, error, etc.)
+     * @param {string} message - Notification message
+     */
     function showToast (type, message)
     {
         toast(message, {
@@ -126,6 +155,11 @@
             })
     }
 
+    /**
+     * @event checkEmail
+     * @description Checks if the email is valid
+     * @returns {boolean}
+     */
     function checkEmail()
     {
         const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -142,6 +176,11 @@
         return true;
     }
 
+    /**
+     * @event checkPassword
+     * @description Checks if the password is valid
+     * @returns {boolean}
+     */
     function checkPassword()
     {
         if (!password.value)
@@ -153,10 +192,13 @@
         return true;
     }
 
+    /**
+     * @event makeComprobations
+     * @description Makes all the comprobations for the login
+     * @returns {boolean}
+     */
     function makeComprobations()
     {
-
-        
 
         if (!checkEmail() || !checkPassword())
         {

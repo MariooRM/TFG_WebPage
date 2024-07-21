@@ -135,6 +135,11 @@
 </template>
 
 <script setup>
+/**
+ * @module Home/Profile
+ * @description Profile page where the user can see and modify their personal information and profile image, as well as delete their account
+ * @author Mario Rodrigo Marcos @MariooRM on GitHub
+ */
 import { ref, watch, onMounted } from 'vue';
 import { useUserInfoStore, useAuthStore } from '@/stores';
 import { useConfirm } from 'primevue/useconfirm';
@@ -184,7 +189,10 @@ let usernameIsValid = ref(false);
 let nameIsValid = ref(false);
 let currentPasswordIsValid = ref(false);
 
-
+/**
+ * @event onMounted
+ * @description Initializes the original values of the user's personal information
+ */
 onMounted(() => {
   originalUsername.value = username.value;
   originalEmail.value = email.value;
@@ -206,6 +214,11 @@ watch(deletePassword, (newDeletePassword) => {
 
 // Functions related to the profile image
 
+/**
+ * @event onFileChange
+ * @description Updates the user's profile image when a new image is selected
+ * @param event 
+ */
 function onFileChange(event) {
   const file = event.target.files[0];
   if (file) {
@@ -213,6 +226,10 @@ function onFileChange(event) {
   }
 }
 
+/**
+ * @event openFileInput
+ * @description Opens the file input dialog to select a new profile image
+ */
 function openFileInput() {
   const fileInput = document.querySelector('input[type="file"]');
   if (fileInput) {
@@ -222,6 +239,10 @@ function openFileInput() {
 
 
 // Functions related to the personal info
+/**
+ * @event makeComprobations
+ * @description Checks if the new personal information is valid and shows a confirmation dialog
+ */
 async function makeComprobations() {
   let allValid = true;
 
@@ -238,6 +259,11 @@ async function makeComprobations() {
     showConfirmDialog();
   }
 }
+
+/**
+ * @event savePersonalInfo
+ * @description Saves the new personal information in Firestore
+ */
 async function savePersonalInfo() {
   loading.value = true;
   await userInfoStore.updatePersonalInfo(name.value, surname.value);
@@ -249,6 +275,10 @@ async function savePersonalInfo() {
 
 
 // Functions related to the dialogs
+/**
+ * @event showConfirmDialog
+ * @description Shows a confirmation dialog to save the changes
+ */
 function showConfirmDialog() {
   confirm.require({
     group: 'saveChanges',
@@ -259,6 +289,10 @@ function showConfirmDialog() {
   });
 }
 
+/**
+ * @event showDeleteAccountDialog
+ * @description Shows a confirmation dialog to delete the account
+ */
 function showDeleteAccountDialog() {
   confirm.require({
     group: 'deleteAccount',
@@ -269,6 +303,11 @@ function showDeleteAccountDialog() {
   });
 }
 
+/**
+ * @event showModificationDialog
+ * @description Shows the dialog to modify the username or password
+ * @param field 
+ */
 function showModificationDialog(field) {
  
   if (field == 'username')
@@ -281,6 +320,10 @@ function showModificationDialog(field) {
   } 
 }
 
+/**
+ * @event OnDialogHide
+ * @description Hides the dialog and resets the error messages
+ */
 function OnDialogHide()
 {
   usernameVisible.value = false;
@@ -297,6 +340,10 @@ function OnDialogHide()
 
 
 // Functions to validate and update the username and password
+/**
+ * @event checkNewUsername
+ * @description Checks if the new username is valid and updates it in Firestore
+ */
 async function checkNewUsername()
 {
   if (usernameToModify.value != originalUsername.value) {
@@ -315,6 +362,10 @@ async function checkNewUsername()
   }
   }
 
+/**
+ * @event checkPasswordInputs
+ * @description Checks if the new password is valid and updates it in Firestore
+ */
 async function checkPasswordInputs()
 {
   // We first check if the current password is correct
@@ -342,6 +393,10 @@ async function checkPasswordInputs()
   }
 }
 
+/**
+ * @event checkPasswordAndConfirmPassword
+ * @description Checks if the new password and the confirmation password are valid
+ */
 function checkPasswordAndConfirmPassword()
 {
   const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
@@ -369,11 +424,21 @@ function checkPasswordAndConfirmPassword()
 
 // Function to delete the account
 
+/**
+ * @event deleteUserAccount
+ * @description Deletes the user's account from Firestore
+ */
 async function deleteUserAccount()
 {
   await authStore.deleteUserAccount(email.value, deletePassword.value);
 }
 
+/**
+ * @event showToast
+ * @description Shows a toast message
+ * @param type 
+ * @param message 
+ */
 function showToast (type, message)
 {
     toast(message, {

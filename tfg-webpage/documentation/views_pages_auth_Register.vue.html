@@ -1,0 +1,391 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Source: views/pages/auth/Register.vue | Source: views/pages/auth/Register.vue</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/tui-doc.css">
+
+    
+</head>
+<body>
+<nav class="lnb" id="lnb">
+    <div class="logo" style="">
+        
+            <img src="img/toast-ui.png" width="100%" height="100%">
+        
+    </div>
+    <div class="title">
+        <h1><a href="index.html" class="link">Source: views/pages/auth/Register.vue</a></h1>
+        
+    </div>
+    <div class="search-container" id="search-container">
+        <input type="text" placeholder="Search">
+        <ul></ul>
+    </div>
+    
+    <div class="lnb-api hidden"><h3>Modules</h3><ul><li><a href="module-Auth_ForgotPassword.html">Auth/ForgotPassword</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Auth/ForgotPassword_sub"><div class="member-type">Events</div><ul class="inner"><li><a href="module-Auth_Register.html#~event:goBack">goBack</a></li><li><a href="module-Auth_Register.html#~event:handleEventKey">handleEventKey</a></li><li><a href="module-Auth_ForgotPassword.html#~event:sendRecoveryEmail">sendRecoveryEmail</a></li><li><a href="module-Home_Profile.html#~event:showToast">showToast</a></li></ul></div></li><li><a href="module-Auth_Login.html">Auth/Login</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Auth/Login_sub"><div class="member-type">Events</div><ul class="inner"><li><a href="module-Auth_Login.html#~event:checkEmail">checkEmail</a></li><li><a href="module-Auth_Login.html#~event:checkPassword">checkPassword</a></li><li><a href="module-Auth_Register.html#~event:goBack">goBack</a></li><li><a href="module-Auth_Register.html#~event:handleEventKey">handleEventKey</a></li><li><a href="module-Auth_Login.html#~event:login">login</a></li><li><a href="module-Home_Profile.html#~event:makeComprobations">makeComprobations</a></li><li><a href="module-Home_Profile.html#~event:onMounted">onMounted</a></li><li><a href="module-Home_Profile.html#~event:showToast">showToast</a></li></ul></div></li><li><a href="module-Auth_RecoveryPassword.html">Auth/RecoveryPassword</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Auth/RecoveryPassword_sub"><div class="member-type">Events</div><ul class="inner"><li><a href="module-Auth_Register.html#~event:handleEventKey">handleEventKey</a></li><li><a href="module-Home_Profile.html#~event:onMounted">onMounted</a></li><li><a href="module-Auth_RecoveryPassword.html#~event:resetPassword">resetPassword</a></li><li><a href="module-Home_Profile.html#~event:showToast">showToast</a></li></ul></div></li><li><a href="module-Auth_Register.html">Auth/Register</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Auth/Register_sub"><div class="member-type">Events</div><ul class="inner"><li><a href="module-Home_Profile.html#~event:checkPasswordAndConfirmPassword">checkPasswordAndConfirmPassword</a></li><li><a href="module-Auth_Register.html#~event:goBack">goBack</a></li><li><a href="module-Auth_Register.html#~event:goNext">goNext</a></li><li><a href="module-Auth_Register.html#~event:handleEventKey">handleEventKey</a></li><li><a href="module-Home_Profile.html#~event:showToast">showToast</a></li></ul></div></li><li><a href="module-Components_TabMenuComponent.html">Components/TabMenuComponent</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Components/TabMenuComponent_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-Components_TabMenuComponent.html#~activeIndex">activeIndex</a></li></ul></div></li><li><a href="module-Home_Dashboard.html">Home/Dashboard</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Home/Dashboard_sub"></div></li><li><a href="module-Home_GameDetails.html">Home/GameDetails</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Home/GameDetails_sub"><div class="member-type">Events</div><ul class="inner"><li><a href="module-Home_Profile.html#~event:onMounted">onMounted</a></li></ul></div></li><li><a href="module-Home_Profile.html">Home/Profile</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Home/Profile_sub"><div class="member-type">Events</div><ul class="inner"><li><a href="module-Home_Profile.html#~event:OnDialogHide">OnDialogHide</a></li><li><a href="module-Home_Profile.html#~event:checkNewUsername">checkNewUsername</a></li><li><a href="module-Home_Profile.html#~event:checkPasswordAndConfirmPassword">checkPasswordAndConfirmPassword</a></li><li><a href="module-Home_Profile.html#~event:checkPasswordInputs">checkPasswordInputs</a></li><li><a href="module-Home_Profile.html#~event:deleteUserAccount">deleteUserAccount</a></li><li><a href="module-Home_Profile.html#~event:makeComprobations">makeComprobations</a></li><li><a href="module-Home_Profile.html#~event:onFileChange">onFileChange</a></li><li><a href="module-Home_Profile.html#~event:onMounted">onMounted</a></li><li><a href="module-Home_Profile.html#~event:openFileInput">openFileInput</a></li><li><a href="module-Home_Profile.html#~event:savePersonalInfo">savePersonalInfo</a></li><li><a href="module-Home_Profile.html#~event:showConfirmDialog">showConfirmDialog</a></li><li><a href="module-Home_Profile.html#~event:showDeleteAccountDialog">showDeleteAccountDialog</a></li><li><a href="module-Home_Profile.html#~event:showModificationDialog">showModificationDialog</a></li><li><a href="module-Home_Profile.html#~event:showToast">showToast</a></li></ul></div></li><li><a href="module-Home_Stats.html">Home/Stats</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Home/Stats_sub"><div class="member-type">Members</div><ul class="inner"><li><a href="module-Home_Stats.html#~chartOptions">chartOptions</a></li><li><a href="module-Home_Stats.html#~collectiblesChartData">collectiblesChartData</a></li><li><a href="module-Home_Stats.html#~deathsChartData">deathsChartData</a></li><li><a href="module-Home_Stats.html#~headshotsChartData">headshotsChartData</a></li><li><a href="module-Home_Stats.html#~kdChartData">kdChartData</a></li><li><a href="module-Home_Stats.html#~killsChartData">killsChartData</a></li><li><a href="module-Home_Stats.html#~memoriesChartData">memoriesChartData</a></li></ul><div class="member-type">Events</div><ul class="inner"><li><a href="module-Home_Stats.html#~event:goToGameDetails">goToGameDetails</a></li><li><a href="module-Home_Stats.html#~event:setChartOptions">setChartOptions</a></li><li><a href="module-Home_Stats.html#~event:setCollectiblesChartData">setCollectiblesChartData</a></li><li><a href="module-Home_Stats.html#~event:setDeathsChartData">setDeathsChartData</a></li><li><a href="module-Home_Stats.html#~event:setHeadshotsChartData">setHeadshotsChartData</a></li><li><a href="module-Home_Stats.html#~event:setKDChartData">setKDChartData</a></li><li><a href="module-Home_Stats.html#~event:setKillsChartData">setKillsChartData</a></li><li><a href="module-Home_Stats.html#~event:setMemoriesChartData">setMemoriesChartData</a></li></ul></div></li><li><a href="module-Leaderboard_Collectibles.html">Leaderboard/Collectibles</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/Collectibles_sub"></div></li><li><a href="module-Leaderboard_Deaths.html">Leaderboard/Deaths</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/Deaths_sub"></div></li><li><a href="module-Leaderboard_Headshots.html">Leaderboard/Headshots</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/Headshots_sub"></div></li><li><a href="module-Leaderboard_KD.html">Leaderboard/KD</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/KD_sub"></div></li><li><a href="module-Leaderboard_Kills.html">Leaderboard/Kills</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/Kills_sub"></div></li><li><a href="module-Leaderboard_Memories.html">Leaderboard/Memories</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/Memories_sub"></div></li><li><a href="module-Leaderboard_PlayedTime.html">Leaderboard/PlayedTime</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Leaderboard/PlayedTime_sub"></div></li><li><a href="module-Stores_AuthStore.html">Stores/AuthStore</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Stores/AuthStore_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Stores_AuthStore.html#~changePassword">changePassword</a></li><li><a href="module-Stores_AuthStore.html#~checkCurrentPassword">checkCurrentPassword</a></li><li><a href="module-Stores_AuthStore.html#~deleteUser">deleteUser</a></li><li><a href="module-Stores_AuthStore.html#~deleteUserSubCollections">deleteUserSubCollections</a></li><li><a href="module-Stores_AuthStore.html#~initAuth">initAuth</a></li><li><a href="module-Stores_AuthStore.html#~login">login</a></li><li><a href="module-Stores_AuthStore.html#~logout">logout</a></li><li><a href="module-Stores_AuthStore.html#~register">register</a></li><li><a href="module-Stores_AuthStore.html#~resetPassword">resetPassword</a></li><li><a href="module-Stores_AuthStore.html#~sendEmail">sendEmail</a></li><li><a href="module-Stores_AuthStore.html#~sendRecoveryEmail">sendRecoveryEmail</a></li><li><a href="module-Stores_AuthStore.html#~showToast">showToast</a></li></ul><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-Stores_AuthStore.html#~UserAuthState">UserAuthState</a></li></ul></div></li><li><a href="module-Stores_StatsStore.html">Stores/StatsStore</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Stores/StatsStore_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Stores_StatsStore.html#~clearData">clearData</a></li><li><a href="module-Stores_StatsStore.html#~fetchUserGamesDocs">fetchUserGamesDocs</a></li></ul><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-Stores_StatsStore.html#~UserStatsState">UserStatsState</a></li></ul></div></li><li><a href="module-Stores_UserInfoStore.html">Stores/UserInfoStore</a><button type="button" class="hidden toggle-subnav btn btn-link">  <span class="glyphicon glyphicon-plus"></span></button><div class="hidden" id="module:Stores/UserInfoStore_sub"><div class="member-type">Methods</div><ul class="inner"><li><a href="module-Stores_UserInfoStore.html#~checkConfirmPassword">checkConfirmPassword</a></li><li><a href="module-Stores_UserInfoStore.html#~checkEmail">checkEmail</a></li><li><a href="module-Stores_UserInfoStore.html#~checkName">checkName</a></li><li><a href="module-Stores_UserInfoStore.html#~checkPassword">checkPassword</a></li><li><a href="module-Stores_UserInfoStore.html#~checkUsername">checkUsername</a></li><li><a href="module-Stores_UserInfoStore.html#~clearData">clearData</a></li><li><a href="module-Stores_UserInfoStore.html#~emailExists">emailExists</a></li><li><a href="module-Stores_UserInfoStore.html#~getUserInfo">getUserInfo</a></li><li><a href="module-Stores_UserInfoStore.html#~updateEmail">updateEmail</a></li><li><a href="module-Stores_UserInfoStore.html#~updatePersonalInfo">updatePersonalInfo</a></li><li><a href="module-Stores_UserInfoStore.html#~updateProfileImg">updateProfileImg</a></li><li><a href="module-Stores_UserInfoStore.html#~updateUsername">updateUsername</a></li><li><a href="module-Stores_UserInfoStore.html#~usernameExists">usernameExists</a></li></ul><div class="member-type">Typedef</div><ul class="inner"><li><a href="module-Stores_UserInfoStore.html#~UserInfoState">UserInfoState</a></li></ul></div></li></ul></div>
+</nav>
+<div id="resizer"></div>
+
+<div class="main" id="main">
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+&lt;template>
+    &lt;div class="surface-ground flex align-items-center justify-content-center min-h-screen min-w-screen overflow-hidden">
+        &lt;div class="flex flex-column align-items-center justify-content-center">
+            &lt;div style="border-radius: 53px; padding: 0.3rem; background: linear-gradient(180deg, black 10%, rgba(33, 150, 243, 0) 30%)">
+                &lt;div class="w-full surface-card pb-8 pt-4 px-5 sm:px-8" style="border-radius: 53px;">
+                    &lt;div class="text-center mb-5">
+                        &lt;img src="../../../assets/images/Logo02.png" alt="EM logo" class="mb-5 w-20rem flex-shrink-0"/>
+
+                        &lt;!-- &lt;Avatar icon="pi pi-user" size="large" shape="circle" class="mb-3" /> -->
+                        &lt;div class="text-900 text-3xl font-medium mb-3">Welcome!&lt;/div>
+                        &lt;span class="text-600 font-medium text-xl">Sign up to continue&lt;/span>
+                    &lt;/div>
+
+                    &lt;div class="register-form" @keydown.enter="handleEventKey">
+                        &lt;form autocomplete="new-password">
+                            &lt;div class="input-fields-1" v-if="showFields1">
+                            &lt;label for="name" class="block text-900 text-xl font-medium mb-2">Name&lt;/label>
+                            &lt;div>
+                                &lt;InputText id="name" v-model="name" type="text" placeholder="Name" class="w-full md:w-30rem text-lg font-medium" style="padding: 1rem"/>
+                                &lt;span v-if="errorMessages.name" class="error-message text-red-500 block mt-2 text-lg">{{ errorMessages.name }}&lt;/span>
+                            &lt;/div>
+                            
+                            &lt;label for="surname" class="block text-900 text-xl font-medium mb-2 mt-5">Surname&lt;/label>
+                            &lt;div>
+                                &lt;InputText id="surname" v-model="surname" type="text" placeholder="Surname" class="w-full md:w-30rem text-lg font-medium" style="padding: 1rem"/>
+                            &lt;/div>
+                            
+                            &lt;/div>
+                            &lt;div class="input-fields-2" v-if="showFields2">
+                                &lt;label for="email" class="block text-900 text-xl font-medium mb-2">Email&lt;/label>
+                                &lt;div>
+                                    &lt;InputText id="email" v-model="email" type="text" placeholder="Email" class="w-full md:w-30rem text-lg font-medium" style="padding: 1rem"/>
+                                    &lt;span v-if="errorMessages.email" class="error-message text-red-500 block mt-2 text-lg">{{ errorMessages.email }}&lt;/span>
+                                &lt;/div>
+                                
+                                &lt;label for="username" class="block text-900 text-xl font-medium mb-2 mt-5">Username&lt;/label>
+                                &lt;div>
+                                    &lt;InputText id="username" v-model="username" type="text" placeholder="Username" class="w-full md:w-30rem text-lg font-medium" style="padding: 1rem"/>
+                                    &lt;span v-if="errorMessages.username" class="error-message text-red-500 block mt-2 text-lg">{{ errorMessages.username }}&lt;/span>
+                                &lt;/div>
+                                
+                            &lt;/div>
+                            &lt;div class="input-fields-3" v-if="showFields3">
+                                &lt;label for="password" class="block text-900 font-medium text-xl mb-2">Password&lt;/label>
+                                &lt;div>
+                                    &lt;Password id="password" v-model="password" v-tooltip.right="'At least 8 characters, \none lowercase,\n one uppercase and one number'" :feedback="false" placeholder="Password" :toggleMask="true" class="w-full md:w-30rem text-lg font-medium" inputClass="w-full text-lg" :inputStyle="{ padding: '1rem' }">&lt;/Password>
+                                    &lt;span v-if="errorMessages.password" class="error-message text-red-500 block mt-2 text-lg">{{ errorMessages.password }}&lt;/span>
+                                &lt;/div>
+                            
+                            &lt;label for="confirmPassword" class="block text-900 font-medium text-xl mb-2 mt-5">Confirm password&lt;/label>
+                            &lt;div>
+                                &lt;Password id="confirmPassword" v-model="confirmPassword" :feedback="false" placeholder="Confirm password" :toggleMask="true" class="w-full md:w-30rem text-lg font-medium" inputClass="w-full text-lg" :inputStyle="{ padding: '1rem' }">&lt;/Password>
+                                &lt;span v-if="errorMessages.confirmPassword" class="error-message text-red-500 block mt-2 text-lg">{{ errorMessages.confirmPassword }}&lt;/span>
+                            &lt;/div>
+                            
+                            &lt;/div>
+                        &lt;/form>
+                        
+                        
+                        
+                        &lt;div class="flex align-items-center justify-content-between mb-3 gap-5">
+                            
+                        &lt;/div>
+                        &lt;div class="flex align-items-center justify-content-center">
+                            &lt;a class="font-medium no-underline ml-2 mb-2 text-center cursor-pointer mt-3 font-bold text-lg" style="color: lightslategray" onclick="window.location.href='/auth/login'">Already have an account? Sign in&lt;/a>
+                        &lt;/div>
+                        &lt;Button id="nextButton" :label="firstButton" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor, marginBottom: '5px', marginTop: '10px' }" @click="goNext">&lt;/Button>
+                        &lt;Button v-if="showButton" label="Back" class="w-full p-3 text-xl" :style="{ backgroundColor: bgColor }" @click="goBack">&lt;/Button> 
+                    &lt;/div>
+                &lt;/div>
+            &lt;/div>
+        &lt;/div>
+    &lt;/div>
+    &lt;AppConfig simple />
+&lt;/template>
+
+&lt;script setup>
+/**
+ * @module Auth/Register
+ * @description Register view for user registration
+ * @autor Mario Rodrigo Marcos @MariooRM on GitHub
+ */
+    import { useLayout } from '@/layout/composables/layout';
+    import AppConfig from '@/layout/AppConfig.vue';
+    
+    import { ref, computed } from 'vue';
+    import { useRouter } from 'vue-router';
+
+    import { toast } from 'vue3-toastify';
+    import 'vue3-toastify/dist/index.css';
+
+    import { useAuthStore } from '@/stores';
+    import { useUserInfoStore } from '@/stores';
+
+    const { layoutConfig } = useLayout();
+    const autStore = useAuthStore();
+    const userInfoStore = useUserInfoStore();
+
+    const firstButton = ref('Next');
+    const showButton = ref(false);
+    const showFields1 = ref(true);
+    const showFields2 = ref(false);
+    const showFields3 = ref(false);
+    const phase = ref(1);
+
+    const name = ref('');
+    const surname = ref('');
+    const email = ref('');
+    const username = ref('');
+    const password = ref('');
+    const confirmPassword = ref('');
+
+    const usernameValid = ref(false);
+    const emailValid = ref(false);
+    const nameValid = ref(false);
+
+    const errorMessages = ref({
+        name: '',
+        email: '',
+        username: '',
+        password: '',
+        confirmPassword: ''
+    });
+
+    const router = useRouter();
+
+    const bgColor = computed(() => {
+        return layoutConfig.darkTheme.value ? 'white' : 'black';
+    });
+
+    /**
+     * @event handleEventKey
+     * @description Handles the keydown event for the form
+     * @param {KeyboardEvent} event
+     */
+    function handleEventKey(event) {
+        if (event.key === 'Enter') {
+            const nextButton = document.getElementById('nextButton');
+            if (nextButton) {
+                nextButton.click();
+            }
+        }
+    }
+
+    /**
+     * @event goBack
+     * @description Goes back to the previous registration phase
+     */
+    function goBack()
+    {
+        if (phase.value == 1)
+        {
+            showButton.value = false;
+            router.push('/auth/login');
+        }
+        else if (phase.value == 2)
+        {
+            showButton.value = false;
+            showFields1.value = true;
+            showFields2.value = false;
+            phase.value = 1;
+        }
+        else if (phase.value == 3)
+        {
+            firstButton.value = 'Next';
+            showFields2.value = true;
+            showFields3.value = false;
+            phase.value = 2;
+        }
+    }
+
+    /**
+     * @event goNext
+     * @description Goes to the next registration phase
+     */
+    async function goNext()
+    {
+        if (phase.value == 1) // Name comprobation
+        {
+            [errorMessages.value.name, nameValid.value] = userInfoStore.checkName(name.value);
+
+            if (!nameValid.value){
+                return;
+            }
+            else
+            {
+                showButton.value = true;
+                phase.value = 2;
+                showFields1.value = false;
+                showFields2.value = true;
+            }
+            
+        }
+        else if (phase.value == 2) // Username and email comprobation
+        {
+            [errorMessages.value.email, emailValid.value] = await userInfoStore.checkEmail(email.value);
+          
+            if (!emailValid.value)
+            {
+                return;
+            }
+            
+            [errorMessages.value.username, usernameValid.value] = await userInfoStore.checkUsername(username.value);
+            if (!usernameValid.value)
+            {
+                return;
+            }
+            else
+            {
+                phase.value = 3;
+                showFields2.value = false;
+                showFields3.value = true;
+                firstButton.value = 'Register';
+            }
+        }
+        else if (phase.value == 3)
+        {
+            if (!checkPasswordAndConfirmPassword())
+            {
+                return;
+            }
+            else
+            {
+                try
+                {
+                    const {userCredential, userData} = await autStore.register(name.value, surname.value, email.value, username.value, password.value);
+                    await autStore.sendEmail(userCredential, userData, email.value);
+                }
+                catch(error)
+                {
+                    showToast('error', error.message);
+                }
+            }
+        }
+    }
+
+    /**
+     * @event showToast
+     * @description Shows a toast notification
+     * @param {string} type - Notification type (info, success, error, etc.)
+     * @param {string} message - Notification message
+     */
+    function showToast (type, message)
+    {
+        toast(message, {
+            "theme": "colored",
+            "type": type,
+            "autoClose": 2000,
+            "dangerouslyHTMLString": true
+            })
+    }
+
+    /**
+     * @event checkPasswordAndConfirmPassword
+     * @description Checks if the password and confirm password fields are valid
+     * @returns {boolean}
+     */
+    function checkPasswordAndConfirmPassword()
+    {
+        const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/;
+        if (!password.value || !passwordRegex.test(password.value))
+        {
+            errorMessages.value.password = 'You must provide a valid password';
+            return false;
+        }
+        else errorMessages.value.password = '';
+
+        if (!confirmPassword.value)
+        {
+            errorMessages.value.confirmPassword = 'Password confirmation is needed';
+            return false; 
+        }
+        else if (password.value != confirmPassword.value)
+        {
+            errorMessages.value.confirmPassword = 'Passwords do not match';
+            return false;
+        }
+        else errorMessages.value.confirmPassword = '';
+        
+        return true;
+    }
+
+&lt;/script>
+&lt;style scoped>
+
+.pi-eye {
+    transform: scale(1.6);
+    margin-right: 1rem;
+}
+
+.pi-eye-slash {
+    transform: scale(1.6);
+    margin-right: 1rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    margin-left: 20px;
+    margin-right: 10px;
+  }
+
+.error-message {
+    font-size: .9em;
+}
+
+.surface-ground {
+    background: linear-gradient(to bottom, #f0f0f0, #d9d9d9);
+}
+&lt;/style>
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<footer>
+    <img class="logo" src="img/toast-ui.png" style="">
+    <div class="footer-text">NHN Entertainment. Frontend Development Lab</div>
+</footer>
+<script>prettyPrint();</script>
+<script src="scripts/jquery.min.js"></script>
+<script src="scripts/tui-doc.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+    <script>
+        var id = '_sub'.replace(/"/g, '_');
+        var selectedApi = document.getElementById(id); // do not use jquery selector
+        var $selectedApi = $(selectedApi);
+
+        $selectedApi.removeClass('hidden');
+        $selectedApi.parent().find('.glyphicon').removeClass('glyphicon-plus').addClass('glyphicon-minus');
+        showLnbApi();
+    </script>
+
+</body>
+</html>

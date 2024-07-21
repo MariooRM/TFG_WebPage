@@ -1,4 +1,9 @@
 <script setup>
+/**
+ * @module Home/Dashboard
+ * @description Dashboard view for the home page
+ * @author Mario Rodrigo Marcos @MariooRM on GitHub
+ */
 import { onMounted, reactive, ref, watch } from 'vue';
 import { ProductService } from '@/service/ProductService';
 import { useLayout } from '@/layout/composables/layout';

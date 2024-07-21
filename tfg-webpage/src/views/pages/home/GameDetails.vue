@@ -111,15 +111,16 @@
               <span class="text-green-500 text-xl">since last visit</span>
           </div>
       </div>
-
-      
   </div>
-
-
 </template>
   
   
 <script setup>
+/**
+ * @module Home/GameDetails
+ * @description This component shows the details of the selected game slot.
+ * 
+ */
   import { ref, onMounted, watch } from 'vue';
   import { useStatsStore, useAuthStore } from '@/stores';
   import { useRouter } from 'vue-router';
@@ -133,6 +134,10 @@
   const kd = ref('');
 
 
+  /**
+   * @event onMounted
+   * @description This event is triggered when the component is mounted.
+   */
   onMounted(() => {
     if (route.query.gameSlot) {
       gameSlot.value = parseInt(decodeURIComponent(route.query.gameSlot.toString()));

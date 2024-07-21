@@ -1,0 +1,36 @@
+{
+  "tags": {
+    "allowUnknownTags": true,
+    "dictionaries": ["jsdoc"]
+  },
+  "source": {
+    "include": ["src"],
+    "includePattern": "\\.(vue|js)$",  
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "plugins": [
+    "plugins/markdown",
+    "node_modules/jsdoc-vuejs"  
+  ],
+  "templates": {
+    "cleverLinks": false,
+    "monospaceLinks": false,
+    "default": {
+      "outputSourceFiles": true
+    },
+    "path": "node_modules/tui-jsdoc-template",  
+    "theme": "default",
+    "navType": "vertical",
+    "linenums": true,
+    "collapseSymbols": false,
+    "inverseNav": false,
+    "outputSourceFiles": true,
+    "outputSourcePath": true
+  },
+  "opts": {
+    "encoding": "utf8",
+    "destination": "./documentation/",
+    "recurse": true,
+    "template": "node_modules/tui-jsdoc-template"  
+  }
+}
