@@ -1,8 +1,11 @@
 # Erased Memories Web Page
  This os the web page from the Erased Memories game.
 
+<<<<<<< HEAD
  ![Erased Memories logo](tfg-webpage/src/assets/images/Logo02.png)
 
+=======
+>>>>>>> 81f616d696a4de5fb22a77a2996840b230fec686
  ### Install dependencies
  To install dependencies, run:
  ```bash
@@ -14,6 +17,7 @@
 ```bash
  npm run dev
  ```
+<<<<<<< HEAD
 
 ### Build
  To build the project, which is needed for firebase hosting, run:
@@ -26,3 +30,5 @@
  ```bash
  firebase deploy
  ```
+=======
+>>>>>>> 81f616d696a4de5fb22a77a2996840b230fec686
