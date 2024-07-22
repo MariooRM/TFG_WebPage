@@ -21,6 +21,7 @@ const smoothScroll = (id) => {
 const showTopBar = ref(false);
 const showNavBar = ref(false);
 
+
 function toggleTopBar() {
     showTopBar.value = !showTopBar.value;
 }
@@ -130,8 +131,13 @@ async function logout() {
                     <h1 class="text-6xl font-bold text-black line-height-2">Recover from the shadows of your mind...</h1>
                     <p class="font-normal text-2xl line-height-3 md:mt-3 text-gray-800">You have woken up but your mind is... different. <br> It feels like your thoughts and memories have been stolen or even <strong>erased</strong></p>
                     <br>
-                    <Button label="PLAY NOW FOR FREE!" :style="{ 'background-color': 'black', 'margin-left': 'irem' }" class="p-button-rounded text-xl border-none mt-5 bg-black font-normal text-white line-height-3 px-3 md:ml-0"></Button>
-                    </div>
+                    <a href="https://marioorm.itch.io/erased-memories-demo" target="_blank" rel="noopener noreferrer">
+                        <Button 
+                            label="PLAY NOW FOR FREE!" 
+                            :style="{ 'background-color': 'black', 'margin-left': '1rem' }" 
+                            class="p-button-rounded text-xl border-none mt-5 bg-black font-normal text-white line-height-3 px-3 md:ml-0" 
+                        />
+                        </a>                    </div>
                 </div>
                     <div class="flex md:flex-row flex-column justify-content-center">
                         <div class="hidden md:flex" style="width: 700px; height: 400px; border: 5px solid black; margin-top: 100px">
