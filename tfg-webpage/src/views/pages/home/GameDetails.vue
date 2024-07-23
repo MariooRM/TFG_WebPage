@@ -69,7 +69,7 @@
               <div class="flex justify-content-between mb-3">
                   <div>
                       <span class="block text-500 font-medium mb-3 text-3xl">K/D</span>
-                      <div class="text-900 font-medium text-2xl">{{ statsStore.gamesData[gameSlot]?.["k/d"] }}</div>
+                      <div class="text-900 font-medium text-2xl">{{ statsStore.gamesData[gameSlot]?.["kd"] }}</div>
                   </div>
                   <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
                     <img alt="dropdown icon" src="/src/assets/images/icons/kd-icon.png" style="width: 40px;">
@@ -141,7 +141,7 @@
   onMounted(() => {
     if (route.query.gameSlot) {
       gameSlot.value = parseInt(decodeURIComponent(route.query.gameSlot.toString()));
-      kd.value = statsStore.gamesData[gameSlot.value]?.["k/d"];
+      kd.value = statsStore.gamesData[gameSlot.value]?.["kd"];
     }
     statsStore.fetchUserGamesDocs(authStore.userUID);
   });
@@ -149,11 +149,11 @@
  
   watch(() => route.query.gameSlot, (newGameSlot) => {
      gameSlot.value = newGameSlot;
-     kd.value = statsStore.gamesData[gameSlot.value]?.["k/d"];
+     kd.value = statsStore.gamesData[gameSlot.value]?.["kd"];
  });
 
  watch(() => statsStore.gamesData, (newGamesData) => {
-     kd.value = statsStore.gamesData[gameSlot.value]?.["k/d"];
+     kd.value = statsStore.gamesData[gameSlot.value]?.["kd"];
  });
 
 </script>

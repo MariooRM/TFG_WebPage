@@ -158,7 +158,7 @@ const chartColors = {
 function setKillsChartData() {
   const gamesData = statsStore.gamesData;
 
-  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key) + 1}`);
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)}`);
   const data = Object.values(gamesData).map(game => game["kills"]);
 
   return {
@@ -181,7 +181,7 @@ function setKillsChartData() {
 function setDeathsChartData() {
   const gamesData = statsStore.gamesData;
 
-  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key) + 1}`);
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)}`);
   const data = Object.values(gamesData).map(game => game["deaths"]);
 
   return {
@@ -204,7 +204,7 @@ function setDeathsChartData() {
 function setHeadshotsChartData() {
   const gamesData = statsStore.gamesData;
 
-  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key) + 1}`);
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)}`);
   const data = Object.values(gamesData).map(game => game["headshots"]);
 
   return {
@@ -227,8 +227,8 @@ function setHeadshotsChartData() {
 function setKDChartData() {
   const gamesData = statsStore.gamesData;
 
-  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key) + 1}`);
-  const data = Object.values(gamesData).map(game => game["k/d"]);
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)}`);
+  const data = Object.values(gamesData).map(game => game["kd"]);
 
   return {
     labels,
@@ -250,7 +250,7 @@ function setKDChartData() {
 function setCollectiblesChartData() {
   const gamesData = statsStore.gamesData;
 
-  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key) + 1}`);
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)}`);
   const data = Object.values(gamesData).map(game => game["collectibles"]);
 
   return {
@@ -273,7 +273,7 @@ function setCollectiblesChartData() {
 function setMemoriesChartData() {
   const gamesData = statsStore.gamesData;
 
-  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key) + 1}`);
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)}`);
   const data = Object.values(gamesData).map(game => game["memories"]);
 
   return {
@@ -318,7 +318,7 @@ function setChartOptions() {
 function goToGameDetails(gameSlot)
 {
   console.log(gameSlot, typeof gameSlot);
-  router.push(`/home/game_details?gameSlot=${encodeURIComponent(gameSlot)}`);
+  router.push(`/home/game_details?gameSlot=${encodeURIComponent(gameSlot+1)}`);
 }
 
 

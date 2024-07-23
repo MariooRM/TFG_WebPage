@@ -31,7 +31,8 @@ function toggleNavBar() {
 }
 
 async function logout() {
-    this.toggleTopBar();
+    console.log('toggleTopBar');
+    toggleTopBar();
     await authStore.logout();
 }
 
