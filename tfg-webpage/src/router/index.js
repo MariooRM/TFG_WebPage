@@ -104,6 +104,16 @@ export const router = createRouter({
             name: 'recovery_password',
             component: () => import('@/views/pages/auth/RecoveryPassword.vue')
         },
+        {
+            path: '/auth/redirect',
+            name: 'redirect',
+            component: () => import('@/views/pages/auth/Redirect.vue')
+        },
+        {
+            path: '/auth/verify_email',
+            name: 'verify_email',
+            component: () => import('@/views/pages/auth/VerifyEmail.vue')
+        },
 
         
 

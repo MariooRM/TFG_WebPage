@@ -1,7 +1,7 @@
 
 export const firebaseConfig = {
   apiKey: "AIzaSyCIVCKtuTfDwXs5UsDAET-MvhYvRqOqtAQ",
-  authDomain: "tfg-mariorodrigomarcos.firebaseapp.com",
+  authDomain: "erased-memories.firebaseapp.com",
   projectId: "tfg-mariorodrigomarcos",
   storageBucket: "tfg-mariorodrigomarcos.appspot.com",
   messagingSenderId: "1009482475916",
