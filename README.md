@@ -1,7 +1,7 @@
 # Erased Memories Web Page
  This os the web page from the Erased Memories game.
 
- ![Erased Memories logo](tfg-webpage/src/assets/images/Logo02.png)
+ ![Erased Memories logo](https://firebasestorage.googleapis.com/v0/b/tfg-mariorodrigomarcos.appspot.com/o/Logo02.png?alt=media&token=f7776a9f-9d15-4572-91f1-cc8fb5e34c55)
 
  ### Install dependencies
  To install dependencies, run:

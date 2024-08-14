@@ -142,10 +142,10 @@ async function logout() {
                 </div>
                     <div class="flex md:flex-row flex-column justify-content-center">
                         <div class="hidden md:flex" style="width: 700px; height: 400px; border: 5px solid black; margin-top: 100px">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/_zDZYrIUgKE?si=FftuGB7GEEjFGVeh" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/2twd2fnw7ic?si=R8Tk_iwWlBR2iRN9" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <div class ="md:hidden w-20rem h-15rem" style="width: 700px; height: 400px; border: 5px solid black; margin-top: 100px; margin-left: 45px;">
-                            <iframe style="width: 100%; height: 100%;" src="https://www.youtube.com/embed/_zDZYrIUgKE?si=FftuGB7GEEjFGVeh" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe style="width: 100%; height: 100%;" src="https://www.youtube.com/embed/2twd2fnw7ic?si=R8Tk_iwWlBR2iRN9" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <img src="/src/assets/images/ninja.png" alt="Hero Image" class="w-10 md:w-auto" />
                     </div>

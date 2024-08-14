@@ -63,11 +63,6 @@ export const router = createRouter({
                     component: () => import('@/views/pages/home/leaderboard/KD.vue')
                 },
                 {
-                    path: '/leaderboard/memories',
-                    name: 'memories_leaderboard',
-                    component: () => import('@/views/pages/home/leaderboard/Memories.vue')
-                },
-                {
                     path: '/leaderboard/collectibles',
                     name: 'collectibles_leaderboard',
                     component: () => import('@/views/pages/home/leaderboard/Collectibles.vue')

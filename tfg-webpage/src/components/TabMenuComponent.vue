@@ -21,7 +21,6 @@ import KillsIcon from '@/assets/images/icons/kills-icon.png';
 import DeathsIcon from '@/assets/images/icons/deaths-icon.png';
 import HeadshotsIcon from '@/assets/images/icons/headshots-icon.png';
 import KdIcon from '@/assets/images/icons/kd-icon.png';
-import MemoriesIcon from '@/assets/images/icons/memories-icon.png';
 import CollectiblesIcon from '@/assets/images/icons/collectibles-icon.png';
 
 const router = useRouter();
@@ -34,7 +33,6 @@ const items = ref([
   { label: 'Deaths', icon: DeathsIcon, to: '/leaderboard/deaths' },
   { label: 'Headshots', icon: HeadshotsIcon, to: '/leaderboard/headshots' },
   { label: 'K/D', icon: KdIcon, to: '/leaderboard/kd' },
-  { label: 'Memories', icon: MemoriesIcon, to: '/leaderboard/memories' },
   { label: 'Collectibles', icon: CollectiblesIcon, to: '/collectibles' }
 ]);
 

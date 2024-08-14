@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Source: views/pages/home/Dashboard.vue | Source: views/pages/home/Dashboard.vue</title>
+    <title>Source: components/OverallStatsComponent.vue | Source: components/OverallStatsComponent.vue</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -26,7 +26,7 @@
         
     </div>
     <div class="title">
-        <h1><a href="index.html" class="link">Source: views/pages/home/Dashboard.vue</a></h1>
+        <h1><a href="index.html" class="link">Source: components/OverallStatsComponent.vue</a></h1>
         
     </div>
     <div class="search-container" id="search-container">
@@ -46,89 +46,292 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>&lt;script setup>
-/**
- * @module Home/Dashboard
- * @description Dashboard view for the home page
- * @author Mario Rodrigo Marcos @MariooRM on GitHub
- */
-import { onMounted, reactive, ref, watch } from 'vue';
-import { useUserInfoStore, useAuthStore } from '@/stores';
-import { useRouter } from 'vue-router';
-
-const router = useRouter();
-const userInfoStore = useUserInfoStore();
-
-function goTo(view)
-{
-    router.push(view);
-}
-
-&lt;/script>
-
-&lt;template>
-    &lt;div class="grid">
-        &lt;div class="col-12 lg:col-5 xl:col-4" style="border: 1px solid black;">
-            &lt;div class="card mb-0 flex justify-content-center">
-                &lt;div class="flex flex-column justify-content-center align-items-center" style="overflow: hidden;">
-                    &lt;div class="profile-img-div mb-3" style=" border-radius: 50%; width: 250px; height: 250px; ">
-                        &lt;img :src="userInfoStore.profileImg" alt="ProfileImg" class="profile-img" style="object-fit: cover; border-radius: 50%; width: 100%; height: 100%; " />
-                    &lt;/div>
-                    &lt;span class="block text-black text-4xl mb-5">{{ userInfoStore.username }}&lt;/span>
-                    &lt;Button class="md:w-8 sm:w-8 p-3" style="height: 40px;" @click="goTo('/home/profile')" type="button" label="Go to profile" icon="pi pi-user"/>
-                &lt;/div>
+            <pre class="prettyprint source linenums"><code>&lt;template>
+    &lt;Card class="w-full mb-2">
+        &lt;template #content>
+        &lt;div class="charts-div flex flex-column align-items-center justify-content-center">
+            
+            &lt;div class="first-row flex flex-row mb-7 gap-5 jusitfy-content-center align-items-center">
+            &lt;div class="kills-chart flex flex-column align-items-center">
+                &lt;h3 class="text-xl">Kills&lt;/h3>
+                &lt;Chart id="kills" type="pie" :data="killsChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
             &lt;/div>
+            &lt;div class="deaths-chart flex flex-column align-items-center">
+                &lt;h3 class="text-xl">Deaths&lt;/h3>
+                &lt;Chart id="deaths" type="pie" :data="deathsChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
+            &lt;/div>
+            &lt;/div>
+
+            &lt;div class="second-row flex flex-row mb-7 gap-5 jusitfy-content-center align-items-center">
+            &lt;div class="headshots-chart flex flex-column align-items-center">
+                &lt;h3 class="text-xl">Heashots&lt;/h3>
+                &lt;Chart id="headshots" type="pie" :data="headshotsChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
+            &lt;/div>
+            &lt;div class="kd-chart flex flex-column align-items-center">
+                &lt;h3 class="text-xl">K/D Chart&lt;/h3>
+                &lt;Chart id="kd" type="pie" :data="kdChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
+            &lt;/div>
+            &lt;/div>
+
+            &lt;div class="third-row flex flex-row gap-5 jusitfy-content-center align-items-center">
+            &lt;div class="memories-chart flex flex-column align-items-center">
+                &lt;h3 class="text-xl">Memories&lt;/h3>
+                &lt;Chart id="memories" type="pie" :data="memoriesChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
+            &lt;/div>
+            &lt;div class="collectibles-chart flex flex-column align-items-center">
+                &lt;h3 class="text-xl">Collectibles&lt;/h3>
+                &lt;Chart id="collectibles" type="pie" :data="collectiblesChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
+            &lt;/div>
+            &lt;/div>
+            
+            
         &lt;/div>
-
-        &lt;div class="col-12 lg:col-5 xl:col-8" style="border: 1px solid black;">
-            &lt;Card class="w-full mb-2">
-                &lt;template #content>
-                &lt;div class="charts-div flex flex-column align-items-center justify-content-center">
-                    
-                    &lt;div class="first-row flex flex-row mb-7 gap-5 jusitfy-content-center align-items-center">
-                        &lt;div class="kills-chart flex flex-column align-items-center">
-                            &lt;h3 class="text-xl">Kills&lt;/h3>
-                            &lt;Chart id="kills" type="pie" :data="killsChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
-                        &lt;/div>
-                        &lt;div class="deaths-chart flex flex-column align-items-center">
-                            &lt;h3 class="text-xl">Deaths&lt;/h3>
-                            &lt;Chart id="deaths" type="pie" :data="deathsChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
-                        &lt;/div>
-                        &lt;div class="headshots-chart flex flex-column align-items-center">
-                            &lt;h3 class="text-xl">Heashots&lt;/h3>
-                            &lt;Chart id="headshots" type="pie" :data="headshotsChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
-                        &lt;/div>
-                    &lt;/div>
-
-                    &lt;div class="second-row flex flex-row mb-7 gap-5 jusitfy-content-center align-items-center">
-                        &lt;div class="kd-chart flex flex-column align-items-center">
-                            &lt;h3 class="text-xl">K/D Chart&lt;/h3>
-                            &lt;Chart id="kd" type="pie" :data="kdChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
-                        &lt;/div>
-                        &lt;div class="memories-chart flex flex-column align-items-center">
-                            &lt;h3 class="text-xl">Memories&lt;/h3>
-                            &lt;Chart id="memories" type="pie" :data="memoriesChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
-                        &lt;/div>
-                        &lt;div class="collectibles-chart flex flex-column align-items-center">
-                            &lt;h3 class="text-xl">Collectibles&lt;/h3>
-                            &lt;Chart id="collectibles" type="pie" :data="collectiblesChartData" :options="chartOptions" class="w-10rem md:w-15rem" />
-                        &lt;/div>
-                    &lt;/div>
-
-                &lt;/div>
-                &lt;/template>
-            &lt;/Card>
-        &lt;/div>
-
-        
-    &lt;/div>
+        &lt;/template>
+    &lt;/Card>
 &lt;/template>
 
-&lt;style scoped>
-.grid {
-    background: linear-gradient(to bottom, #f0f0f0, #d9d9d9);
+&lt;script setup>
+/**
+ * User stats view
+ * @module Components/OverallStats
+ */
+import { ref, watch, onMounted, computed } from 'vue';
+import { useRouter } from 'vue-router';
+import { useStatsStore, useAuthStore } from '@/stores';
+
+const router = useRouter();
+const statsStore = useStatsStore();
+const authStore = useAuthStore();
+
+
+onMounted(() => {
+  statsStore.fetchUserGamesDocs(authStore.userUID);
+  killsChartData.value = setKillsChartData();
+  deathsChartData.value = setDeathsChartData();
+  headshotsChartData.value = setHeadshotsChartData();
+  kdChartData.value = setKDChartData();
+  chartOptions.value = setChartOptions();
+  memoriesChartData.value = setMemoriesChartData();
+  collectiblesChartData.value = setCollectiblesChartData();
+});
+
+
+/**
+ * Data for the Kills chart.
+ * @type {ref&lt;Chart.ChartData>}
+ */
+const killsChartData = ref();
+
+/**
+ * Data for the Deaths chart.
+ * @type {ref&lt;Chart.ChartData>}
+ */
+const deathsChartData = ref();
+
+/**
+ * Data for the Headshots chart.
+ * @type {ref&lt;Chart.ChartData>}
+ */
+const headshotsChartData = ref();
+
+/**
+ * Data for the K/D chart.
+ * @type {ref&lt;Chart.ChartData>}
+ */
+const kdChartData = ref();
+
+/**
+ * Data for the Memories chart.
+ * @type {ref&lt;Chart.ChartData>}
+ */
+const memoriesChartData = ref();
+
+/**
+ * Data for the Collectibles chart.
+ * @type {ref&lt;Chart.ChartData>}
+ */
+const collectiblesChartData = ref();
+
+/**
+ * Options for the chart.
+ * @type {ref&lt;Chart.ChartData>}
+ */
+const chartOptions = ref();
+
+const chartColors = {
+  backgroundColor: ['#6C757D', '#17A2B8', '#343A40', '#DC3545', '#6610F2', '#28A745'],
+  hoverBackgroundColor: ['#6C757D', '#17A2B8', '#343A40', '#DC3545', '#6610F2', '#28A745']
+};
+
+/**
+ * @event setKillsChartData
+ * @description Sets the data for the Kills chart.
+ * @returns {Chart.ChartData}
+ */
+function setKillsChartData() {
+  const gamesData = statsStore.gamesData;
+
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)}`);
+  const data = Object.values(gamesData).map(game => game["kills"]);
+
+  return {
+    labels,
+    datasets: [
+      {
+        data,
+        backgroundColor: chartColors.backgroundColor,
+        hoverBackgroundColor: chartColors.hoverBackgroundColor
+      }
+    ]
+  };
 }
-&lt;/style>
+
+/**
+ * @event setDeathsChartData
+ * @description Sets the data for the Deaths chart.
+ * @returns {Chart.ChartData}
+ */
+function setDeathsChartData() {
+  const gamesData = statsStore.gamesData;
+
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)}`);
+  const data = Object.values(gamesData).map(game => game["deaths"]);
+
+  return {
+    labels,
+    datasets: [
+      {
+        data,
+        backgroundColor: chartColors.backgroundColor,
+        hoverBackgroundColor: chartColors.hoverBackgroundColor
+      }
+    ]
+  };
+}
+
+/**
+ * @event setHeadshotsChartData
+ * @description Sets the data for the Headshots chart.
+ * @returns {Chart.ChartData}
+ */
+function setHeadshotsChartData() {
+  const gamesData = statsStore.gamesData;
+
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)}`);
+  const data = Object.values(gamesData).map(game => game["headshots"]);
+
+  return {
+    labels,
+    datasets: [
+      {
+        data,
+        backgroundColor: chartColors.backgroundColor,
+        hoverBackgroundColor: chartColors.hoverBackgroundColor
+      }
+    ]
+  };
+}
+
+/**
+ * @event setKDChartData
+ * @description Sets the data for the K/D chart.
+ * @returns {Chart.ChartData}
+ */
+function setKDChartData() {
+  const gamesData = statsStore.gamesData;
+
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)}`);
+  const data = Object.values(gamesData).map(game => game["kd"]);
+
+  return {
+    labels,
+    datasets: [
+      {
+        data,
+        backgroundColor: chartColors.backgroundColor,
+        hoverBackgroundColor: chartColors.hoverBackgroundColor
+      }
+    ]
+  };
+}
+
+/**
+ * @event setCollectiblesChartData
+ * @description Sets the data for the Collectibles chart.
+ * @returns {Chart.ChartData}
+ */
+function setCollectiblesChartData() {
+  const gamesData = statsStore.gamesData;
+
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)}`);
+  const data = Object.values(gamesData).map(game => game["collectibles"]);
+
+  return {
+    labels,
+    datasets: [
+      {
+        data,
+        backgroundColor: chartColors.backgroundColor,
+        hoverBackgroundColor: chartColors.hoverBackgroundColor
+      }
+    ]
+  };
+}
+
+/**
+ * @event setMemoriesChartData
+ * @description Sets the data for the Memories chart.
+ * @returns {Chart.ChartData}
+ */
+function setMemoriesChartData() {
+  const gamesData = statsStore.gamesData;
+
+  const labels = Object.keys(gamesData).map(key => `Slot ${parseInt(key)}`);
+  const data = Object.values(gamesData).map(game => game["memories"]);
+
+  return {
+    labels,
+    datasets: [
+      {
+        data,
+        backgroundColor: chartColors.backgroundColor,
+        hoverBackgroundColor: chartColors.hoverBackgroundColor
+      }
+    ]
+  };
+}
+
+/**
+ * @event setChartOptions
+ * @description Sets the options for the chart.
+ * @returns {Chart.ChartData}
+ */
+function setChartOptions() {
+  const documentStyle = getComputedStyle(document.documentElement);
+  const textColor = documentStyle.getPropertyValue('--text-color');
+
+  return {
+    plugins: {
+      legend: {
+        labels: {
+          usePointStyle: true,
+          color: textColor
+        }
+      }
+    }
+  };
+}
+
+watch(() => statsStore.gamesData, () => {
+  killsChartData.value = setKillsChartData();
+  deathsChartData.value = setDeathsChartData();
+  headshotsChartData.value = setHeadshotsChartData();
+  kdChartData.value = setKDChartData();
+  memoriesChartData.value = setMemoriesChartData();
+  collectiblesChartData.value = setCollectiblesChartData();
+}, { deep: true });
+
+&lt;/script>
 </code></pre>
         </article>
     </section>
