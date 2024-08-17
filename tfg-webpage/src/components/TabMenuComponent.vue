@@ -33,7 +33,7 @@ const items = ref([
   { label: 'Deaths', icon: DeathsIcon, to: '/leaderboard/deaths' },
   { label: 'Headshots', icon: HeadshotsIcon, to: '/leaderboard/headshots' },
   { label: 'K/D', icon: KdIcon, to: '/leaderboard/kd' },
-  { label: 'Collectibles', icon: CollectiblesIcon, to: '/collectibles' }
+  { label: 'Collectibles', icon: CollectiblesIcon, to: '/leaderboard/collectibles' }
 ]);
 
 /**

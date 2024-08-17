@@ -38,18 +38,16 @@ function goTo(view)
         <!-- Stats -->
         <div class="col-12 lg:col-5 xl:col-6">
             <OverallStatsComponent class="h-full"/>
-            
         </div>
 
         <!-- Leaderboard -->
-        <div class="col-12 lg:col-5 xl:col-6 hover-effect" @click="goTo('/home/stats')">
-            <div class="card mb-0 flex justify-content-center">
+        <div class="col-12 lg:col-5 xl:col-6">
+            <div class="card mb-0 flex justify-content-center h-full hover-effect" @click="goTo('/leaderboard/played_time')">
                 <div class="flex flex-column justify-content-center align-items-center" style="overflow: hidden;">
-                    <div class="profile-img-div mb-3" style=" border-radius: 50%; width: 250px; height: 250px; ">
-                        <img :src="userInfoStore.profileImg" alt="ProfileImg" class="profile-img" style="object-fit: cover; border-radius: 50%; width: 100%; height: 100%; " />
+                    <div class="profile-img-div mb-3" style=" border-radius: 7%; width: 250px; height: 250px; ">
+                        <img src="../../../assets/images/icons/LeaderboardIcon.png" alt="LeaderboardIcon" class="leaderboard-img" style="object-fit: cover; border-radius: 7%; width: 100%; height: 100%; " />
                     </div>
-                    <span class="block text-black text-4xl mb-5">{{ userInfoStore.username }}</span>
-                    <Button class="md:w-8 sm:w-8 p-3" style="height: 40px;" @click="goTo('/home/profile')" type="button" label="Go to profile" icon="pi pi-user"/>
+                    
                 </div>
             </div>
         </div>

@@ -142,7 +142,7 @@ async function logout() {
                 </div>
                     <div class="flex md:flex-row flex-column justify-content-center">
                         <div class="hidden md:flex" style="width: 700px; height: 400px; border: 5px solid black; margin-top: 100px">
-                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/2twd2fnw7ic?si=R8Tk_iwWlBR2iRN9" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe class="w-full h-full" src="https://www.youtube.com/embed/KXFt3na9GO8?si=YGFmPYRqBehotKuY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>
                         <div class ="md:hidden w-20rem h-15rem" style="width: 700px; height: 400px; border: 5px solid black; margin-top: 100px; margin-left: 45px;">
                             <iframe style="width: 100%; height: 100%;" src="https://www.youtube.com/embed/2twd2fnw7ic?si=R8Tk_iwWlBR2iRN9" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
@@ -209,9 +209,9 @@ async function logout() {
                                 </div>
                                 <h5 class="mb-2 text-900">HK-45 Pistol</h5>
                                 <span class="text-600">A light and quick weapon<br><br> 
-                                    Damage: 25<br>
+                                    Damage: 20<br>
                                     Mag size: 11<br>
-                                    Implemented: not yet<br>
+                                    Implemented: already implemented<br>
                                     </span>
                             </div>
                         </div>
@@ -225,23 +225,53 @@ async function logout() {
                                 </div>
                                 <h5 class="mb-2 text-900">Svitka Shotgun</h5>
                                 <span class="text-600">Deathly at short range<br><br> 
-                                    Damage: 75<br>
-                                    Mag size: 5<br>
-                                    Implemented: not yet<br></span>
+                                    Damage: 100<br>
+                                    Mag size: 6<br>
+                                    Implemented: already implemented<br></span>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-12 md:col-12 lg:col-4 p-0 lg:pb-5 mt-4 lg:mt-0">
+                    <div class="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
                         <div class="arsenal-div">
                             <div class="p-3 surface-card h-full" style="border-radius: 8px">
                                 <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
                                     <img alt="dropdown icon" src="/src/assets/images/icons/weapon-icon.png" style="width: 40px;">
                                 </div>
                                 <h5 class="mb-2 text-900">Ark.53 AR</h5>
-                                <span class="text-600">Hight firepower but medium movement<br><br> 
-                                    Damage: 40<br>
+                                <span class="text-600">nice range and damage<br><br> 
+                                    Damage: 35<br>
                                     Mag size: 30<br>
+                                    Implemented: already implemented<br></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
+                        <div class="arsenal-div">
+                            <div class="p-3 surface-card h-full" style="border-radius: 8px">
+                                <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <img alt="dropdown icon" src="/src/assets/images/icons/weapon-icon.png" style="width: 40px;">
+                                </div>
+                                <h5 class="mb-2 text-900">Skorpion SMG</h5>
+                                <span class="text-600">Nice fire rate but low range<br><br> 
+                                    Damage: 25<br>
+                                    Mag size: 32<br>
+                                    Implemented: already implemented<br></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-12 md:col-12 lg:col-4 p-0 lg:pr-5 lg:pb-5 mt-4 lg:mt-0">
+                        <div class="arsenal-div">
+                            <div class="p-3 surface-card h-full" style="border-radius: 8px">
+                                <div class="flex align-items-center justify-content-center bg-bluegray-200 mb-3" style="width: 3.5rem; height: 3.5rem; border-radius: 10px">
+                                    <img alt="dropdown icon" src="/src/assets/images/icons/weapon-icon.png" style="width: 40px;">
+                                </div>
+                                <h5 class="mb-2 text-900">Ballistic knife</h5>
+                                <span class="text-600">A weapon for duelists<br><br> 
+                                    Damage: 100<br>
+                                    Mag size: 1<br>
                                     Implemented: not yet<br></span>
                             </div>
                         </div>
@@ -254,8 +284,8 @@ async function logout() {
                                     <img alt="dropdown icon" src="/src/assets/images/icons/weapon-icon.png" style="width: 40px;">
                                 </div>
                                 <h5 class="mb-2 text-900">Mark-6 Sniper rifle</h5>
-                                <span class="text-600">Deathly at short range<br><br> 
-                                    Damage: 75<br>
+                                <span class="text-600">One shot, one kill<br><br> 
+                                    Damage: 120<br>
                                     Mag size: 5<br>
                                     Implemented: not yet<br></span>
                             </div>

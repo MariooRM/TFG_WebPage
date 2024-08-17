@@ -1,7 +1,7 @@
 <template>
     <div>
       <TabMenuComponent />
-      <DataTable class="flex-grow text-xl" :value="items" size="large" style="border-radius: 7px; white-space: nowrap;">
+      <DataTable class="flex-grow text-xl mb-5" :value="items" size="large" style="border-radius: 7px; white-space: nowrap;">
         <Column header="Rank" class="px-5">
           <template #body="slotProps">
             <div class="rank-column">
@@ -15,12 +15,14 @@
         <Column header="Player">
           <template #body="slotProps">
             <div class="player-column">
-              <img :src="userInfoStore.profileImg" alt="ProfileImg" class="profile-img mr-3" style="object-fit: cover; border-radius: 50%; width: 50px; height: 100%;" />
+              <div class="profile-img-div mb-3 mr-5 w-5rem h-5rem md:w-8rem md:h-8rem" style=" border-radius: 50%;">
+                <img :src="userInfoStore.profileImg" alt="ProfileImg" class="profile-img" style="object-fit: cover; border-radius: 50%; width: 100%; height: 100%; " />
+              </div>
               <span>{{ slotProps.data.username }}</span>
             </div>
           </template>
         </Column>
-        <Column field="playedTime" header="Played time"></Column>
+        <Column field="headshots" header="Headshots" class="w-20rem"></Column>
       </DataTable>
     </div>
   </template>
@@ -36,11 +38,11 @@
     const userInfoStore = useUserInfoStore();
     
     const items = [
-      { rank: 1, playedTime: '2:30:00', username: 'Player 1', profileImg: 'path/to/paco.jpg' },
-      { rank: 2, playedTime: '2:00:00', username: 'Player 2', profileImg: 'path/to/jugador2.jpg' },
-      { rank: 3, playedTime: '1:45:00', username: 'Player 3', profileImg: 'path/to/jugador3.jpg' },
-      { rank: 4, playedTime: '1:15:00', username: 'Player 4', profileImg: 'path/to/jugador4.jpg' },
-      { rank: 5, playedTime: '1:00:00', username: 'Player 5', profileImg: 'path/to/jugador5.jpg' }
+      { rank: 1, headshots: 150, username: 'Player 1', profileImg: 'path/to/paco.jpg' },
+      { rank: 2, headshots: 100, username: 'Player 2', profileImg: 'path/to/jugador2.jpg' },
+      { rank: 3, headshots: 65, username: 'Player 3', profileImg: 'path/to/jugador3.jpg' },
+      { rank: 4, headshots: 55, username: 'Player 4', profileImg: 'path/to/jugador4.jpg' },
+      { rank: 5, headshots: 23, username: 'Player 5', profileImg: 'path/to/jugador5.jpg' }
     ];
   </script>
   
