@@ -56,13 +56,12 @@ const statsStore = useStatsStore();
 const authStore = useAuthStore();
 
 const gameSlots = computed(() => {
-  const totalGames = statsStore.totalGames;
+  const totalGames = 3;
   return totalGames > 0 ? Array.from({ length: totalGames }, (_, i) => `${i}`) : [];
 });
 
 onMounted(() => {
   statsStore.fetchUserGamesDocs(authStore.userUID);
-
 });
 
 

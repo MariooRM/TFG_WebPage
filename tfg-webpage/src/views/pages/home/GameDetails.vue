@@ -1,5 +1,5 @@
 <template>
-  <div class="grid">
+  <div class="grid" v-if="existentGameSlot">
       <div class="col-12 lg:col-6 xl:col-3">
             <div class="card mb-0">
                 <div class="flex justify-content-between mb-3">
@@ -94,6 +94,9 @@
           </div>
       </div>
   </div>
+  <div v-else class="flex justify-content-center align-items-center">
+    <h1 class="text-500 font-medium text-3xl">Game slot does not exist</h1>
+  </div>
 </template>
   
   
@@ -119,20 +122,31 @@
   const deaths = ref('');
   const collectibles = ref('');
 
+  const existentGameSlot = ref(false);
+
   /**
    * @event onMounted
    * @description This event is triggered when the component is mounted.
    */
   onMounted(() => {
     if (route.query.gameSlot) {
-      gameSlot.value = parseInt(decodeURIComponent(route.query.gameSlot.toString()));
-      kd.value = statsStore.gamesData[gameSlot.value]?.["kd"];
-      headshots.value = statsStore.gamesData[gameSlot.value]?.["headshots"];
-      kills.value = statsStore.gamesData[gameSlot.value]?.["kills"];
-      deaths.value = statsStore.gamesData[gameSlot.value]?.["deaths"];
-      collectibles.value = statsStore.gamesData[gameSlot.value]?.["collectibles"];
+        gameSlot.value = parseInt(decodeURIComponent(route.query.gameSlot.toString()));
+
+        if (statsStore.gamesData[gameSlot.value]?.["playedTime"] == undefined) {
+            existentGameSlot.value = false;
+            console.log("Game slot does not exist");
+        } else {
+            existentGameSlot.value = true;
+            console.log("Game slot exists");
+            kd.value = statsStore.gamesData[gameSlot.value]?.["kd"];
+            headshots.value = statsStore.gamesData[gameSlot.value]?.["headshots"];
+            kills.value = statsStore.gamesData[gameSlot.value]?.["kills"];
+            deaths.value = statsStore.gamesData[gameSlot.value]?.["deaths"];
+            collectibles.value = statsStore.gamesData[gameSlot.value]?.["collectibles"];
+        }
     }
     statsStore.fetchUserGamesDocs(authStore.userUID);
+    
   });
 
  

@@ -19,6 +19,7 @@ export const useStatsStore = defineStore({
   state: () => ({
     totalGames: parseInt(localStorage.getItem('totalGames')) || 0,
     gamesData: JSON.parse(localStorage.getItem('gamesData')) || {},
+    killsRanking: [],
     subscription: null
   }),
 

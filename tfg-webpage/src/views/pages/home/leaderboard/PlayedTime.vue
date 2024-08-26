@@ -16,7 +16,7 @@
         <template #body="slotProps">
           <div class="player-column">
             <div class="profile-img-div mb-3 mr-5 w-5rem h-5rem md:w-8rem md:h-8rem" style=" border-radius: 50%;">
-              <img :src="userInfoStore.profileImg" alt="ProfileImg" class="profile-img" style="object-fit: cover; border-radius: 50%; width: 100%; height: 100%; " />
+              <img :src="slotProps.data.profileImg" alt="ProfileImg" class="profile-img" style="object-fit: cover; border-radius: 50%; width: 100%; height: 100%; " />
             </div>
             <span>{{ slotProps.data.username }}</span>
           </div>
@@ -38,11 +38,11 @@
   const userInfoStore = useUserInfoStore();
 
   const items = [
-    { rank: 1, playedTime: '2:30:00', username: 'Player 1', profileImg: 'path/to/paco.jpg' },
-    { rank: 2, playedTime: '2:00:00', username: 'Player 2', profileImg: 'path/to/jugador2.jpg' },
-    { rank: 3, playedTime: '1:45:00', username: 'Player 3', profileImg: 'path/to/jugador3.jpg' },
-    { rank: 4, playedTime: '1:15:00', username: 'Player 4', profileImg: 'path/to/jugador4.jpg' },
-    { rank: 5, playedTime: '1:00:00', username: 'Player 5', profileImg: 'path/to/jugador5.jpg' }
+    { rank: 1, playedTime: '2:30:00', username: 'Nog1cs', profileImg: '/src/assets/images/leaderboard/examples/ex_1.gif' },
+    { rank: 2, playedTime: '2:00:00', username: 'TheBraxter', profileImg: '/src/assets/images/leaderboard/examples/ex_2.jpeg' },
+    { rank: 3, playedTime: '1:45:00', username: 'Ctello02', profileImg: '/src/assets/images/leaderboard/examples/ex_3.jpeg' },
+    { rank: 4, playedTime: '1:15:00', username: 'Carlos1219', profileImg: '/src/assets/images/leaderboard/examples/ex_4.jpeg' },
+    { rank: 5, playedTime: '1:00:00', username: 'Sport060989', profileImg: '/src/assets/images/leaderboard/examples/ex_5.jpeg' }
   ];
 </script>
 

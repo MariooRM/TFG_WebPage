@@ -330,14 +330,27 @@ async function logout() {
                     <span class="text-300 md:text-2xl text-xl">Learn about me</span>
                 </div>
                 <div class="flex flex-column lg:align-items-center text-center lg:text-center">
-                    <h3 class="line-height-1 text-900 text-2xl font-normal">
+                    <h3 class="line-height-1 text-900 text-2xl font-normal mb-7">
                         Hi! I'm Mario, the main developer of Erased Memories. This is my final degree work.
                         <br><br>
                         I'm currently studying Computer Engineering at the University of Salamanca.
                         <br><br>
                         I love videogames and I've always wanted to create one. This is my first project and I hope you enjoy it!
                     </h3>
-                    
+
+                    <div class="flex-column flex justify-content-left align-items-center mb-5">
+                        <div class="flex flex-row gap-5">
+                            <a href="https://github.com/MariooRM" class="line-height-3 text-2xl block cursor-pointer mb-2 text-700 w-10rem flex justify-content-center align-items-center gap-2" style="border-radius: 7px; padding: 10px;">
+                                <i class="pi pi-github" style="font-size: 3rem;"></i>
+                                Github
+                            </a>
+                            <a href="https://www.linkedin.com/in/mariorodrg/" class="line-height-3 text-2xl block cursor-pointer mb-2 text-700 w-10rem flex justify-content-center align-items-center gap-2" style="border-radius: 7px; padding: 10px;">
+                                <i class="pi pi-linkedin" style="font-size: 3rem;"></i>
+                                Linkedin
+                            </a>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
@@ -345,43 +358,8 @@ async function logout() {
                 <a @click="smoothScroll('#navBar')" class="flex flex-wrap align-items-center justify-content-center md:justify-content-center md:mb-5 mb-3 cursor-pointer">
                         <img src="../../assets/images/Logo02.png" alt="footer sections"height="120" class="mr-2" />
                 </a>
-                <div class="grid justify-content-center">
-                    <div class="col-12 md:col-10 lg:col-7">
-                        <div class="grid text-center md:text-left">
-                            <div class="col-12 md:col-3">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Company</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">About Us</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">News</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Investor Relations</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Careers</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Media Kit</a>
-                            </div>
-
-                            <div class="col-12 md:col-3 mt-4 md:mt-0">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Resources</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Get Started</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Learn</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Case Studies</a>
-                            </div>
-
-                            <div class="col-12 md:col-3 mt-4 md:mt-0">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Community</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Discord</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Events<img src="/demo/images/landing/new-badge.svg" class="ml-2" /></a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">FAQ</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Blog</a>
-                            </div>
-
-                            <div class="col-12 md:col-3 mt-4 md:mt-0">
-                                <h4 class="font-medium text-2xl line-height-3 mb-3 text-900">Legal</h4>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Brand Policy</a>
-                                <a class="line-height-3 text-xl block cursor-pointer mb-2 text-700">Privacy Policy</a>
-                                <a class="line-height-3 text-xl block cursor-pointer text-700">Terms of Service</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
+            
         </div>
     </div>
     <AppConfig simple />
