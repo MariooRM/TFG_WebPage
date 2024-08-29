@@ -1,7 +1,7 @@
 <template>
     <div>
       <TabMenuComponent />
-      <DataTable class="flex-grow text-xl mb-5" :value="items" size="large" style="border-radius: 7px; white-space: nowrap;">
+      <DataTable class="flex-grow text-xl mb-5" :value="statsStore.killsRanking" size="large" style="border-radius: 7px; white-space: nowrap;">
         <Column header="Rank" class="px-5">
           <template #body="slotProps">
             <div class="rank-column">
@@ -16,7 +16,7 @@
           <template #body="slotProps">
             <div class="player-column">
               <div class="profile-img-div mb-3 mr-5 w-5rem h-5rem md:w-8rem md:h-8rem" style=" border-radius: 50%;">
-                <img :src="userInfoStore.profileImg" alt="ProfileImg" class="profile-img" style="object-fit: cover; border-radius: 50%; width: 100%; height: 100%; " />
+                <img :src="slotProps.data.profileImg" alt="ProfileImg" class="profile-img" style="object-fit: cover; border-radius: 50%; width: 100%; height: 100%; " />
               </div>
               <span>{{ slotProps.data.username }}</span>
             </div>
@@ -32,18 +32,11 @@
    * @module Leaderboard/Kills
    * @description Kills view for the leaderboard page
    */
-    import { useUserInfoStore } from '@/stores';
+    import { useStatsStore } from '@/stores';
     import TabMenuComponent from '@/components/TabMenuComponent.vue';
     
-    const userInfoStore = useUserInfoStore();
-    
-    const items = [
-      { rank: 1, kills: 250, username: 'Player 1', profileImg: 'path/to/paco.jpg' },
-      { rank: 2, kills: 246, username: 'Player 2', profileImg: 'path/to/jugador2.jpg' },
-      { rank: 3, kills: 201, username: 'Player 3', profileImg: 'path/to/jugador3.jpg' },
-      { rank: 4, kills: 184, username: 'Player 4', profileImg: 'path/to/jugador4.jpg' },
-      { rank: 5, kills: 95, username: 'Player 5', profileImg: 'path/to/jugador5.jpg' }
-    ];
+    const statsStore = useStatsStore();
+
   </script>
   
   <style scoped>

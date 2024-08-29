@@ -5,13 +5,25 @@
  * @author Mario Rodrigo Marcos @MariooRM on GitHub
  */
 import { onMounted, reactive, ref, watch } from 'vue';
-import { useUserInfoStore, useAuthStore } from '@/stores';
+import { useUserInfoStore, useStatsStore } from '@/stores';
 import { useRouter } from 'vue-router';
 
 import OverallStatsComponent from '../../../components/OverallStatsComponent.vue';
 
 const router = useRouter();
 const userInfoStore = useUserInfoStore();
+const statsStore = useStatsStore();
+
+onMounted(async () => {
+      try {
+        await statsStore.fetchKillsLeaderboard();
+        await statsStore.fetchDeathsLeaderboard();
+        await statsStore.fetchHeadshotsLeaderboard();
+        await statsStore.fetchKDLeaderboard();
+      } catch (error) {
+        console.error(error);
+      }
+  });
 
 function goTo(view)
 {

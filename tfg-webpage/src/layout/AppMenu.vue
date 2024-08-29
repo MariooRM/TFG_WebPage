@@ -14,7 +14,7 @@ const model = ref([
             { label: 'Dashboard', icon: 'pi pi-fw pi-home', to: '/home/dashboard' },
             { label: 'Profile', icon: 'pi pi-fw pi-user', to: '/home/profile' },
             { label: 'Stats', icon: 'pi pi-fw pi-chart-bar', to: '/home/stats' },
-            { label: 'Leaderboard', icon: 'pi pi-fw pi-bolt', to: '/leaderboard/played_time' },
+            { label: 'Leaderboard', icon: 'pi pi-fw pi-bolt', to: '/leaderboard/kills' },
         ]
     },
     

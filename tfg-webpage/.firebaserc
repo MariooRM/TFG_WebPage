@@ -1,5 +1,12 @@
 {
   "projects": {
     "default": "tfg-mariorodrigomarcos"
-  }
+  },
+  "targets": {},
+  "etags": {
+    "tfg-mariorodrigomarcos": {
+      "extensionInstances": {}
+    }
+  },
+  "dataconnectEmulatorConfig": {}
 }

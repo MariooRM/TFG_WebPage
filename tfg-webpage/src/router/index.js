@@ -38,11 +38,6 @@ export const router = createRouter({
                 
                 // Leaderboard views
                 {
-                    path: '/leaderboard/played_time',
-                    name: 'played_time_leaderboard',
-                    component: () => import('@/views/pages/home/leaderboard/PlayedTime.vue')
-                },
-                {
                     path: '/leaderboard/kills',
                     name: 'kills_leaderboard',
                     component: () => import('@/views/pages/home/leaderboard/Kills.vue')
@@ -61,11 +56,6 @@ export const router = createRouter({
                     path: '/leaderboard/kd',
                     name: 'kd_leaderboard',
                     component: () => import('@/views/pages/home/leaderboard/KD.vue')
-                },
-                {
-                    path: '/leaderboard/collectibles',
-                    name: 'collectibles_leaderboard',
-                    component: () => import('@/views/pages/home/leaderboard/Collectibles.vue')
                 },
             ],
         },

@@ -73,6 +73,7 @@ export const useAuthStore = defineStore({
                 const userCredential = await signInWithEmailAndPassword(auth, email, password);
                 this.userUID = userCredential.user.uid;
                 this.isAuthenticated = true;
+                console.log(userCredential.user.getIdToken());
                 await userInfoStore.getUserInfo(email);
                 statsStore.fetchUserGamesDocs(userCredential.user.uid);
                 localStorage.setItem('userUID', JSON.stringify(userCredential.user.uid));

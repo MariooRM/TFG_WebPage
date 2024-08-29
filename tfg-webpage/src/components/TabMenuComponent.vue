@@ -28,12 +28,10 @@ const route = useRoute();
 const num = ref(0);
 
 const items = ref([
-  { label: 'Played time', icon: PlayedTimeIcon, to: '/leaderboard/played_time' },
   { label: 'Kills', icon: KillsIcon, to: '/leaderboard/kills' },
   { label: 'Deaths', icon: DeathsIcon, to: '/leaderboard/deaths' },
   { label: 'Headshots', icon: HeadshotsIcon, to: '/leaderboard/headshots' },
   { label: 'K/D', icon: KdIcon, to: '/leaderboard/kd' },
-  { label: 'Collectibles', icon: CollectiblesIcon, to: '/leaderboard/collectibles' }
 ]);
 
 /**
